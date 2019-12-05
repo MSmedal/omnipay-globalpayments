@@ -1,5 +1,5 @@
 {
-    "name": "omnipay-globalpayments",
+    "name": "gp/omnipay-globalpayments",
     "type": "library",
     "description": "description",
     "keywords": [
