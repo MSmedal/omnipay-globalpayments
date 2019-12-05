@@ -22,7 +22,7 @@
         "psr-4": {
             "Omnipay\\Heartland\\": "vendor/globalpayments/hps_omni/"
         }
-    }
+    },
     "require": {
         "omnipay/common": "^3"
     }
