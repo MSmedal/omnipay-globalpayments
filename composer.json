@@ -24,6 +24,7 @@
         }
     },
     "require": {
-        "omnipay/common": "^3"
+        "omnipay/common": "^3",
+        "globalpayments/php-sdk": "^1.0"
     }
 }
