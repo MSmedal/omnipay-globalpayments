@@ -1,0 +1,29 @@
+{
+    "name": "omnipay-globalpayments",
+    "type": "library",
+    "description": "description",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment",
+        "heartland"
+    ],
+    "homepage": "homepage",
+    "license": "license",
+    "authors": [
+        {
+            "name": "Mark Smedal Jr",
+            "email": "mark.smedal@e-hps.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Omnipay\\Heartland\\": "vendor/globalpayments/hps_omni/"
+        }
+    }
+    "require": {
+        "omnipay/common": "^3"
+    }
+}
