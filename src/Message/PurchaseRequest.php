@@ -17,10 +17,10 @@ class PurchaseRequest extends AbstractPorticoRequest
         $chargeMe = new CreditCardData();
 
         // will need to do some logic for card number vs token etc.
-        $chargeMe->number = $data['number'];
-        $chargeMe->expMonth = $data['expiryMonth'];
-        $chargeMe->expYear = $data['expiryYear'];
-        $chargeMe->cvn  = $data['cvv'];
+        $chargeMe->number = $data['card']['number'] ;
+        $chargeMe->expMonth = $data['card']['expiryMonth'];
+        $chargeMe->expYear = $data['card']['expiryYear'];
+        $chargeMe->cvn  = $data['card']['cvv'];
 
         return $chargeMe->charge($this->getAmount())
             ->withCurrency($this->getCurrency())
@@ -34,11 +34,12 @@ class PurchaseRequest extends AbstractPorticoRequest
         // control structure to pick between token or manual entry or payplan thing needs to go here
         $card = $this->getCard();
         
-        // add payment method info to $data
-        $data['number']         = $card->getNumber();
-        $data['expiryMonth']    = $card->getExpiryMonth();
-        $data['expiryYear']     = $card->getExpiryYear();
-        $data['cvv']            = $card->getCvv();
+        // add card info to $data
+        $data['card'] = array();
+        $data['card']['number']         = $card->getNumber();
+        $data['card']['expiryMonth']    = $card->getExpiryMonth();
+        $data['card']['expiryYear']     = $card->getExpiryYear();
+        $data['card']['cvv']            = $card->getCvv();
 
         // add payor info to $data
         $data['firstName']          = $card->getFirstName();
