@@ -8,13 +8,15 @@ namespace Omnipay\Heartland;
 
 use Omnipay\Common\AbstractGateway;
 
-class Gateway extends AbstractGateway {
-
-    public function getName() {
+class Gateway extends AbstractGateway 
+{
+    public function getName()
+    {
         return 'Heartland';
     }
 
-    public function getDefaultParameters() {
+    public function getDefaultParameters()
+    {
         return array(
             'secretApiKey' => '',
             'siteId' => '',
@@ -29,43 +31,53 @@ class Gateway extends AbstractGateway {
         );
     }
 
-    public function setSecretApiKey($value) {
+    public function setSecretApiKey($value)
+    {
         return $this->setParameter('secretApiKey', $value);
     }
 
-    public function setSiteId($value) {
+    public function setSiteId($value)
+    {
         return $this->setParameter('siteId', $value);
     }
 
-    public function setDeviceId($value) {
+    public function setDeviceId($value)
+    {
         return $this->setParameter('deviceId', $value);
     }
 
-    public function setUserName($value) {
+    public function setUserName($value)
+    {
         return $this->setParameter('userName', $value);
     }
 
-    public function setPassword($value) {
+    public function setPassword($value)
+    {
         return $this->setParameter('password', $value);
     }
 
-    public function setDeveloperId($value) {
+    public function setDeveloperId($value)
+    {
         return $this->setParameter('developerId', $value);
     }
 
-    public function setVersionNumber($value) {
+    public function setVersionNumber($value)
+    {
         return $this->setVersionNumber('versionNumber', $value);
     }
 
-    public function setSiteTrace($value) {
+    public function setSiteTrace($value)
+    {
         return $this->setParameter('siteTrace', $value);
     }
 
-    public function setServiceUri($value) {
+    public function setServiceUri($value)
+    {
         return $this->setParameter('serviceUri', $value);
     }
 
-    public function purchase($options = array()) {
+    public function purchase($options = array())
+    {
         return $this->createRequest('\Omnipay\Heartland\Message\PurchaseRequest', $options);
     }
     

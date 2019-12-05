@@ -4,8 +4,8 @@ namespace Omnipay\Heartland\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 
-class Response extends AbstractResponse {
-
+class Response extends AbstractResponse
+{
     public function __construct($request, $data)
     {        
         $this->request = $request;
@@ -23,4 +23,3 @@ class Response extends AbstractResponse {
     }
 
 }
-

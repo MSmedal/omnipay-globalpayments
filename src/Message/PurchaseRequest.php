@@ -4,9 +4,10 @@ namespace Omnipay\Heartland\Message;
 
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 
-class PurchaseRequest extends AbstractPorticoRequest {
-
-    public function getTransactionType() {
+class PurchaseRequest extends AbstractPorticoRequest
+{
+    public function getTransactionType()
+    {
         return "CreditSale";
     }
     

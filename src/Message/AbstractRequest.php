@@ -2,7 +2,6 @@
 
 namespace Omnipay\Heartland\Message;
 
-use Guzzle\Http\ClientInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
@@ -10,25 +9,23 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     /**
      * Create a new Request
      *
-     * @param ClientInterface $httpClient  A Guzzle client to make API calls with
      * @param HttpRequest     $httpRequest A Symfony HTTP request object
      */
-    // public function __construct(ClientInterface $httpClient, HttpRequest $httpRequest)
-    // {
-    //     parent::__construct($httpClient, $httpRequest);
-    // }
+    
     /**
      * Gets the full URL to the required web service.
      *
      * @return string
      */
     abstract public function getEndpoint();
+
     /**
      * Gets the transaction type for response parsing and logging.
      *
      * @return string
      */
     abstract public function getTransactionType();
+
     public function validateConnectionParameters()
     {
         //check whether secretApiKey or siteid details passed
@@ -46,6 +43,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         }
         // TODO: Build correct validations based on request type.
     }
+
     /**
      * Get the gateway Secret API Key.
      *
@@ -58,6 +56,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('secretApiKey');
     }
+
     /**
      * Set the gateway Secret API Key.
      *
@@ -88,6 +87,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('secretApiKey', $value);
     }
+
     /**
      * Get the gateway Site Id.
      *
@@ -103,6 +103,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('siteId');
     }
+
     /**
      * Set the gateway Site Id.
      *
@@ -120,6 +121,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('siteId', $value);
     }
+
     /**
      * Get the gateway Device Id.
      *
@@ -135,6 +137,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('deviceId');
     }
+
     /**
      * Set the gateway Device Id.
      *
@@ -152,6 +155,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('deviceId', $value);
     }
+
     /**
      * Get the gateway License Id.
      *
@@ -167,6 +171,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('licenseId');
     }
+
     /**
      * Set the gateway License Id.
      *
@@ -184,6 +189,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('licenseId', $value);
     }
+
     /**
      * Get the gateway username.
      *
@@ -199,6 +205,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('username');
     }
+
     /**
      * Set the gateway username.
      *
@@ -216,6 +223,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('username', $value);
     }
+
     /**
      * Get the gateway password.
      *
@@ -231,6 +239,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('password');
     }
+
     /**
      * Get the gateway password.
      *
@@ -248,6 +257,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('password', $value);
     }
+
     /**
      * Get the integration developer ID.
      *
@@ -260,6 +270,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('developerId');
     }
+
     /**
      * Set the integration developer ID.
      *
@@ -274,6 +285,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('developerId', $value);
     }
+
     /**
      * Get the integration version number.
      *
@@ -286,6 +298,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('versionNumber');
     }
+
     /**
      * Set the integration version number.
      *
@@ -300,6 +313,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('versionNumber', $value);
     }
+
     /**
      * Get the gateway site trace value.
      *
@@ -311,6 +325,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('siteTrace');
     }
+
     /**
      * Set the gateway site trace value.
      *
@@ -324,6 +339,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('siteTrace', $value);
     }
+
     /**
      * Get the gateway service URI
      *
@@ -335,6 +351,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->getParameter('serviceUri');
     }
+
     /**
      * Set the gateway service URI
      *
@@ -346,20 +363,25 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         return $this->setParameter('serviceUri', $value);
     }
+
     public function getCustomerReference()
     {
         return $this->getParameter('customerReference');
     }
+
     public function setCustomerReference($value)
     {
         return $this->setParameter('customerReference', $value);
     }
+
     public function getTransactionHistoryId()
     {
         return $this->getParameter('transactionHistoryId');
     }
+
     public function setTransactionHistoryId($value)
     {
         return $this->setParameter('transactionHistoryId', $value);
     }
+
 }

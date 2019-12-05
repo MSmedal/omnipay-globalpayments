@@ -16,9 +16,6 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         return new Response($data, $this->runHPSTrans($data));
     }
 
-    /**
-     * @return string
-     */
     public function getEndpoint()
     {
         if ($this->getSecretApiKey() != null && $this->getSecretApiKey() != "") {
