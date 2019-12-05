@@ -18,7 +18,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Omnipay\\Heartland\\": ""
+            "Omnipay\\Heartland\\": "src/"
         }
     },
     "require": {
