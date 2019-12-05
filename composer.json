@@ -20,7 +20,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Omnipay\\Heartland\\": "vendor/globalpayments/omnipay-globalpayments/"
+            "Omnipay\\Heartland\\": ""
         }
     },
     "require": {
