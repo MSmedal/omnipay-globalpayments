@@ -26,24 +26,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      */
     abstract public function getTransactionType();
 
-    public function validateConnectionParameters()
-    {
-        //check whether secretApiKey or siteid details passed
-        if ($this->getSecretApiKey() == null) {
-            $this->validate(
-                'siteId',
-                'deviceId',
-                'licenseId',
-                'username',
-                'password',
-                'serviceUri'
-            );
-        } else {
-            $this->validate('secretApiKey');
-        }
-        // TODO: Build correct validations based on request type.
-    }
-
     /**
      * Get the gateway Secret API Key.
      *
