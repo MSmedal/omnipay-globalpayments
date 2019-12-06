@@ -25,8 +25,8 @@ class Gateway extends AbstractGateway
             'username' => '',
             'password' => '',
             'serviceUri' => '',
-            'developerId' => '696969', // should be hard-coded when certificaiton happens
-            'versionNumber' => '6969', // should be hard-coded when certificaiton happens
+            'developerId' => '002914',
+            'versionNumber' => '4285',
             'siteTrace' => ''
         );
     }
