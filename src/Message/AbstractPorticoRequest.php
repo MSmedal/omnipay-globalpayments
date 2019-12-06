@@ -13,7 +13,7 @@ abstract class AbstractPorticoRequest extends AbstractRequest
     {
         $this->setServicesConfig();
 
-        return new Response($data, $this->runHPSTrans($data));
+        return new Response($this, $this->runHPSTrans($data));
     }
 
     public function getEndpoint()
