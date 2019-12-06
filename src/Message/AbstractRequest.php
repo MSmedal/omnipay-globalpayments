@@ -356,14 +356,4 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('customerReference', $value);
     }
 
-    public function getTransactionHistoryId()
-    {
-        return $this->getParameter('transactionHistoryId');
-    }
-
-    public function setTransactionHistoryId($value)
-    {
-        return $this->setParameter('transactionHistoryId', $value);
-    }
-
 }
