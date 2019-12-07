@@ -17,9 +17,19 @@ class Response extends AbstractResponse
         return in_array($this->response->responseCode, $this->request->getGoodReponseCodes());
     }
 
+    public function isDecline()
+    {
+        return !in_array($this->response->responseCode, $this->request->getGoodReponseCodes());
+    }
+
     public function getMessage()
     {
         return $this->response->responseMessage;
+    }
+    
+    public function getCode()
+    {
+        return $this->response->responseCode;
     }
 
 }
