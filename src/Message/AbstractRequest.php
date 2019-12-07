@@ -18,14 +18,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      * @return string
      */
     abstract public function getEndpoint();
-
-    /**
-     * Gets the transaction type for response parsing and logging.
-     *
-     * @return string
-     */
-    abstract public function getTransactionType();
-
     /**
      * Get the gateway Secret API Key.
      *
@@ -354,6 +346,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     public function setCustomerReference($value)
     {
         return $this->setParameter('customerReference', $value);
+    }
+
+    public function getGoodReponseCodes()
+    {
+        return $this->getParameter('goodResponseCodes');
+    }
+
+    public function setGoodResponseCodes($value)
+    {
+        return $this->setParameter('goodResponseCodes', $value);
     }
 
 }

@@ -6,13 +6,10 @@ use GlobalPayments\Api\PaymentMethods\CreditCardData;
 
 class PurchaseRequest extends AbstractPorticoRequest
 {
-    public function getTransactionType()
-    {
-        return "CreditSale";
-    }
-    
     public function runHPSTrans($data)
     {
+        $this->setGoodResponseCodes(array('00', '10'));
+        
         // set up credit card for HPS
         $chargeMe = new CreditCardData();
 
@@ -57,9 +54,6 @@ class PurchaseRequest extends AbstractPorticoRequest
         $data['description']    = $this->getDescription();
         $data['amount']     = $this->getAmount();
         $data['currency']   = $this->getCurrency();
-
-        // add good HPS response codes for trans type
-        $data['goodResponseCodes'] = array('00', '10');
 
         return $data;
     }

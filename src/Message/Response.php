@@ -14,7 +14,7 @@ class Response extends AbstractResponse
 
     public function isSuccessful()
     {
-        return in_array($this->response->responseCode, $this->request["goodResponseCodes"]);
+        return in_array($this->response->responseCode, $this->request->getGoodReponseCodes());
     }
 
     public function getMessage()
