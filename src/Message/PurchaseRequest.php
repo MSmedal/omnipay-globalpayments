@@ -3,6 +3,9 @@
 namespace Omnipay\Heartland\Message;
 
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
+use GlobalPayments\Api\Entities\Address;
+use GlobalPayments\Api\Entities\Customer;
+
 
 class PurchaseRequest extends AbstractPorticoRequest
 {
@@ -10,17 +13,31 @@ class PurchaseRequest extends AbstractPorticoRequest
     {
         $this->setGoodResponseCodes(array('00', '10'));
         
-        // set up credit card for HPS
+        // new GlobalPayments credit card object
         $chargeMe = new CreditCardData();
 
-        // will need to do some logic for card number vs token etc.
+        if ($this->getToken() != null && $this->getToken() != "") {
+            $chargeMe->token = $this->getToken();
+        }
+        // token and card info can be submitted simultaneously; discrete card info values (below vars) will take precedence over token-contained card info
         $chargeMe->number = $data['card']['number'] ;
         $chargeMe->expMonth = $data['card']['expiryMonth'];
         $chargeMe->expYear = $data['card']['expiryYear'];
         $chargeMe->cvn  = $data['card']['cvv'];
+        $chargeMe->cardHolderName = $data['firstName'] . " " . $data['lastName'];
 
-        return $chargeMe->charge($this->getAmount())
-            ->withCurrency($this->getCurrency())
+        // new GlobalPayments address object
+        $address = new Address();
+        $address->streetAddress1 = $data['billingAddress1'];
+        $address->streetAddress2 = $data['billingAddress2'];
+        $address->city = $data['billingCity'];
+        $address->state = $data['billingState'];
+        $address->country = $data['billingCountry'] ;
+        $address->postalCode = $data['billingPostcode'];
+
+        return $chargeMe->charge($data['amount'])
+            ->withAddress($address)
+            ->withCurrency($data['currency'])
             ->execute();
     }
 
@@ -28,7 +45,6 @@ class PurchaseRequest extends AbstractPorticoRequest
     {
         $data = array();
 
-        // control structure to pick between token or manual entry or payplan thing needs to go here
         $card = $this->getCard();
         
         // add card info to $data
