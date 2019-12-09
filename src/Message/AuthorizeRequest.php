@@ -5,7 +5,7 @@ namespace Omnipay\Heartland\Message;
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
 
-class PurchaseRequest extends AbstractPorticoRequest
+class AuthorizeRequest extends AbstractPorticoRequest
 {
     public function runHPSTrans($data)
     {
@@ -33,7 +33,7 @@ class PurchaseRequest extends AbstractPorticoRequest
         $address->country = $data['billingCountry'] ;
         $address->postalCode = $data['billingPostcode'];
 
-        return $chargeMe->charge($data['amount'])
+        return $chargeMe->authorize($data['amount'])
             ->withAddress($address)
             ->withCurrency($data['currency'])
             ->execute();
