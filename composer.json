@@ -21,7 +21,11 @@
             "Omnipay\\Heartland\\": "src/"
         }
     },
+    "repositories": {
+        "type": "git",
+        "url": "https://github.heartlandapps.net/DevPortal/PHP-SDK-v3/tree/transIT-support"
+    },
     "require": {
-        "globalpayments/php-sdk": "^1.0"
+        "globalpayments/php-sdk": "transIT-support"
     }
 }
