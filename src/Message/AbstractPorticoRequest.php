@@ -16,28 +16,9 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         return new Response($this, $this->runHPSTrans($data));
     }
 
-    public function getEndpoint()
-    {
-        if ($this->getSecretApiKey() != null && $this->getSecretApiKey() != "") {
-            if (strpos($this->getSecretApiKey(), '_cert_') !== false) {
-                $this->setParameter('testMode', true);
-                return "https://cert.api2.heartlandportico.com";
-            } elseif (strpos($this->getSecretApiKey(), '_uat_') !== false) {
-                $this->setParameter('testMode', true);
-                return "https://posgateway.uat.secureexchange.net";
-            } else {
-                $this->setParameter('testMode', false);
-                return "https://api2-c.heartlandportico.com";
-            }
-        } else {
-            return $this->getServiceUri();
-        }
-    }
-
     protected function setServicesConfig()
     {
         $config = new ServicesConfig();
-        $config->serviceUrl = $this->getEndpoint();
 
         if ($this->getSecretApiKey() != null && $this->getSecretApiKey() != "") {
             $config->secretApiKey = trim($this->getSecretApiKey());

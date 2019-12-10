@@ -13,12 +13,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      */
     
     /**
-     * Gets the full URL to the required web service.
-     *
-     * @return string
-     */
-    abstract public function getEndpoint();
-    /**
      * Get the gateway Secret API Key.
      *
      * Authentication is by means of a single secret API key set as
