@@ -85,5 +85,15 @@ class Gateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\Heartland\Message\AuthorizeRequest', $options);
     }
+
+    public function capture($options = array())
+    {
+        return $this->createRequest('\Omnipay\Heartland\Message\CaptureRequest', $options);
+    }
+
+    public function void($options = array())
+    {
+        return $this->createRequest('\Omnipay\Heartland\Message\VoidRequest', $options);
+    }
     
 }

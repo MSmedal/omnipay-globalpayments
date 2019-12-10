@@ -32,4 +32,9 @@ class Response extends AbstractResponse
         return $this->response->responseCode;
     }
 
+    public function getTransactionReference()
+    {
+        return $this->response->transactionId;
+    }
+
 }
