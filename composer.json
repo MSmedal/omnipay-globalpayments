@@ -20,12 +20,5 @@
         "psr-4": {
             "Omnipay\\Heartland\\": "src/"
         }
-    },
-    "repositories": {
-        "type": "vcs",
-        "url": "https://github.heartlandapps.net/DevPortal/PHP-SDK-v3/tree/transIT-support"
-    },
-    "require": {
-        "globalpayments/php-sdk": "transIT-support"
     }
 }
