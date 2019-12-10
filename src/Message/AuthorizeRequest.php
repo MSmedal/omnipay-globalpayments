@@ -5,7 +5,7 @@ namespace Omnipay\Heartland\Message;
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
 
-class AuthorizeRequest extends AbstractPorticoRequest
+class AuthorizeRequest extends PurchaseRequest
 {
     public function runHPSTrans($data)
     {
@@ -37,39 +37,6 @@ class AuthorizeRequest extends AbstractPorticoRequest
             ->withAddress($address)
             ->withCurrency($data['currency'])
             ->execute();
-    }
-
-    public function getData()
-    {
-        $data = array();
-
-        $card = $this->getCard();
-        
-        // add card info to $data
-        $data['card'] = array();
-        $data['card']['number']         = $card->getNumber();
-        $data['card']['expiryMonth']    = $card->getExpiryMonth();
-        $data['card']['expiryYear']     = $card->getExpiryYear();
-        $data['card']['cvv']            = $card->getCvv();
-
-        // add payor info to $data
-        $data['firstName']          = $card->getFirstName();
-        $data['lastName']           = $card->getLastName();
-        $data['billingAddress1']    = $card->getBillingAddress1();
-        $data['billingAddress2']    = $card->getBillingAddress2();
-        $data['billingCity']        = $card->getBillingCity();
-        $data['billingPostcode']    = $card->getBillingPostcode();
-        $data['billingState']       = $card->getBillingState();
-        $data['billingCountry']     = $card->getBillingCountry();
-        $data['billingPhone']       = $card->getBillingPhone();
-        $data['email']              = $card->getEmail();
-
-        // add transaction information to $data
-        $data['description']    = $this->getDescription();
-        $data['amount']     = $this->getAmount();
-        $data['currency']   = $this->getCurrency();
-
-        return $data;
     }
     
 }
