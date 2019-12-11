@@ -2,6 +2,7 @@
 
 namespace Omnipay\Heartland\Message;
 
+use GlobalPayments\Api\Entities\Transaction;
 use Omnipay\Common\Message\AbstractResponse;
 
 class Response extends AbstractResponse
@@ -14,7 +15,12 @@ class Response extends AbstractResponse
 
     public function isSuccessful()
     {
-        return in_array($this->response->responseCode, $this->request->getGoodReponseCodes());
+        if ($this->response instanceof Transaction)
+        {
+            return in_array($this->response->responseCode, $this->request->getGoodReponseCodes());
+        }
+
+        return $this->response;
     }
 
     public function isDecline()
@@ -35,6 +41,11 @@ class Response extends AbstractResponse
     public function getTransactionReference()
     {
         return $this->response->transactionId;
+    }
+
+    public function getCardReference()
+    {
+        return $this->response->token;
     }
 
 }

@@ -16,14 +16,4 @@ class VoidRequest extends AbstractPorticoRequest
             ->execute();
     }
 
-    public function getData()
-    {
-        $data = array();
-
-        // add transaction information to $data
-        $data['transactionReference']   = $this->getTransactionReference();
-
-        return $data;
-    }
-
 }

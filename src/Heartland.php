@@ -101,4 +101,19 @@ class Gateway extends AbstractGateway
         return $this->createRequest('\Omnipay\Heartland\Message\RefundRequest', $options);
     }
 
+    public function createCard($options = array())
+    {
+        return $this->createRequest('\Omnipay\Heartland\Message\CreateCardRequest', $options);
+    }
+
+    public function updateCard($options = array())
+    {
+        return $this->createRequest('\Omnipay\Heartland\Message\UpdateCardRequest', $options);
+    }
+
+    public function deleteCard($options = array())
+    {
+        return $this->createRequest('\Omnipay\Heartland\Message\DeleteCardRequest', $options);
+    }
+
 }

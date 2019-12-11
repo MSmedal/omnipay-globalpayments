@@ -17,16 +17,4 @@ class RefundRequest extends AbstractPorticoRequest
             ->execute();
     }
 
-    public function getData()
-    {
-        $data = array();
-
-        // add transaction information to $data
-        $data['transactionReference']   = $this->getTransactionReference();
-        $data['amount']                 = $this->getAmount();
-        $data['currency']               = $this->getCurrency();
-
-        return $data;
-    }
-
 }

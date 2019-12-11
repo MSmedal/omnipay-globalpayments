@@ -5,7 +5,7 @@ namespace Omnipay\Heartland\Message;
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
 
-class AuthorizeRequest extends PurchaseRequest
+class AuthorizeRequest extends AbstractPorticoRequest
 {
     public function runHPSTrans($data)
     {
@@ -16,6 +16,8 @@ class AuthorizeRequest extends PurchaseRequest
 
         if ($this->getToken() != null && $this->getToken() != "") {
             $chargeMe->token = $this->getToken();
+        } elseif ($this->getCardReference() != null && $this->getCardReference() != "") {
+            $chargeMe->token = $this->getCardReference();
         }
         // token and card info can be submitted simultaneously; discrete card info values (below vars) will take precedence over token-contained card info
         $chargeMe->number = $data['card']['number'] ;
