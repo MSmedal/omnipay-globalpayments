@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\Heartland\Message;
+namespace Omnipay\GlobalPayments\HeartlandMessage;
 
 use GlobalPayments\Api\Entities\Transaction;
 

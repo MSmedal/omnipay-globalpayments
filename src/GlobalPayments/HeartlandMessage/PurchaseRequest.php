@@ -1,21 +1,23 @@
 <?php
 
-namespace Omnipay\Heartland\Message;
+namespace Omnipay\GlobalPayments\HeartlandMessage;
 
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
 
-class CreateCardRequest extends AbstractPorticoRequest
+class PurchaseRequest extends AbstractPorticoRequest
 {
     public function runHPSTrans($data)
     {
-        $this->setGoodResponseCodes(array('00', '85'));
+        $this->setGoodResponseCodes(array('00', '10'));
         
         // new GlobalPayments credit card object
         $chargeMe = new CreditCardData();
 
         if ($this->getToken() != null && $this->getToken() != "") {
             $chargeMe->token = $this->getToken();
+        } elseif ($this->getCardReference() != null && $this->getCardReference() != "") {
+            $chargeMe->token = $this->getCardReference();
         }
         // token and card info can be submitted simultaneously; discrete card info values (below vars) will take precedence over token-contained card info
         $chargeMe->number = $data['card']['number'] ;
@@ -33,9 +35,9 @@ class CreateCardRequest extends AbstractPorticoRequest
         $address->country = $data['billingCountry'] ;
         $address->postalCode = $data['billingPostcode'];
 
-        return $chargeMe->verify($data['amount'])
+        return $chargeMe->charge($data['amount'])
             ->withAddress($address)
-            ->withRequestMultiUseToken(true)
+            ->withCurrency($data['currency'])
             ->execute();
     }
     
