@@ -5,7 +5,7 @@ namespace Omnipay\GlobalPayments\TransitMessage;
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
 
-class PurchaseRequest extends AbstractTransitRequest
+class AuthorizeRequest extends AbstractTransitRequest
 {
     public function runTransitTrans($data)
     {
@@ -35,7 +35,7 @@ class PurchaseRequest extends AbstractTransitRequest
         $address->country = $data['billingCountry'] ;
         $address->postalCode = $data['billingPostcode'];
 
-        return $chargeMe->charge($data['amount'])
+        return $chargeMe->authorize($data['amount'])
             ->withAddress($address)
             ->withCurrency($data['currency'])
             ->execute();

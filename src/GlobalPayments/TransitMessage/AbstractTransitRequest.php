@@ -2,8 +2,11 @@
 
 namespace Omnipay\GlobalPayments\TransitMessage;
 
+use GlobalPayments\Api\Entities\Enums\GatewayProvider;
 use GlobalPayments\Api\ServicesConfig;
 use GlobalPayments\Api\ServicesContainer;
+use Omnipay\GlobalPayments\AbstractRequest;
+use Omnipay\GlobalPayments\Response;
 
 abstract class AbstractTransitRequest extends AbstractRequest
 {
@@ -13,7 +16,7 @@ abstract class AbstractTransitRequest extends AbstractRequest
     {
         $this->setServicesConfig();
 
-        return new Response($this, $this->runHPSTrans($data));
+        return new Response($this, $this->runTransitTrans($data));
     }
 
     public function getData()
@@ -45,6 +48,7 @@ abstract class AbstractTransitRequest extends AbstractRequest
         $data['description']    = $this->getDescription();
         $data['amount']     = $this->getAmount();
         $data['currency']   = $this->getCurrency();
+        $data['transactionReference'] = $this->getTransactionReference();
 
         return $data;
     }
@@ -52,15 +56,20 @@ abstract class AbstractTransitRequest extends AbstractRequest
     protected function setServicesConfig()
     {
         $config = new ServicesConfig();
+        $config->merchantId = $this->getMerchantId();
+        $config->username = $this->getUsername();
+        $config->password = $this->getPassword();
+        $config->deviceId = $this->getDeviceId();
+        $config->developerId = $this->getDeveloperId();
+        $config->gatewayProvider = GatewayProvider::TRANSIT;
 
-        if ($this->getSecretApiKey() != null && $this->getSecretApiKey() != "") {
-            $config->secretApiKey = trim($this->getSecretApiKey());
+        if ($this->getTransactionKey() != null && $this->getTransactionKey() != "") {
+            $config->getTransactionKey = $this->getTransactionKey();
         } else {
-            $config->siteId =       $this->getSiteId();
-            $config->licenseId =    $this->getLicenseId();
-            $config->deviceId =     $this->getDeviceId();
-            $config->username =     $this->getUsername();
-            $config->password =     $this->getPassword();
+            ServicesContainer::configure($config);
+            $provider = ServicesContainer::instance()->getClient();
+            $response = $provider->getTransactionKey();
+            $config->transactionKey = $response->transactionKey;
         }
         
         ServicesContainer::configure($config);

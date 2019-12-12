@@ -4,6 +4,8 @@ namespace Omnipay\GlobalPayments\HeartlandMessage;
 
 use GlobalPayments\Api\ServicesConfig;
 use GlobalPayments\Api\ServicesContainer;
+use Omnipay\GlobalPayments\AbstractRequest;
+use Omnipay\GlobalPayments\Response;
 
 abstract class AbstractPorticoRequest extends AbstractRequest
 {
@@ -45,6 +47,7 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         $data['description']    = $this->getDescription();
         $data['amount']     = $this->getAmount();
         $data['currency']   = $this->getCurrency();
+        $data['transactionReference'] = $this->getTransactionReference();
 
         return $data;
     }

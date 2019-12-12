@@ -68,12 +68,12 @@ class HeartlandGateway extends AbstractGateway
 
     public function purchase($options = array())
     {
-        return $this->createRequest('\Omnipay\Heartland\Message\PurchaseRequest', $options);
+        return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\PurchaseRequest', $options);
     }
 
     public function authorize($options = array())
     {
-        return $this->createRequest('\Omnipay\Heartland\Message\AuthorizeRequest', $options);
+        return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\AuthorizeRequest', $options);
     }
 
     public function capture($options = array())

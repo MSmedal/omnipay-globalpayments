@@ -64,25 +64,25 @@ class TransitGateway extends AbstractGateway
         return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\PurchaseRequest', $options);
     }
 
-    // public function authorize($options = array())
-    // {
-    //     return $this->createRequest('\Omnipay\Heartland\Message\AuthorizeRequest', $options);
-    // }
+    public function authorize($options = array())
+    {
+        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\AuthorizeRequest', $options);
+    }
 
-    // public function capture($options = array())
-    // {
-    //     return $this->createRequest('\Omnipay\Heartland\Message\CaptureRequest', $options);
-    // }
+    public function capture($options = array())
+    {
+        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\CaptureRequest', $options);
+    }
 
-    // public function void($options = array())
-    // {
-    //     return $this->createRequest('\Omnipay\Heartland\Message\VoidRequest', $options);
-    // }
+    public function void($options = array())
+    {
+        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\VoidRequest', $options);
+    }
     
-    // public function refund($options = array())
-    // {
-    //     return $this->createRequest('\Omnipay\Heartland\Message\RefundRequest', $options);
-    // }
+    public function refund($options = array())
+    {
+        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\RefundRequest', $options);
+    }
 
     // public function createCard($options = array())
     // {
