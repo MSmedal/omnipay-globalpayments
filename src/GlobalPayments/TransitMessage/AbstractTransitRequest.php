@@ -7,7 +7,7 @@ use GlobalPayments\Api\ServicesContainer;
 
 abstract class AbstractTransitRequest extends AbstractRequest
 {
-    protected $responseType = '\Omnipay\Heartland\Message\PorticoResponse';
+    protected $responseType = '\Omnipay\GlobalPayments\Response';
 
     public function sendData($data)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\Heartland\Message;
+namespace Omnipay\GlobalPayments\TransitMessage;
 
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;

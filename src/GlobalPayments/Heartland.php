@@ -20,7 +20,6 @@ class HeartlandGateway extends AbstractGateway
             'licenseId' => '',
             'username' => '',
             'password' => '',
-            'serviceUri' => '',
             'developerId' => '002914',
             'versionNumber' => '4285',
             'siteTrace' => ''
@@ -59,17 +58,12 @@ class HeartlandGateway extends AbstractGateway
 
     public function setVersionNumber($value)
     {
-        return $this->setVersionNumber('versionNumber', $value);
+        return $this->setParameter('versionNumber', $value);
     }
 
     public function setSiteTrace($value)
     {
         return $this->setParameter('siteTrace', $value);
-    }
-
-    public function setServiceUri($value)
-    {
-        return $this->setParameter('serviceUri', $value);
     }
 
     public function purchase($options = array())
@@ -84,32 +78,32 @@ class HeartlandGateway extends AbstractGateway
 
     public function capture($options = array())
     {
-        return $this->createRequest('\Omnipay\Heartland\Message\CaptureRequest', $options);
+        return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\CaptureRequest', $options);
     }
 
     public function void($options = array())
     {
-        return $this->createRequest('\Omnipay\Heartland\Message\VoidRequest', $options);
+        return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\VoidRequest', $options);
     }
     
     public function refund($options = array())
     {
-        return $this->createRequest('\Omnipay\Heartland\Message\RefundRequest', $options);
+        return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\RefundRequest', $options);
     }
 
     public function createCard($options = array())
     {
-        return $this->createRequest('\Omnipay\Heartland\Message\CreateCardRequest', $options);
+        return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\CreateCardRequest', $options);
     }
 
     public function updateCard($options = array())
     {
-        return $this->createRequest('\Omnipay\Heartland\Message\UpdateCardRequest', $options);
+        return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\UpdateCardRequest', $options);
     }
 
     public function deleteCard($options = array())
     {
-        return $this->createRequest('\Omnipay\Heartland\Message\DeleteCardRequest', $options);
+        return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\DeleteCardRequest', $options);
     }
 
 }

@@ -308,30 +308,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('siteTrace', $value);
     }
 
-    /**
-     * Get the gateway service URI
-     *
-     * @param string $value
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
-     */
-    public function getServiceUri()
-    {
-        return $this->getParameter('serviceUri');
-    }
-
-    /**
-     * Set the gateway service URI
-     *
-     * @param string $value
-     *
-     * @return \Omnipay\Common\Message\AbstractRequest
-     */
-    public function setServiceUri($value)
-    {
-        return $this->setParameter('serviceUri', $value);
-    }
-
     public function getCustomerReference()
     {
         return $this->getParameter('customerReference');
@@ -350,6 +326,26 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     public function setGoodResponseCodes($value)
     {
         return $this->setParameter('goodResponseCodes', $value);
+    }
+
+    public function getMerchantId()
+    {
+        return $this->getParameter('merchantId');
+    }
+
+    public function setMerchantId($value)
+    {
+        return $this->setParameter('merchantId', $value);
+    }
+
+    public function getTransactionKey()
+    {
+        return $this->getParameter('transactionKey');
+    }
+
+    public function setTransactionKey($value)
+    {
+        return $this->setParameter('transactionKey', $value);
     }
 
 }

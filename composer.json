@@ -18,7 +18,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Omnipay\\GlobalPayments\\": "src/"
+            "Omnipay\\GlobalPayments\\": "src/GlobalPayments/"
         }
     }
 }
