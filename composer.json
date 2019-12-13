@@ -20,5 +20,23 @@
         "psr-4": {
             "Omnipay\\GlobalPayments\\": "src/GlobalPayments/"
         }
-    }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "require-dev": {
+        "omnipay/tests": "^3.1"
+    },
+    "require": {
+        "omnipay/common": "^3.0",
+        "globalpayments/php-sdk": "*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "C:\\Users\\mark.smedal\\Google Drive\\HPS_Dev\\OmniPay\\global\\PHP-SDK-v3-transIT-support"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
