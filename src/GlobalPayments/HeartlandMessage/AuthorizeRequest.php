@@ -20,20 +20,27 @@ class AuthorizeRequest extends AbstractPorticoRequest
             $chargeMe->token = $this->getCardReference();
         }
         // token and card info can be submitted simultaneously; discrete card info values (below vars) will take precedence over token-contained card info
-        $chargeMe->number = $data['card']['number'] ;
-        $chargeMe->expMonth = $data['card']['expiryMonth'];
-        $chargeMe->expYear = $data['card']['expiryYear'];
-        $chargeMe->cvn  = $data['card']['cvv'];
-        $chargeMe->cardHolderName = $data['firstName'] . " " . $data['lastName'];
+        if (isset($data['card']['number'])) $chargeMe->number = $data['card']['number'];
+        if (isset($data['card']['expiryMonth'])) $chargeMe->expMonth = $data['card']['expiryMonth'];
+        if (isset($data['card']['expiryYear'])) $chargeMe->expYear = $data['card']['expiryYear'];
+        if (isset($data['card']['cvv'])) $chargeMe->cvn  = $data['card']['cvv'];
+
+        if (isset($data['firstName']) && isset($data['lastName'])) {
+            $chargeMe->cardHolderName = $data['firstName'] . " " . $data['lastName'];
+        } elseif (isset($data['firstName'])) {
+            $chargeMe->cardHolderName = $data['firstName'];
+        } elseif (isset($data['lastName'])) {
+            $chargeMe->cardHolderName = $data['lastName'];
+        }        
 
         // new GlobalPayments address object
         $address = new Address();
-        $address->streetAddress1 = $data['billingAddress1'];
-        $address->streetAddress2 = $data['billingAddress2'];
-        $address->city = $data['billingCity'];
-        $address->state = $data['billingState'];
-        $address->country = $data['billingCountry'] ;
-        $address->postalCode = $data['billingPostcode'];
+        if (isset($data['billingAddress1'])) $address->streetAddress1 = $data['billingAddress1'];
+        if (isset($data['billingAddress2'])) $address->streetAddress2 = $data['billingAddress2'];
+        if (isset($data['billingCity'])) $address->city = $data['billingCity'];
+        if (isset($data['billingState'])) $address->state = $data['billingState'];
+        if (isset($data['billingCountry'])) $address->country = $data['billingCountry'];
+        if (isset($data['billingPostcode'])) $address->postalCode = $data['billingPostcode'];
 
         return $chargeMe->authorize($data['amount'])
             ->withAddress($address)

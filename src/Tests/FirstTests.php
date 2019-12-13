@@ -33,562 +33,285 @@ class EcommerceTest extends TestCase
         if ($secretAPIKey) {
             $this->gateway = Omnipay::create('GlobalPayments\Heartland');
             $this->gateway->setSecretApiKey($secretAPIKey);
-        } else {
-            // No credentials were found, so skip this test
-            $this->markTestSkipped();
         }
     }
     public function test01PurchaseVisaManualEntry()
     {
-        // Authorize
         $request = $this->gateway->purchase(array(
             'card' => $this->getVisaCard(),
             'currency' => 'USD',
-            'amount' => '1.01'
+            'amount' => $this->randAmount()
         ));
         $response = $request->send();
-        $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-        // $this->assertNotNull($response->getTransactionReference());
-        // $this->assertNotEmpty($response->getData()['TokenValue']);
-        // static::$visaToken = $response->getData()['TokenValue'];
 
-        
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
     }
-    // public function test01CardVerifyVisaSingleUseToken()
-    // {
-    //     // Authorize
-    //     $request = $this->gateway->verify(array(
-    //         'token' => $this->getToken($this->getVisaCard()),
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Verify should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test02CardVerifyMasterCardManualEntry()
-    // {
-    //     $request = $this->gateway->verify(array(
-    //         'card' => $this->getMastercardCard(),
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Verify should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    //     static::$mastercardToken = $response->getData()['TokenValue'];
-    // }
-    // public function test02CardVerifyMasterCardSingleUseToken()
-    // {
-    //     $request = $this->gateway->verify(array(
-    //         'token' => $this->getToken($this->getMastercardCard()),
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Verify should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test03CardVerifyDiscoverManualEntry()
-    // {
-    //     $card = $this->getDiscoverCard();
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->verify(array(
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Verify should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    //     static::$discoverToken = $response->getData()['TokenValue'];
-    // }
-    // public function test03CardVerifyDiscoverSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getDiscoverCard());
-    //     $card = array();
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->verify(array(
-    //         'token' => $token,
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Verify should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test04CardVerifyAmexManualEntry()
-    // {
-    //     $card = $this->getAmexCard();
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->verify(array(
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Verify should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    //     static::$amexToken = $response->getData()['TokenValue'];
-    // }
-    // public function test04CardVerifyAmexSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getAmexCard());
-    //     $card = array();
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->verify(array(
-    //         'token' => $token,
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Verify should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test06SaleVisaManualEntry()
-    // {
-    //     $card = $this->getVisaCard();
-    //     $card['billingAddress1'] = '6860 Dallas Pkwy';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '13.01',
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test06SaleVisaSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getVisaCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860 Dallas Pkwy';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '13.01',
-    //         'token' => $token,
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test07SaleMasterCardManualEntry()
-    // {
-    //     $card = $this->getMastercardCard();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '13.02',
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test07SaleMasterCardSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getMastercardCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '13.02',
-    //         'token' => $token,
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test08SaleDiscoverManualEntry()
-    // {
-    //     $card = $this->getDiscoverCard();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '750241234';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '13.03',
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test08SaleDiscoverSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getDiscoverCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '750241234';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '13.03',
-    //         'token' => $token,
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test09SaleAmexManualEntry()
-    // {
-    //     $card = $this->getAmexCard();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '13.04',
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test09SaleAmexSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getAmexCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '13.04',
-    //         'token' => $token,
-    //         'card' => $card,
-    //         'requestCardReference' => true,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotEmpty($response->getData()['TokenValue']);
-    // }
-    // public function test10SaleVisaManualEntry()
-    // {
-    //     // sale
-    //     $token = static::$visaToken;
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860 Dallas Pkwy';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.01',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     // reversal
-    //     $request = $this->gateway->reverse(array(
-    //         'transactionReference' => $response->getTransactionReference(),
-    //         'amount' => '17.01',
-    //     ));
-    //     $reponse = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Reverse should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test10SaleVisaSingleUseToken()
-    // {
-    //     // sale
-    //     $token = $this->getToken($this->getVisaCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860 Dallas Pkwy';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.01',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     // reversal
-    //     $request = $this->gateway->reverse(array(
-    //         'transactionReference' => $response->getTransactionReference(),
-    //         'amount' => '17.01',
-    //     ));
-    //     $reponse = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Reverse should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test11SaleMasterCardManualEntry()
-    // {
-    //     $token = static::$mastercardToken;
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.02',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test11SaleMasterCardSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getMastercardCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.02',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test12SaleDiscoverManualEntry()
-    // {
-    //     $token = static::$discoverToken;
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '750241234';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.03',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test12SaleDiscoverSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getDiscoverCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '750241234';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.03',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test13SaleAmexManualEntry()
-    // {
-    //     $token = static::$amexToken;
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.04',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test13SaleAmexSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getAmexCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.04',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test14SaleJcbManualEntry()
-    // {
-    //     $card = $this->getJcbCard();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '750241234';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.05',
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test14SaleJcbSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getJcbCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '750241234';
-    //     $request = $this->gateway->purchase(array(
-    //         'amount' => '17.05',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Purchase should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test15AuthorizeVisaManualEntry()
-    // {
-    //     // authorize
-    //     $card = $this->getVisaCard();
-    //     $card['billingAddress1'] = '6860 Dallas Pkwy';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->authorize(array(
-    //         'amount' => '17.06',
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Authorize should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     // capture
-    //     $request = $this->gateway->capture(array(
-    //         'transactionReference' => $response->getTransactionReference(),
-    //         'amount' => '17.06',
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Capture should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test15AuthorizeVisaSingleUseToken()
-    // {
-    //     // authorize
-    //     $token = $this->getToken($this->getVisaCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860 Dallas Pkwy';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->authorize(array(
-    //         'amount' => '17.06',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Authorize should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     // capture
-    //     $request = $this->gateway->capture(array(
-    //         'transactionReference' => $response->getTransactionReference(),
-    //         'amount' => '17.06',
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Capture should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test16AuthorizeMasterCardManualEntry()
-    // {
-    //     // authorize
-    //     $card = $this->getMastercardCard();
-    //     $card['billingAddress1'] = '6860 Dallas Pkwy';
-    //     $card['billingPostcode'] = '750241234';
-    //     $request = $this->gateway->authorize(array(
-    //         'amount' => '17.07',
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Authorize should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     // capture
-    //     $request = $this->gateway->capture(array(
-    //         'transactionReference' => $response->getTransactionReference(),
-    //         'amount' => '17.07',
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Capture should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test16AuthorizeMasterCardSingleUseToken()
-    // {
-    //     // authorize
-    //     $token = $this->getToken($this->getMastercardCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860 Dallas Pkwy';
-    //     $card['billingPostcode'] = '750241234';
-    //     $request = $this->gateway->authorize(array(
-    //         'amount' => '17.07',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Authorize should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     // capture
-    //     $request = $this->gateway->capture(array(
-    //         'transactionReference' => $response->getTransactionReference(),
-    //         'amount' => '17.07',
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Capture should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test17AuthorizeDiscoverManualEntry()
-    // {
-    //     // authorize
-    //     $card = $this->getDiscoverCard();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->authorize(array(
-    //         'amount' => '17.08',
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Authorize should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     // capture
-    //     // ignore
-    // }
-    // public function test17AuthorizeDiscoverSingleUseToken()
-    // {
-    //     // authorize
-    //     $token = $this->getToken($this->getDiscoverCard());
-    //     $card = array();
-    //     $card['billingAddress1'] = '6860';
-    //     $card['billingPostcode'] = '75024';
-    //     $request = $this->gateway->authorize(array(
-    //         'amount' => '17.08',
-    //         'token' => $token,
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Authorize should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     // capture
-    //     // ignore
-    // }
-    // public function test34ReturnMasterCardManualEntry()
-    // {
-    //     $card = $this->getMastercardCard();
-    //     $request = $this->gateway->refund(array(
-    //         'amount' => '15.15',
-    //         'card' => $card,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Refund should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
-    // public function test34ReturnMasterCardSingleUseToken()
-    // {
-    //     $token = $this->getToken($this->getMastercardCard());
-    //     $request = $this->gateway->refund(array(
-    //         'amount' => '15.15',
-    //         'token' => $token,
-    //     ));
-    //     $response = $request->send();
-    //     $this->assertTrue($response->isSuccessful(), 'Refund should succeed');
-    //     $this->assertNotNull($response->getTransactionReference());
-    // }
+    public function test02PurchaseMastercardManualEntry()
+    {
+        $request = $this->gateway->purchase(array(
+            'card' => $this->getMastercardCard(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test03PurchaseDiscoverManualEntry()
+    {
+        $request = $this->gateway->purchase(array(
+            'card' => $this->getDiscoverCard(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test04PurchaseAmexManualEntry()
+    {
+        $request = $this->gateway->purchase(array(
+            'card' => $this->getAmexCard(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test05PurchaseVisaSingleUseToken()
+    {
+        $request = $this->gateway->purchase(array(
+            'token' => $this->getToken($this->getVisaCard()),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test06PurchaseMastercardSingleUseToken()
+    {
+        $request = $this->gateway->purchase(array(
+            'token' => $this->getToken($this->getMastercardCard()),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test07PurchaseDiscoverSingleUseToken()
+    {
+        $request = $this->gateway->purchase(array(
+            'token' => $this->getToken($this->getDiscoverCard()),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test08PurchaseAmexSingleUseToken()
+    {
+        $request = $this->gateway->purchase(array(
+            'token' => $this->getToken($this->getAmexCard()),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test09AuthAndCaputreVisaManualEntry()
+    {
+        // Authorize
+        $request = $this->gateway->authorize(array(
+            'card' => $this->getVisaCard(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+
+        // Capture
+        $request = $this->gateway->capture(array(
+            'transactionReference' => $response->getTransactionReference()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test10AuthAndCaputreMastercardManualEntry()
+    {
+        // Authorize
+        $request = $this->gateway->authorize(array(
+            'card' => $this->getMastercardCard(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+
+        // Capture
+        $request = $this->gateway->capture(array(
+            'transactionReference' => $response->getTransactionReference()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test11AuthAndCaputreDiscoverManualEntry()
+    {
+        // Authorize
+        $request = $this->gateway->authorize(array(
+            'card' => $this->getDiscoverCard(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+
+        // Capture
+        $request = $this->gateway->capture(array(
+            'transactionReference' => $response->getTransactionReference()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test12AuthAndCaputreAmexManualEntry()
+    {
+        // Authorize
+        $request = $this->gateway->authorize(array(
+            'card' => $this->getAmexCard(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+
+        // Capture
+        $request = $this->gateway->capture(array(
+            'transactionReference' => $response->getTransactionReference()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test13Refund()
+    {
+        // Purchase
+        $request = $this->gateway->purchase(array(
+            'card' => $this->getAmexCard(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+
+        // Refund
+        $request = $this->gateway->refund(array(
+            'transactionReference' => $response->getTransactionReference(),
+            'currency' => 'USD',
+            'amount' => '1.00'
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    public function test14Void()
+    {
+        // Purchase
+        $request = $this->gateway->authorize(array(
+            'card' => $this->getAmexCard(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+
+        // Void
+        $request = $this->gateway->void(array(
+            'transactionReference' => $response->getTransactionReference()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    
+    protected function randAmount()
+    {
+        return "1." . rand(1, 99);
+    }
+
     protected function getAmexCard()
     {
         return array(
