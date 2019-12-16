@@ -67,6 +67,9 @@ abstract class AbstractPorticoRequest extends AbstractRequest
             $config->username =     $this->getUsername();
             $config->password =     $this->getPassword();
         }
+
+        $config->developerId = $this->getDeveloperId();
+        $config->versionNumber = $this->getVersionNumber();
         
         ServicesContainer::configure($config);
     }

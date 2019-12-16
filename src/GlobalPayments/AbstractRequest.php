@@ -348,4 +348,34 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('transactionKey', $value);
     }
 
+    public function getMerchantName()
+    {
+        return $this->getParameter('merchantName');
+    }
+
+    public function setMerchantName($value)
+    {
+        return $this->setParameter('merchantName', $value);
+    }
+
+    public function getMerchantSiteId()
+    {
+        return $this->getParameter('merchantSiteId');
+    }
+
+    public function setMerchantSiteId($value)
+    {
+        return $this->setParameter('merchantSiteId', $value);
+    }
+    
+    public function getMerchantKey()
+    {
+        return $this->getParameter('merchantKey');
+    }
+
+    public function setMerchantKey($value)
+    {
+        return $this->setParameter('merchantKey', $value);
+    }    
+
 }

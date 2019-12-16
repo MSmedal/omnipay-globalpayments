@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\GlobalPayments\TransitMessage;
+namespace Omnipay\GlobalPayments\GeniusMessage;
 
 use GlobalPayments\Api\Entities\Enums\GatewayProvider;
 use GlobalPayments\Api\ServicesConfig;
@@ -8,7 +8,7 @@ use GlobalPayments\Api\ServicesContainer;
 use Omnipay\GlobalPayments\AbstractRequest;
 use Omnipay\GlobalPayments\Response;
 
-abstract class AbstractTransitRequest extends AbstractRequest
+abstract class AbstractGeniusRequest extends AbstractRequest
 {
     protected $responseType = '\Omnipay\GlobalPayments\Response';
 
@@ -16,7 +16,7 @@ abstract class AbstractTransitRequest extends AbstractRequest
     {
         $this->setServicesConfig();
 
-        return new Response($this, $this->runTransitTrans($data));
+        return new Response($this, $this->runGeniusTrans($data));
     }
 
     public function getData()
@@ -58,22 +58,12 @@ abstract class AbstractTransitRequest extends AbstractRequest
     protected function setServicesConfig()
     {
         $config = new ServicesConfig();
-        $config->merchantId = $this->getMerchantId();
-        $config->username = $this->getUsername();
-        $config->password = $this->getPassword();
-        $config->deviceId = $this->getDeviceId();
+        $config->merchantName = $this->getMerchantName();
+        $config->merchantSiteId = $this->getMerchantSiteId();
+        $config->merchantKey = $this->getMerchantKey();
         $config->developerId = $this->getDeveloperId();
         $config->versionNumber = $this->getVersionNumber();
-        $config->gatewayProvider = GatewayProvider::TRANSIT;
-
-        if ($this->getTransactionKey() != null && $this->getTransactionKey() != "") {
-            $config->getTransactionKey = $this->getTransactionKey();
-        } else {
-            ServicesContainer::configure($config);
-            $provider = ServicesContainer::instance()->getClient();
-            $response = $provider->getTransactionKey();
-            $config->transactionKey = $response->transactionKey;
-        }
+        $config->gatewayProvider = GatewayProvider::GENIUS;
         
         ServicesContainer::configure($config);
     }

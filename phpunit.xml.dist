@@ -16,6 +16,7 @@
         <testsuite name="integration">
             <file>./src/Tests/HeartlandEcommerceTest.php</file>
             <file>./src/Tests/TransitEcommerceTest.php</file>
+            <file>./src/Tests/GeniusEcommerceTest.php</file>
             <!-- <directory>.src/tests/</directory> -->
         </testsuite>
     </testsuites>
