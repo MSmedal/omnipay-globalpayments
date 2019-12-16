@@ -91,10 +91,10 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
     }
-    public function test05PurchaseVisaSingleUseToken()
+    public function test05PurchaseMastercardCardToken()
     {
         $request = $this->gateway->purchase(array(
-            'token' => $this->getToken($this->getVisaCard()),
+            'token' => '5RpF5t9Asb9U6527',
             'currency' => 'USD',
             'amount' => $this->randAmount()
         ));
@@ -105,48 +105,7 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
     }
-    public function test06PurchaseMastercardSingleUseToken()
-    {
-        $request = $this->gateway->purchase(array(
-            'token' => $this->getToken($this->getMastercardCard()),
-            'currency' => 'USD',
-            'amount' => $this->randAmount()
-        ));
-        $response = $request->send();
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
-        $this->assertNotNull($response->getTransactionReference());
-        $this->assertNotNull($response->getMessage());
-        $this->assertNotNull($response->getCode());
-    }
-    public function test07PurchaseDiscoverSingleUseToken()
-    {
-        $request = $this->gateway->purchase(array(
-            'token' => $this->getToken($this->getDiscoverCard()),
-            'currency' => 'USD',
-            'amount' => $this->randAmount()
-        ));
-        $response = $request->send();
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
-        $this->assertNotNull($response->getTransactionReference());
-        $this->assertNotNull($response->getMessage());
-        $this->assertNotNull($response->getCode());
-    }
-    public function test08PurchaseAmexSingleUseToken()
-    {
-        $request = $this->gateway->purchase(array(
-            'token' => $this->getToken($this->getAmexCard()),
-            'currency' => 'USD',
-            'amount' => $this->randAmount()
-        ));
-        $response = $request->send();
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
-        $this->assertNotNull($response->getTransactionReference());
-        $this->assertNotNull($response->getMessage());
-        $this->assertNotNull($response->getCode());
-    }
+
     public function test09AuthAndCaputreVisaManualEntry()
     {
         // Authorize
