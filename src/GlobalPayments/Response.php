@@ -25,7 +25,12 @@ class Response extends AbstractResponse
 
     public function isDecline()
     {
-        return !in_array($this->response->responseCode, $this->request->getGoodReponseCodes());
+        if ($this->response instanceof Transaction)
+        {
+            return !in_array($this->response->responseCode, $this->request->getGoodReponseCodes());
+        }
+        
+        return !$this->response;
     }
 
     public function getMessage()

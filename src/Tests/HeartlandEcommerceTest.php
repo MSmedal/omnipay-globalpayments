@@ -12,20 +12,13 @@ use Omnipay\Tests\TestCase;
  *
  * Once configured, the tests will no longer skip.
  */
-class EcommerceTest extends TestCase
+class HeartlandEcommerceTest extends TestCase
 {
     /** @var Gateway */
     protected $gateway;
     /** @var string */
     protected $publicKey = 'pkapi_cert_jKc1FtuyAydZhZfbB3';
-    /** @var string */
-    protected static $visaToken;
-    /** @var string */
-    protected static $mastercardToken;
-    /** @var string */
-    protected static $discoverToken;
-    /** @var string */
-    protected static $amexToken;
+
     public function setUp()
     {
         parent::setUp();
@@ -306,10 +299,79 @@ class EcommerceTest extends TestCase
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
     }
-    
+    public function test15VisaCreateCard()
+    {
+        // Requires Heartland Multi-Use Tokens be enabled
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getVisaCard()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+    public function test16AmexCreateCard()
+    {
+        // Requires Heartland Multi-Use Tokens be enabled
+        // Amex will require an address to create a Card Reference (multi-use token)
+        $request = $this->gateway->createCard(array(
+            'card' => array_merge($this->getAmexCard(), $this->getAddress())
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+    public function test17DeleteMastercardCardReference() {
+        // Requires Heartland Multi-Use Tokens be enabled
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getMastercardCard()
+        ));
+        $response = $request->send();
+        
+        $cardReference = $response->getCardReference();
+
+        $request = $this->gateway->deleteCard(array(
+            'cardReference' => $cardReference
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+    }
+    public function test18UpdateDiscoverCardReference() {
+        // Requires Heartland Multi-Use Tokens be enabled
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getDiscoverCard()
+        ));
+        $response = $request->send();
+        
+        $cardReference = $response->getCardReference();
+
+        $request = $this->gateway->updateCard(array(
+            'card' => array(
+                'expiryYear' => '2020',
+                'expiryMonth' => '1'
+            ),
+            'cardReference' => $cardReference
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+    }
+
     protected function randAmount()
     {
-        return "1." . rand(1, 99);
+        return rand(1, 9) . "." . rand(1, 99);
     }
 
     protected function getAmexCard()
@@ -355,6 +417,16 @@ class EcommerceTest extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 123,
+        );
+    }
+    protected function getAddress()
+    {
+        return array(
+            'billingAddress1'       => '1 Heartland Way',
+            'billingCountry'        => 'USA',
+            'billingCity'           => 'Jeffersonville',
+            'billingPostcode'       => '47130',
+            'billingState'          => 'IN'
         );
     }
     protected function getToken(array $card)

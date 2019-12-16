@@ -14,8 +14,9 @@
     </php>
     <testsuites>
         <testsuite name="integration">
-            <file>./src/Tests/FirstTests.php</file>
-            <directory>./tests/Certifications/</directory>
+            <file>./src/Tests/HeartlandEcommerceTest.php</file>
+            <!-- <file>./src/Tests/TransitEcommerceTest.php</file> -->
+            <!-- <directory>.src/tests/</directory> -->
         </testsuite>
     </testsuites>
     <listeners>
