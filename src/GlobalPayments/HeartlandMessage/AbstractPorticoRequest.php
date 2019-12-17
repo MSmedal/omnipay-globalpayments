@@ -45,6 +45,29 @@ abstract class AbstractPorticoRequest extends AbstractRequest
             $data['email']              = $card->getEmail();
         }
 
+        if ($this->getCheck()) {
+            $check = $this->getCheck();
+
+            // add check info to $data
+            $data['check'] = array();
+            $data['check']['accountNumber']     = $check['accountNumber'];
+            $data['check']['routingNumber']     = $check['routingNumber'];
+            $data['check']['accountType']       = $check['accountType'];
+            $data['check']['secCode']           = $check['secCode'];
+            $data['check']['checkType']         = $check['checkType'];
+            $data['check']['checkHolderName']   = $check['checkHolderName'];
+    
+            // add payor info to $data
+            if (isset($check['billingAddress1'])) $data['billingAddress1']  = $check['billingAddress1'];
+            if (isset($check['billingAddress2'])) $data['billingAddress2']  = $check['billingAddress2'];
+            if (isset($check['billingCity'])) $data['billingCity']          = $check['billingCity'];
+            if (isset($check['billingPostcode'])) $data['billingPostcode']  = $check['billingPostcode'];
+            if (isset($check['billingState'])) $data['billingState']        = $check['billingState'];
+            if (isset($check['billingCountry'])) $data['billingCountry']    = $check['billingCountry'];
+            if (isset($check['billingPhone'])) $data['billingPhone']        = $check['billingPhone'];
+            if (isset($check['email'])) $data['email']                      = $check['email'];
+        }
+
         // add transaction information to $data
         $data['description']    = $this->getDescription();
         $data['amount']     = $this->getAmount();
@@ -73,5 +96,7 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         
         ServicesContainer::configure($config);
     }
+
+
 
 }

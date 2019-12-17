@@ -5,19 +5,19 @@ use Omnipay\Omnipay;
 use Omnipay\Tests\TestCase;
 
 /**
- * Integration tests for the  Gateway. These tests make real requests to Heartland sandbox environment.
+ * Integration tests for the  Gateway. These tests make real requests to Heartland sandbox environment using Certification MID 777700959162
  */
 class HeartlandEcommerceTest extends TestCase
 {
     /** @var Gateway */
     protected $gateway;
     /** @var string */
-    protected $publicKey = 'pkapi_cert_jKc1FtuyAydZhZfbB3';
+    protected $publicKey = 'pkapi_cert_EuYk7ncMQaZLDLC0Gg';
 
     public function setUp()
     {
         parent::setUp();
-        $secretAPIKey = 'skapi_cert_MTyMAQBiHVEAewvIzXVFcmUd2UcyBge_eCpaASUp0A';
+        $secretAPIKey = 'skapi_cert_MXvdAQB61V4AkyM-x3EJuY6hkEaCzaMimTWav7mVfQ';
         if ($secretAPIKey) {
             $this->gateway = Omnipay::create('GlobalPayments\Heartland');
             $this->gateway->setSecretApiKey($secretAPIKey);
@@ -365,6 +365,22 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isDecline());
     }
+    public function test19ACHPurchase()
+    {
+        // Requires Heartland ACH be enabled
+        $request = $this->gateway->purchase(array(
+            'check' => $this->getPersonalCheck(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
 
     protected function randAmount()
     {
@@ -414,6 +430,17 @@ class HeartlandEcommerceTest extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 123,
+        );
+    }
+    protected function getPersonalCheck()
+    {
+        return array(
+            'accountNumber' => '1357902468',
+            'routingNumber' => '122000030',
+            'accountType' => 'checking',
+            'checkType' => 'personal',
+            'secCode' => 'ppd',
+            'checkHolderName' => 'Tony Smedal'
         );
     }
     protected function getAddress()
