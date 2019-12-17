@@ -6,11 +6,6 @@ use Omnipay\Tests\TestCase;
 
 /**
  * Integration tests for the  Gateway. These tests make real requests to Heartland sandbox environment.
- *
- * In order to run, these tests require your Heartland sandbox credentials without which, they just skip. Configure
- * the following environment variables
- *
- * Once configured, the tests will no longer skip.
  */
 class HeartlandEcommerceTest extends TestCase
 {
@@ -313,6 +308,7 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
         $this->assertNotNull($response->getCardReference());
+        $this->assertNotEmpty($response->getCardReference());
     }
     public function test16AmexCreateCard()
     {
@@ -329,6 +325,7 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
         $this->assertNotNull($response->getCardReference());
+        $this->assertNotEmpty($response->getCardReference());
     }
     public function test17DeleteMastercardCardReference() {
         // Requires Heartland Multi-Use Tokens be enabled

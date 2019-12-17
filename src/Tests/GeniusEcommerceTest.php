@@ -5,12 +5,7 @@ use Omnipay\Omnipay;
 use Omnipay\Tests\TestCase;
 
 /**
- * Integration tests for the  Gateway. These tests make real requests to Heartland sandbox environment.
- *
- * In order to run, these tests require your Heartland sandbox credentials without which, they just skip. Configure
- * the following environment variables
- *
- * Once configured, the tests will no longer skip.
+ * Integration tests for the Genius Gateway. These tests make real requests to Heartland sandbox environment.
  */
 class GeniusEcommerceTest extends TestCase
 {
@@ -305,7 +300,6 @@ class GeniusEcommerceTest extends TestCase
     }
     public function test15VisaCreateCard()
     {
-        // Requires Heartland Multi-Use Tokens be enabled
         $request = $this->gateway->createCard(array(
             'card' => $this->getVisaCard()
         ));
@@ -320,7 +314,6 @@ class GeniusEcommerceTest extends TestCase
     }
     public function test16AmexCreateCard()
     {
-        // Requires Heartland Multi-Use Tokens be enabled
         // Amex will require an address to create a Card Reference (multi-use token)
         $request = $this->gateway->createCard(array(
             'card' => array_merge($this->getAmexCard(), $this->getAddress())
@@ -332,10 +325,9 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
-        $this->assertNotNull($response->getCardReference());
+        $this->assertNotEmpty($response->getCardReference());
     }
     public function test17DeleteMastercardCardReference() {
-        // Requires Heartland Multi-Use Tokens be enabled
         $request = $this->gateway->createCard(array(
             'card' => $this->getMastercardCard()
         ));
@@ -353,7 +345,6 @@ class GeniusEcommerceTest extends TestCase
         $this->assertFalse($response->isDecline());
     }
     public function test18UpdateDiscoverCardReference() {
-        // Requires Heartland Multi-Use Tokens be enabled
         $request = $this->gateway->createCard(array(
             'card' => $this->getDiscoverCard()
         ));
@@ -434,31 +425,5 @@ class GeniusEcommerceTest extends TestCase
             'billingState'          => 'IN'
         );
     }
-    protected function getToken(array $card)
-    {
-        $payload = array(
-            'object' => 'token',
-            'token_type' => 'supt',
-            'card' => array(
-                'number' => $card['number'],
-                'exp_month' => $card['expiryMonth'],
-                'exp_year' => $card['expiryYear'],
-                'cvc' => $card['cvv'],
-            ),
-        );
-        $url = 'https://cert.api2-c.heartlandportico.com/Hps.Exchange.PosGateway.Hpf.v1/api/token?api_key=' . $this->publicKey;
-        $options = array(
-            'http' => array(
-                'header' => "Content-Type: application/json\r\n",
-                'method' => 'POST',
-                'content' => json_encode($payload),
-            ),
-        );
-        $context = stream_context_create($options);
-        $response = json_decode(file_get_contents($url, false, $context));
-        if (!$response || isset($response->error)) {
-            $this->fail('no single-use token obtained');
-        }
-        return $response->token_value;
-    }
+
 }
