@@ -51,7 +51,6 @@ use GlobalPayments\Api\Entities\Address;
  * }
  * 
  * </code>
- * 
  */
 
 class ACHPurchaseRequest extends AbstractPorticoRequest
@@ -111,6 +110,7 @@ class ACHPurchaseRequest extends AbstractPorticoRequest
         return $check->charge($data['amount'])
             ->withAddress($address)
             ->withCurrency($data['currency'])
+            ->withDescription($data['description'])
             ->execute();
     }
 }
