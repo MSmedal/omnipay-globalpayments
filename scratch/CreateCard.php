@@ -24,7 +24,7 @@ $formData = [
 
 $response = $gateway->createCard(
     [
-        'card'          => $formData
+        'card'  => $formData
     ]
 )->send();
 
