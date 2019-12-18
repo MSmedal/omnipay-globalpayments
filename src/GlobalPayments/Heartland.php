@@ -4,7 +4,7 @@ namespace Omnipay\GlobalPayments;
 
 use Omnipay\Common\AbstractGateway;
 
-class HeartlandGateway extends AbstractGateway 
+class HeartlandGateway extends AbstractGateway
 {
     public function getName()
     {
@@ -67,9 +67,9 @@ class HeartlandGateway extends AbstractGateway
     }
 
     public function purchase($options = array())
-    { 
+    {
         if (isset($options['check'])) {
-            return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\AchPurchaseRequest', $options); 
+            return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\ACHPurchaseRequest', $options);
         }
         return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\PurchaseRequest', $options);
     }
@@ -88,7 +88,7 @@ class HeartlandGateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\VoidRequest', $options);
     }
-    
+
     public function refund($options = array())
     {
         return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\RefundRequest', $options);
@@ -108,5 +108,4 @@ class HeartlandGateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\DeleteCardRequest', $options);
     }
-
 }

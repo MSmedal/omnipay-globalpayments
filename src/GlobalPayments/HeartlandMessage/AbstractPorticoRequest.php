@@ -24,14 +24,14 @@ abstract class AbstractPorticoRequest extends AbstractRequest
 
         if ($this->getCard()) {
             $card = $this->getCard();
-        
+
             // add card info to $data
             $data['card'] = array();
             $data['card']['number']         = $card->getNumber();
             $data['card']['expiryMonth']    = $card->getExpiryMonth();
             $data['card']['expiryYear']     = $card->getExpiryYear();
             $data['card']['cvv']            = $card->getCvv();
-    
+
             // add payor info to $data
             $data['firstName']          = $card->getFirstName();
             $data['lastName']           = $card->getLastName();
@@ -56,7 +56,7 @@ abstract class AbstractPorticoRequest extends AbstractRequest
             $data['check']['secCode']           = $check['secCode'];
             $data['check']['checkType']         = $check['checkType'];
             $data['check']['checkHolderName']   = $check['checkHolderName'];
-    
+
             // add payor info to $data
             if (isset($check['billingAddress1'])) $data['billingAddress1']  = $check['billingAddress1'];
             if (isset($check['billingAddress2'])) $data['billingAddress2']  = $check['billingAddress2'];
@@ -69,10 +69,10 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         }
 
         // add transaction information to $data
-        $data['description']    = $this->getDescription();
-        $data['amount']     = $this->getAmount();
-        $data['currency']   = $this->getCurrency();
-        $data['transactionReference'] = $this->getTransactionReference();
+        $data['description']            = $this->getDescription();
+        $data['amount']                 = $this->getAmount();
+        $data['currency']               = $this->getCurrency();
+        $data['transactionReference']   = $this->getTransactionReference();
 
         return $data;
     }
@@ -84,19 +84,16 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         if ($this->getSecretApiKey() != null && $this->getSecretApiKey() != "") {
             $config->secretApiKey = trim($this->getSecretApiKey());
         } else {
-            $config->siteId =       $this->getSiteId();
-            $config->licenseId =    $this->getLicenseId();
-            $config->deviceId =     $this->getDeviceId();
-            $config->username =     $this->getUsername();
-            $config->password =     $this->getPassword();
+            $config->siteId     = $this->getSiteId();
+            $config->licenseId  = $this->getLicenseId();
+            $config->deviceId   = $this->getDeviceId();
+            $config->username   = $this->getUsername();
+            $config->password   = $this->getPassword();
         }
 
-        $config->developerId = $this->getDeveloperId();
-        $config->versionNumber = $this->getVersionNumber();
-        
+        $config->developerId    = $this->getDeveloperId();
+        $config->versionNumber  = $this->getVersionNumber();
+
         ServicesContainer::configure($config);
     }
-
-
-
 }
