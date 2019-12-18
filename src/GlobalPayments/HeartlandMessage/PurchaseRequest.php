@@ -5,8 +5,6 @@ namespace Omnipay\GlobalPayments\HeartlandMessage;
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
 
-use Omnipay\Omnipay;
-
 /**
  * Heartland Purchase Request
  * 
@@ -51,42 +49,7 @@ use Omnipay\Omnipay;
  * </code>
  */
 
-$gateway = Omnipay::create('GlobalPayments\Heartland');
-$gateway->setSecretApiKey('skapi_cert_MXvdAQB61V4AkyM-x3EJuY6hkEaCzaMimTWav7mVfQ');
-
-// Example form data
-$formData = [
-    
-    
-    
-    
-    
-    
-    'billingAddress1'   => '1 Heartland Way', // optional
-    'billingCity'       => 'Jeffersonville', // optional
-    'billingPostcode'   => '47130', // optional
-    'billingState'      => 'IN', // optional
-    'billingCountry'    => 'USA' // optional
-];
-
-$response = $gateway->purchase(
-    [
-        
-        'currency'      => 'USD', // required
-        'amount'        => '1.23',
-        
-    ]
-)->send();
-
-// Heartland doesn't use a redirect, so isSuccessful() and isDecline() are used to evaluate result and isRedirect() is not used.
-// Response.php holds all of these supported methods
-if ($response->isSuccessful()) {
-    echo $response->getTransactionReference();
-} elseif ($response->isDecline()) {
-    echo $response->getMessage();
-}
-
-class PurchaseRequest extends AbstractPorticoRequest
+ class PurchaseRequest extends AbstractPorticoRequest
 {
     public function runHPSTrans($data)
     {
