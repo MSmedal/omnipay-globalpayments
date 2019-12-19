@@ -43,6 +43,8 @@ use GlobalPayments\Api\Entities\Address;
  *     echo $response->getCardReference();
  * } elseif ($response->isDecline()) {
  *     echo $response>getMessage();
+ * } else {
+ *     echo 'something went wrong';
  * }
  * 
  * </code>

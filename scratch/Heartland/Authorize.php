@@ -22,12 +22,12 @@ $formData = [
     'billingCountry'    => 'USA' // optional
 ];
 
-$response = $gateway->purchase(
+$response = $gateway->authorize(
     [
         'card'          => $formData,
         'currency'      => 'USD', // required
-        'amount'        => '1.23',
-        'description'   => 'Test Purchase using Purchase.php in scratch folder.'
+        'amount'        => '12.34',
+        'description'   => 'Test Authorization using Authorize.php in scratch folder.'
     ]
 )->send();
 
@@ -37,4 +37,6 @@ if ($response->isSuccessful()) {
     echo $response->getTransactionReference();
 } elseif ($response->isDecline()) {
     echo $response->getMessage();
+} else {
+    echo 'something went wrong';
 }

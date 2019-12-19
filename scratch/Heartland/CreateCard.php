@@ -22,19 +22,18 @@ $formData = [
     'billingCountry'    => 'USA' // optional
 ];
 
-$response = $gateway->authorize(
+$response = $gateway->createCard(
     [
-        'card'          => $formData,
-        'currency'      => 'USD', // required
-        'amount'        => '12.34',
-        'description'   => 'Test Authorization using Authorize.php in scratch folder.'
+        'card'  => $formData
     ]
 )->send();
 
 // Heartland doesn't use a redirect, so isSuccessful() and isDecline() are used to evaluate result and isRedirect() is not used.
 // Response.php holds all of these supported methods
 if ($response->isSuccessful()) {
-    echo $response->getTransactionReference();
+    echo $response->getCardReference();
 } elseif ($response->isDecline()) {
     echo $response->getMessage();
+} else {
+    echo 'something went wrong';
 }
