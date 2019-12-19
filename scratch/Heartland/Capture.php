@@ -21,4 +21,6 @@ if ($response->isSuccessful()) {
     echo $response->getTransactionReference();
 } elseif ($response->isDecline()) {
     echo $response->getMessage();
+} else {
+    echo 'something went wrong';
 }
