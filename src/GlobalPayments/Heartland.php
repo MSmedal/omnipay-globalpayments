@@ -108,4 +108,9 @@ class HeartlandGateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\DeleteCardRequest', $options);
     }
+
+    public function createCustomer($options = array())
+    {
+        return $this->createRequest('\Omnipay\GlobalPayments\HeartlandMessage\CreateCustomerRequest', $options);
+    }
 }
