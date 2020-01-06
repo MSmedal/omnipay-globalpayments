@@ -17,7 +17,7 @@ $formData = [
     'billingCity'       => 'Jeffersonville', // optional
     'billingPostcode'   => '47130', // optional
     'billingState'      => 'IN', // optional
-    'billingCountry'    => 'USA' // optional
+    'billingCountry'    => 'USA' // required; must be 'USA' or 'CAN'
 ];
 
 $response = $gateway->createCustomer(
@@ -29,9 +29,9 @@ $response = $gateway->createCustomer(
 // Heartland doesn't use a redirect, so isSuccessful() and isDecline() are used to evaluate result and isRedirect() is not used.
 // Response.php holds all of these supported methods
 if ($response->isSuccessful()) {
-    echo $response->getTransactionReference();
+    echo $response->getCustomerReference();
 } elseif ($response->isDecline()) {
-    echo $response->getMessage();
+    var_dump($response);
 } else {
     echo 'something went wrong';
 }

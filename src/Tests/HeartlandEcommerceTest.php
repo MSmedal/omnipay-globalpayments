@@ -381,6 +381,18 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
     }
+    public function test20CreateCustomer()
+    {
+        // Requires Payplan to be enabled
+        $request = $this->gateway->createCustomer(array(
+            'company' => 'Heartland Payment Systems',
+            'country' => 'USA'
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertNotNull($response->getCustomerReference());
+    }
 
     protected function randAmount()
     {

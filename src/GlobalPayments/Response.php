@@ -53,4 +53,9 @@ class Response extends AbstractResponse
         return $this->response->token;
     }
 
+    public function getCustomerReference()
+    {
+        return $this->response->key;
+    }
+
 }

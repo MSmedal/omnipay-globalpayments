@@ -48,7 +48,7 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         if ($this->getCheck()) {
             $check = $this->getCheck();
 
-            // add check info to $data
+            // add check info to $data; all of these are required pre transaction type
             $data['check'] = array();
             $data['check']['accountNumber']     = $check['accountNumber'];
             $data['check']['routingNumber']     = $check['routingNumber'];
@@ -66,6 +66,22 @@ abstract class AbstractPorticoRequest extends AbstractRequest
             if (isset($check['billingCountry'])) $data['billingCountry']    = $check['billingCountry'];
             if (isset($check['billingPhone'])) $data['billingPhone']        = $check['billingPhone'];
             if (isset($check['email'])) $data['email']                      = $check['email'];
+        }
+
+        if ($this->getCustomer()) {
+            $customer = $this->getCustomer();
+
+            // add customer info to $data
+            if (isset($customer['firstName'])) $data['firstName']               = $customer['firstName'];
+            if (isset($customer['lastName'])) $data['lastName']                 = $customer['lastName'];
+            if (isset($customer['company'])) $data['company']                   = $customer['company'];
+            if (isset($customer['email'])) $data['email']                       = $customer['email'];
+            if (isset($customer['billingAddress1'])) $data['billingAddress1']   = $customer['billingAddress1'];
+            if (isset($customer['billingAddress2'])) $data['billingAddress2']   = $customer['billingAddress2'];
+            if (isset($customer['billingCity'])) $data['billingCity']           = $customer['billingCity'];
+            if (isset($customer['billingPostcode'])) $data['billingPostcode']   = $customer['billingPostcode'];
+            if (isset($customer['billingState'])) $data['billingState']         = $customer['billingState'];
+            if (isset($customer['billingCountry'])) $customer['billingCountry'] = $customer['billingCountry']; // required
         }
 
         // add transaction information to $data

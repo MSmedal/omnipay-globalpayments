@@ -388,4 +388,14 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('check', $value);
     }
 
+    public function getCustomer()
+    {
+        return $this->getParameter('customer');
+    }
+
+    public function setCustomer($value)
+    {
+        return $this->setParameter('customer', $value);
+    }
+
 }
