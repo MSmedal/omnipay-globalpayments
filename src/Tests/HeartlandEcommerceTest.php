@@ -385,12 +385,11 @@ class HeartlandEcommerceTest extends TestCase
     {
         // Requires Payplan to be enabled
         $request = $this->gateway->createCustomer(array(
-            'company' => 'Heartland Payment Systems',
-            'country' => 'USA'
+            'customer' => $this->getCustomer()
         ));
         $response = $request->send();
 
-        $this->assertTrue($response->isSuccessful());
+        $this->assertNotFalse($response->isSuccessful());
         $this->assertNotNull($response->getCustomerReference());
     }
 
@@ -463,6 +462,13 @@ class HeartlandEcommerceTest extends TestCase
             'billingCity'           => 'Jeffersonville',
             'billingPostcode'       => '47130',
             'billingState'          => 'IN'
+        );
+    }
+    protected function getCustomer()
+    {
+        return array(
+            'company'           => 'Heartland Payment Systems',
+            'billingCountry'    => 'USA'
         );
     }
     protected function getToken(array $card)

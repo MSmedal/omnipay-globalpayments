@@ -81,7 +81,7 @@ abstract class AbstractPorticoRequest extends AbstractRequest
             if (isset($customer['billingCity'])) $data['billingCity']           = $customer['billingCity'];
             if (isset($customer['billingPostcode'])) $data['billingPostcode']   = $customer['billingPostcode'];
             if (isset($customer['billingState'])) $data['billingState']         = $customer['billingState'];
-            if (isset($customer['billingCountry'])) $customer['billingCountry'] = $customer['billingCountry']; // required
+            if (isset($customer['billingCountry'])) $data['billingCountry']     = $customer['billingCountry']; // required
         }
 
         // add transaction information to $data
