@@ -55,7 +55,7 @@ class Response extends AbstractResponse
 
     public function getCustomerReference()
     {
-        return $this->response->key;
+        return $this->response->id;
     }
 
 }

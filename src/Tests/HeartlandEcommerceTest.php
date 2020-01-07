@@ -392,6 +392,20 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotFalse($response->isSuccessful());
         $this->assertNotNull($response->getCustomerReference());
     }
+    public function test21CreateCustomerWithReference()
+    {
+        // Requires Payplan to be enabled
+        $customerReference = time();
+
+        $request = $this->gateway->createCustomer(array(
+            'customerReference' => $customerReference,
+            'customer' => $this->getCustomer()
+        ));
+        $response = $request->send();
+
+        $this->assertNotFalse($response->isSuccessful());
+        $this->assertTrue($response->getCustomerReference() == $customerReference);
+    }
 
     protected function randAmount()
     {

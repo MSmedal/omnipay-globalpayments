@@ -38,7 +38,7 @@ use GlobalPayments\Api\Entities\Customer;
  * 
  * // Heartland doesn't use a redirect, so isSuccessful() and isDecline() are used to evaluate result and isRedirect() is not used. Response.php holds all of these supported methods
  * if ($response->isSuccessful()) {
- *     echo $response->getTransactionReference();
+ *     echo $response->getCustomerReference();
  * } elseif ($response->isDecline()) {
  *     echo $response>getMessage();
  * }
@@ -53,7 +53,11 @@ class CreateCustomerRequest extends AbstractPorticoRequest
         // new GlobalPayments credit card object
         $newCustomer = new Customer();
 
-        $newCustomer->id                                                = time() . "__Omnipay__" . rand(100, 999);
+        if (isset($data['customerReference'])) {
+            $newCustomer->id = $data['customerReference'];
+        } else {
+            $newCustomer->id = time() . "__Omnipay__" . rand(100, 999); // generate this automatically not provided
+        }
         if (isset($data['firstName'])) $newCustomer->firstName          = $data['firstName'];
         if (isset($data['lastName'])) $newCustomer->lastName            = $data['lastName'];
         if (isset($data['company'])) $newCustomer->company              = $data['company'];

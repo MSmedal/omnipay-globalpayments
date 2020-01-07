@@ -72,16 +72,17 @@ abstract class AbstractPorticoRequest extends AbstractRequest
             $customer = $this->getCustomer();
 
             // add customer info to $data
-            if (isset($customer['firstName'])) $data['firstName']               = $customer['firstName'];
-            if (isset($customer['lastName'])) $data['lastName']                 = $customer['lastName'];
-            if (isset($customer['company'])) $data['company']                   = $customer['company'];
-            if (isset($customer['email'])) $data['email']                       = $customer['email'];
-            if (isset($customer['billingAddress1'])) $data['billingAddress1']   = $customer['billingAddress1'];
-            if (isset($customer['billingAddress2'])) $data['billingAddress2']   = $customer['billingAddress2'];
-            if (isset($customer['billingCity'])) $data['billingCity']           = $customer['billingCity'];
-            if (isset($customer['billingPostcode'])) $data['billingPostcode']   = $customer['billingPostcode'];
-            if (isset($customer['billingState'])) $data['billingState']         = $customer['billingState'];
-            if (isset($customer['billingCountry'])) $data['billingCountry']     = $customer['billingCountry']; // required
+            if ($this->getCustomerReference()) $data['customerReference']           = $this->getCustomerReference(); // will be generated automatically if not provided
+            if (isset($customer['firstName'])) $data['firstName']                   = $customer['firstName'];
+            if (isset($customer['lastName'])) $data['lastName']                     = $customer['lastName'];
+            if (isset($customer['company'])) $data['company']                       = $customer['company'];
+            if (isset($customer['email'])) $data['email']                           = $customer['email'];
+            if (isset($customer['billingAddress1'])) $data['billingAddress1']       = $customer['billingAddress1'];
+            if (isset($customer['billingAddress2'])) $data['billingAddress2']       = $customer['billingAddress2'];
+            if (isset($customer['billingCity'])) $data['billingCity']               = $customer['billingCity'];
+            if (isset($customer['billingPostcode'])) $data['billingPostcode']       = $customer['billingPostcode'];
+            if (isset($customer['billingState'])) $data['billingState']             = $customer['billingState'];
+            if (isset($customer['billingCountry'])) $data['billingCountry']         = $customer['billingCountry']; // required
         }
 
         // add transaction information to $data
