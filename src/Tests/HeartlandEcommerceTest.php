@@ -406,7 +406,48 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotFalse($response->isSuccessful());
         $this->assertTrue($response->getCustomerReference() == $customerReference);
     }
+    public function test22CreatePaymentMethod()
+    {
+        // Requires Payplan to be enabled
+        $customerReference = time();
 
+        $request = $this->gateway->createCustomer(array(
+            'customerReference' => $customerReference,
+            'customer' => $this->getCustomer()
+        ));
+        $response = $request->send();
+
+        $request = $this->gateway->createPaymentMethod(array(
+            'card' => $this->getVisaCard(),
+            'customerReference' => $customerReference
+        ));
+        $response = $request->send();
+
+        $this->assertNotFalse($response->isSuccessful());
+        $this->assertNotNull($response->getPaymentMethodReference());
+    }
+    public function test23CreatePaymentMethodWithReference()
+    {
+        // Requires Payplan to be enabled
+        $customerReference = time();
+        $paymentMethodReference = $customerReference + 1;
+
+        $request = $this->gateway->createCustomer(array(
+            'customerReference' => $customerReference,
+            'customer' => $this->getCustomer()
+        ));
+        $response = $request->send();
+
+        $request = $this->gateway->createPaymentMethod(array(
+            'card' => $this->getVisaCard(),
+            'customerReference' => $customerReference,
+            'paymentMethodReference' => $paymentMethodReference
+        ));
+        $response = $request->send();
+
+        $this->assertNotFalse($response->isSuccessful());
+        $this->assertTrue($response->getPaymentMethodReference() == $paymentMethodReference);
+    }
     protected function randAmount()
     {
         return rand(1, 9) . "." . rand(1, 99);
@@ -418,7 +459,7 @@ class HeartlandEcommerceTest extends TestCase
             'number' => '372700699251018',
             'expiryMonth' => 12,
             'expiryYear' => 2025,
-            'cvv' => 1234,
+            'cvv' => 1234
         );
     }
     protected function getDiscoverCard()
@@ -427,7 +468,7 @@ class HeartlandEcommerceTest extends TestCase
             'number' => '6011000990156527',
             'expiryMonth' => 12,
             'expiryYear' => 2025,
-            'cvv' => 123,
+            'cvv' => 123
         );
     }
     protected function getJcbCard()
@@ -436,7 +477,7 @@ class HeartlandEcommerceTest extends TestCase
             'number' => '3566007770007321',
             'expiryMonth' => 12,
             'expiryYear' => 2025,
-            'cvv' => 123,
+            'cvv' => 123
         );
     }
     protected function getMastercardCard()
@@ -445,7 +486,7 @@ class HeartlandEcommerceTest extends TestCase
             'number' => '5473500000000014',
             'expiryMonth' => 12,
             'expiryYear' => 2025,
-            'cvv' => 123,
+            'cvv' => 123
         );
     }
     protected function getVisaCard()
@@ -454,7 +495,7 @@ class HeartlandEcommerceTest extends TestCase
             'number' => '4012002000060016',
             'expiryMonth' => 12,
             'expiryYear' => 2025,
-            'cvv' => 123,
+            'cvv' => 123
         );
     }
     protected function getPersonalCheck()

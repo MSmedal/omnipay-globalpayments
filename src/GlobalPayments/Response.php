@@ -58,4 +58,9 @@ class Response extends AbstractResponse
         return $this->response->id;
     }
 
+    public function getPaymentMethodReference()
+    {
+        return $this->response->id;
+    }
+
 }

@@ -43,6 +43,7 @@ abstract class AbstractPorticoRequest extends AbstractRequest
             $data['billingCountry']     = $card->getBillingCountry();
             $data['billingPhone']       = $card->getBillingPhone();
             $data['email']              = $card->getEmail();
+            $data['company']            = $card->getBillingCompany();
         }
 
         if ($this->getCheck()) {
@@ -69,6 +70,23 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         }
 
         if ($this->getCustomer()) {
+            $customer = $this->getCustomer();
+
+            // add customer info to $data
+            if ($this->getCustomerReference()) $data['customerReference']           = $this->getCustomerReference(); // will be generated automatically if not provided
+            if (isset($customer['firstName'])) $data['firstName']                   = $customer['firstName'];
+            if (isset($customer['lastName'])) $data['lastName']                     = $customer['lastName'];
+            if (isset($customer['company'])) $data['company']                       = $customer['company'];
+            if (isset($customer['email'])) $data['email']                           = $customer['email'];
+            if (isset($customer['billingAddress1'])) $data['billingAddress1']       = $customer['billingAddress1'];
+            if (isset($customer['billingAddress2'])) $data['billingAddress2']       = $customer['billingAddress2'];
+            if (isset($customer['billingCity'])) $data['billingCity']               = $customer['billingCity'];
+            if (isset($customer['billingPostcode'])) $data['billingPostcode']       = $customer['billingPostcode'];
+            if (isset($customer['billingState'])) $data['billingState']             = $customer['billingState'];
+            if (isset($customer['billingCountry'])) $data['billingCountry']         = $customer['billingCountry']; // required
+        }
+
+        if ($this->getCustomer()) { ////////////waitwut
             $customer = $this->getCustomer();
 
             // add customer info to $data
