@@ -2,8 +2,8 @@
 
 namespace Omnipay\GlobalPayments\TransitMessage;
 
-use GlobalPayments\Api\Entities\Enums\GatewayProvider;
-use GlobalPayments\Api\ServicesConfig;
+use GlobalPayments\Api\ServiceConfigs\AcceptorConfig;
+use GlobalPayments\Api\ServiceConfigs\Gateways\TransitConfig;
 use GlobalPayments\Api\ServicesContainer;
 use Omnipay\GlobalPayments\AbstractRequest;
 use Omnipay\GlobalPayments\Response;
@@ -57,25 +57,25 @@ abstract class AbstractTransitRequest extends AbstractRequest
 
     protected function setServicesConfig()
     {
-        $config = new ServicesConfig();
+        $config = new TransitConfig();
         $config->merchantId = $this->getMerchantId();
         $config->username = $this->getUsername();
         $config->password = $this->getPassword();
         $config->deviceId = $this->getDeviceId();
         $config->developerId = $this->getDeveloperId();
         $config->versionNumber = $this->getVersionNumber();
-        $config->gatewayProvider = GatewayProvider::TRANSIT;
+        $config->acceptorConfig = new AcceptorConfig();
 
         if ($this->getTransactionKey() != null && $this->getTransactionKey() != "") {
-            $config->getTransactionKey = $this->getTransactionKey();
+            $config->transactionKey = $this->getTransactionKey();
         } else {
-            ServicesContainer::configure($config);
+            ServicesContainer::configureService($config);
             $provider = ServicesContainer::instance()->getClient();
             $response = $provider->getTransactionKey();
             $config->transactionKey = $response->transactionKey;
         }
         
-        ServicesContainer::configure($config);
+        ServicesContainer::configureService($config);
     }
 
 }

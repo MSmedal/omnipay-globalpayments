@@ -4,15 +4,14 @@
     "description": "description",
     "keywords": [
         "gateway",
-        "merchant",
         "omnipay",
-        "pay",
-        "payment",
-        "heartland"
+        "heartland",
+        "globalpayments",
+        "tsys"
     ],
     "authors": [
         {
-            "name": "Mark Smedal Jr",
+            "name": "Tony Smedal",
             "email": "mark.smedal@e-hps.com"
         }
     ],
@@ -29,14 +28,7 @@
     },
     "require": {
         "omnipay/common": "^3.0",
-        "globalpayments/php-sdk": "*"
+        "globalpayments/php-sdk": "^2.2"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "C:\\Users\\mark.smedal\\Google Drive\\HPS_Dev\\OmniPay\\global\\PHP-SDK-v3-transIT-support"
-        }
-    ],
-    "minimum-stability": "dev",
     "prefer-stable": true
 }

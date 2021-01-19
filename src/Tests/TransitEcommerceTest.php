@@ -17,16 +17,17 @@ class TransitEcommerceTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $deviceId = '88700000322602';
-        $merchantId = '887000003226';
-        $password = 'f8mapGqWrE^rVaA9';
-        $userName = 'TA5622118';
+        $transactionKey = 'DPJLWWAD1MOAX8XPCHZAXP15U0UME5U0';
+        $deviceId = '88500000322601';
+        $merchantId = '885000003226';
+        $userName = 'TA5748226';
         if ($deviceId) {
             $this->gateway = Omnipay::create('GlobalPayments\Transit');
             $this->gateway->setDeviceId($deviceId);
             $this->gateway->setMerchantId($merchantId);
-            $this->gateway->setPassword($password);
+            // $this->gateway->setPassword($password);
             $this->gateway->setUserName($userName);
+            $this->gateway->setTransactionKey($transactionKey);
         }
     }
     public function test01PurchaseVisaManualEntry()
@@ -303,12 +304,14 @@ class TransitEcommerceTest extends TestCase
     }
     protected function getVisaCard()
     {
-        return array(
+        $visaCard = array(
             'number' => '4012002000060016',
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 123,
         );
+
+        return array_merge($visaCard, $this->getAddress());
     }
     protected function getAddress()
     {

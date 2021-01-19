@@ -2,6 +2,7 @@
 
 namespace Omnipay\GlobalPayments\HeartlandMessage;
 
+use GlobalPayments\Api\ServiceConfigs\Gateways\PorticoConfig;
 use GlobalPayments\Api\ServicesConfig;
 use GlobalPayments\Api\ServicesContainer;
 use Omnipay\GlobalPayments\AbstractRequest;
@@ -114,7 +115,7 @@ abstract class AbstractPorticoRequest extends AbstractRequest
 
     protected function setServicesConfig()
     {
-        $config = new ServicesConfig();
+        $config = new PorticoConfig();
 
         if ($this->getSecretApiKey() != null && $this->getSecretApiKey() != "") {
             $config->secretApiKey = trim($this->getSecretApiKey());
@@ -129,6 +130,6 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         $config->developerId    = $this->getDeveloperId();
         $config->versionNumber  = $this->getVersionNumber();
 
-        ServicesContainer::configure($config);
+        ServicesContainer::configureService($config);
     }
 }

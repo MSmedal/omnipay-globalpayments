@@ -17,8 +17,7 @@ class TransitGateway extends AbstractGateway
             'deviceId' => '',
             'username' => '',
             'password' => '',
-            'developerId' => '002914',
-            'versionNumber' => '4285',
+            'developerId' => '003282G002',
             'merchantId' => '',
             'transactionKey' => ''
         );
