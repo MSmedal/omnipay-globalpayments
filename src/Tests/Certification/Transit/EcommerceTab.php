@@ -1,6 +1,9 @@
 <?php
 namespace Omnipay\GlobalPayments;
 
+use GlobalPayments\Api\Entities\Enums\StoredCredentialInitiator;
+use GlobalPayments\Api\Entities\StoredCredential;
+use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use Omnipay\Omnipay;
 use Omnipay\Tests\TestCase;
 
@@ -11,6 +14,9 @@ class EcommerceTab extends TestCase
 {
     private static $partialVoidTarget;
     private static $fullVoidTarget;
+    private static $visaReference;
+    private static $mastercardReference;
+    private static $refundTarget;
 
     public function setUp()
     {
@@ -126,7 +132,9 @@ class EcommerceTab extends TestCase
             'currency' => 'USD',
             'amount' => 11.12
         ));
+
         $response = $request->send();
+        static::$refundTarget = $response->getTransactionReference();
 
         $this->assertTrue($response->isSuccessful());
     }
@@ -140,6 +148,39 @@ class EcommerceTab extends TestCase
         ));
         $response = $request->send();
         static::$fullVoidTarget = $response->getTransactionReference();
+
+        $this->assertTrue($response->isSuccessful());
+    }
+
+    public function testCardAuthentication01()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getVisa()
+        ));
+
+        $response = $request->send();
+        static::$visaReference = $response->getCardReference();
+
+        $this->assertTrue($response->isSuccessful());
+    }
+
+    public function testCardAuthentication02()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getMasterCard()
+        ));
+        $response = $request->send();
+        static::$mastercardReference = $response->getCardReference();
+
+        $this->assertTrue($response->isSuccessful());
+    }
+
+    public function testCardAuthentication03()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getAmex()
+        ));
+        $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
     }
@@ -158,6 +199,89 @@ class EcommerceTab extends TestCase
     {
         $request = $this->gateway->void(array(
             'transactionReference' => static::$fullVoidTarget
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+    }
+
+    // public function consumerInitiated01()
+    // {
+    //     $request = $this->gateway->purchase(array(
+    //         'card' => static::$visaReference,
+    //         'currency' => 'USD',
+    //         'amount' => 11.12
+    //     ));
+    //     $response = $request->send();
+
+    //     $this->assertTrue($response->isSuccessful());
+    // }
+
+    // public function consumerInitiated02()
+    // {
+    //     $request = $this->gateway->purchase(array(
+    //         'card' => static::$mastercardReference,
+    //         'currency' => 'USD',
+    //         'amount' => 11.12
+    //     ));
+    //     $response = $request->send();
+
+    //     $this->assertTrue($response->isSuccessful());
+    // }
+
+    public function testTempSaleVisaCIT () {
+        $storedcreds = new StoredCredential;
+        $storedcreds->initiator = StoredCredentialInitiator::MERCHANT;
+
+        // 'number' => '4012000098765439',
+        // 'expiryMonth' => 12,
+        // 'expiryYear' => 2025,
+        // 'cvv' => 999,
+
+        $card = new CreditCardData();
+        $card->token = static::$visaReference;
+        $card->expMonth = $this->getVisa()['expiryMonth'];
+        $card->expYear = $this->getVisa()['expiryYear'];
+        $card->cvn = $this->getVisa()['cvv'];
+
+        $response = $card->charge(14.00)
+            ->withCurrency('USD')
+            ->withClientTransactionId('test30_' . time())
+            ->withStoredCredential($storedcreds)
+            ->execute();
+
+        $this->assertEquals('00', $response->responseCode);
+    }
+
+    public function testTempSaleNonVisaCIT () {
+        $storedcreds = new StoredCredential;
+        $storedcreds->initiator = StoredCredentialInitiator::MERCHANT;
+
+        $card = new CreditCardData();
+        $card->number = static::$mastercardReference;
+        $card->expMonth = $this->getMasterCard()['expiryMonth'];
+        $card->expYear = $this->getMasterCard()['expiryYear'];
+        $card->cvn = $this->getMasterCard()['cvv'];
+
+        // 'number' => '5146315000000055',
+        // 'expiryMonth' => 12,
+        // 'expiryYear' => 2025,
+        // 'cvv' => 998,
+
+        $response = $card->charge(15.00)
+            ->withCurrency('USD')
+            ->withClientTransactionId('test31_' . time())
+            ->withStoredCredential($storedcreds)
+            ->execute();
+
+        $this->assertEquals('00', $response->responseCode);
+    }
+
+    public function testReturn01()
+    {
+        $request = $this->gateway->refund(array(
+            'transactionReference' => static::$refundTarget,
+            'currency' => 'USD',
         ));
         $response = $request->send();
 
