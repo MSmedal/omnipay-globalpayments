@@ -22,6 +22,8 @@ class GeniusGateway extends AbstractGateway
         );
     }
 
+    private $geniusMessagePath = '\Omnipay\GlobalPayments\Message\GeniusMessage';
+
     public function setMerchantName($value)
     {
         return $this->setParameter('merchantName', $value);
@@ -49,42 +51,42 @@ class GeniusGateway extends AbstractGateway
 
     public function purchase($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\GeniusMessage\PurchaseRequest', $options);
+        return $this->createRequest($this->geniusMessagePath . '\PurchaseRequest', $options);
     }
 
     public function authorize($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\GeniusMessage\AuthorizeRequest', $options);
+        return $this->createRequest($this->geniusMessagePath . '\AuthorizeRequest', $options);
     }
 
     public function capture($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\GeniusMessage\CaptureRequest', $options);
+        return $this->createRequest($this->geniusMessagePath . '\CaptureRequest', $options);
     }
 
     public function void($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\GeniusMessage\VoidRequest', $options);
+        return $this->createRequest($this->geniusMessagePath . '\VoidRequest', $options);
     }
     
     public function refund($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\GeniusMessage\RefundRequest', $options);
+        return $this->createRequest($this->geniusMessagePath . '\RefundRequest', $options);
     }
 
     public function createCard($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\GeniusMessage\CreateCardRequest', $options);
+        return $this->createRequest($this->geniusMessagePath . '\CreateCardRequest', $options);
     }
 
     public function updateCard($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\GeniusMessage\UpdateCardRequest', $options);
+        return $this->createRequest($this->geniusMessagePath . '\UpdateCardRequest', $options);
     }
 
     public function deleteCard($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\GeniusMessage\DeleteCardRequest', $options);
+        return $this->createRequest($this->geniusMessagePath . '\DeleteCardRequest', $options);
     }
 
 }

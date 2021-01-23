@@ -1,9 +1,7 @@
 <?php
-namespace Omnipay\GlobalPayments;
+namespace Tests\Certification\Transit;
 
-use GlobalPayments\Api\Entities\Enums\StoredCredentialInitiator;
-use GlobalPayments\Api\Entities\StoredCredential;
-use GlobalPayments\Api\PaymentMethods\CreditCardData;
+use GlobalPayments\Api\Services\BatchService;
 use Omnipay\Omnipay;
 use Omnipay\Tests\TestCase;
 
@@ -54,7 +52,6 @@ class EcommerceTab extends TestCase
         ));
 
         $response = $request->send();
-
         $this->assertTrue($response->isSuccessful());
     }
 
@@ -106,6 +103,7 @@ class EcommerceTab extends TestCase
             'currency' => 'USD',
             'amount' => 34.13
         ));
+
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
     }
@@ -280,10 +278,18 @@ class EcommerceTab extends TestCase
             'transactionReference' => static::$refundTarget,
             'currency' => 'USD',
         ));
-        $response = $request->send();
 
+        $response = $request->send();
         $this->assertTrue($response->isSuccessful());
-    }    
+    }
+    
+    // close the batch via SDK directly
+    // this won't be needed in production since auto-close exists
+    public function testCloseBatch()
+    {
+        $response = BatchService::closeBatch();
+        $this->assertEquals('00', $response->responseCode);
+    }
 
     private function getMasterCard2Bin() {
         $card = array(
@@ -373,10 +379,8 @@ class EcommerceTab extends TestCase
         return array_merge($card, $this->avsData);
     }
 
-
-
     private $avsData = array(
-            'billingAddress1' => '8320',
-            'billingPostcode' => '85284'
+        'billingAddress1' => '8320',
+        'billingPostcode' => '85284'
     );
 }

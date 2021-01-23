@@ -23,6 +23,8 @@ class TransitGateway extends AbstractGateway
         );
     }
 
+    private $transitMessagePath = '\Omnipay\GlobalPayments\Message\TransitMessage';
+
     public function setDeviceId($value)
     {
         return $this->setParameter('deviceId', $value);
@@ -60,32 +62,32 @@ class TransitGateway extends AbstractGateway
 
     public function purchase($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\PurchaseRequest', $options);
+        return $this->createRequest($this->transitMessagePath . '\PurchaseRequest', $options);
     }
 
     public function authorize($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\AuthorizeRequest', $options);
+        return $this->createRequest($this->transitMessagePath . '\AuthorizeRequest', $options);
     }
 
     public function capture($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\CaptureRequest', $options);
+        return $this->createRequest($this->transitMessagePath . '\CaptureRequest', $options);
     }
 
     public function void($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\VoidRequest', $options);
+        return $this->createRequest($this->transitMessagePath . '\VoidRequest', $options);
     }
     
     public function refund($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\RefundRequest', $options);
+        return $this->createRequest($this->transitMessagePath . '\RefundRequest', $options);
     }
 
     public function createCard($options = array())
     {
-        return $this->createRequest('\Omnipay\GlobalPayments\TransitMessage\CreateCardRequest', $options);
+        return $this->createRequest($this->transitMessagePath . '\CreateCardRequest', $options);
     }
 
     // public function updateCard($options = array())
