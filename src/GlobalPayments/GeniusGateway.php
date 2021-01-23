@@ -17,8 +17,8 @@ class GeniusGateway extends AbstractGateway
             'merchantName' => '',
             'siteId' => '',
             'merchantKey' => '',
-            'developerId' => '002914',
-            'versionNumber' => '4285',
+            'developerId' => '',
+            'versionNumber' => '',
         );
     }
 
