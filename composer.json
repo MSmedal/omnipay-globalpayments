@@ -30,5 +30,4 @@
         "omnipay/common": "^3.0",
         "globalpayments/php-sdk": "^2.2"
     },
-    "prefer-stable": true
 }
