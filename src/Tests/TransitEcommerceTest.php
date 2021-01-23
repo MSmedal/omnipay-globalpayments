@@ -25,7 +25,6 @@ class TransitEcommerceTest extends TestCase
             $this->gateway = Omnipay::create('GlobalPayments\Transit');
             $this->gateway->setDeviceId($deviceId);
             $this->gateway->setMerchantId($merchantId);
-            // $this->gateway->setPassword($password);
             $this->gateway->setUserName($userName);
             $this->gateway->setTransactionKey($transactionKey);
         }

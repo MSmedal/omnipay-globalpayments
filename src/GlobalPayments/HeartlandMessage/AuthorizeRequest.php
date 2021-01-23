@@ -4,6 +4,8 @@ namespace Omnipay\GlobalPayments\HeartlandMessage;
 
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
+use GlobalPayments\Api\Entities\Enums\StoredCredentialInitiator;
+use GlobalPayments\Api\Entities\StoredCredential;
 
 /**
  * Heartland Authorize Request
@@ -60,11 +62,15 @@ class AuthorizeRequest extends AbstractPorticoRequest
         // new GlobalPayments credit card object
         $chargeMe = new CreditCardData();
 
-        if ($this->getToken() != null && $this->getToken() != "") {
+        $storedCredentials = new StoredCredential();
+
+        if (!empty($this->getToken())) {
             $chargeMe->token = $this->getToken();
-        } elseif ($this->getCardReference() != null && $this->getCardReference() != "") {
+        } elseif (!empty($this->getCardReference())) {
             $chargeMe->token = $this->getCardReference();
+            $storedCredentials->initiator = StoredCredentialInitiator::MERCHANT;
         }
+        
         // token and card info can be submitted simultaneously; discrete card info values (below vars) will take precedence over token-contained card info
         if (isset($data['card']['number'])) $chargeMe->number           = $data['card']['number'];
         if (isset($data['card']['expiryMonth'])) $chargeMe->expMonth    = $data['card']['expiryMonth'];
