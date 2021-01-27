@@ -22,6 +22,7 @@ class CreateCardRequest extends AbstractTransitRequest
         $chargeMe->expMonth = $data['card']['expiryMonth'];
         $chargeMe->expYear  = $data['card']['expiryYear'];
         $chargeMe->cvn      = $data['card']['cvv'];
+        if (isset($data['card']['type'])) $chargeMe->cardType  = $data['card']['type'];
 
         if (isset($data['firstName']) && isset($data['lastName'])) {
             $chargeMe->cardHolderName = $data['firstName'] . " " . $data['lastName'];

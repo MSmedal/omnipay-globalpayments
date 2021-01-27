@@ -3,9 +3,29 @@
 namespace Omnipay\GlobalPayments\Message;
 
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Omnipay\GlobalPayments\CreditCard;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
+    /**
+     * Get the card.
+     *
+     * @return CreditCard
+     */
+    public function getCard()
+    {
+        return $this->getParameter('card');
+    }
+
+    public function setCard($value)
+    {
+        if ($value && !$value instanceof CreditCard) {
+            $value = new CreditCard($value);
+        }
+
+        return $this->setParameter('card', $value);
+    }
+
     /**
      * Create a new Request
      *

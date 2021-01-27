@@ -30,6 +30,7 @@ class AuthorizeRequest extends AbstractTransitRequest
         if (isset($data['card']['expiryMonth'])) $chargeMe->expMonth = $data['card']['expiryMonth'];
         if (isset($data['card']['expiryYear'])) $chargeMe->expYear = $data['card']['expiryYear'];
         if (isset($data['card']['cvv'])) $chargeMe->cvn  = $data['card']['cvv'];
+        if (isset($data['card']['type'])) $chargeMe->cardType  = $data['card']['type'];
 
         if (isset($data['firstName']) && isset($data['lastName'])) {
             $chargeMe->cardHolderName = $data['firstName'] . " " . $data['lastName'];
@@ -53,6 +54,5 @@ class AuthorizeRequest extends AbstractTransitRequest
             ->withCurrency($data['currency'])
             ->withStoredCredential($storedCredentials)
             ->execute();
-    }
-    
+    }    
 }

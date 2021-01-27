@@ -13,10 +13,11 @@ $gateway->setMerchantId('885000003226');
 
 // Example form data
 $formData = [
-    'number'            => '5146315000000055', // required
-    'expiryMonth'       => '12', // required
-    'expiryYear'        => '2025', // required
-    'cvv'               => '998', // optional
+    'number' => '4012000098765439',
+    'expiryMonth' => 12,
+    'expiryYear' => 2025,
+    'cvv' => 999,
+    'type' => CardType::VISA,
     'firstName'         => 'Tony', // optional
     'lastName'          => 'Smedal', // optional
     'billingAddress1'   => '1 Heartland Way', // optional
@@ -24,10 +25,9 @@ $formData = [
     'billingPostcode'   => '47130', // optional
     'billingState'      => 'IN', // optional
     'billingCountry'    => 'USA', // optional
-    'type'              => CardType::MASTERCARD,
 ];
 
-$response = $gateway->purchase(
+$response = $gateway->createCard(
     [
         'card'          => $formData,
         'currency'      => 'USD', // required
@@ -45,3 +45,18 @@ if ($response->isSuccessful()) {
 } else {
     echo 'something went wrong';
 }
+
+
+        $card = array(
+            'number' => '4012000098765439',
+            'expiryMonth' => 12,
+            'expiryYear' => 2025,
+            'cvv' => 999,
+            'type' => CardType::VISA
+        );
+
+        $response = $this->gateway->createCard(
+            $card
+        );
+
+        $this->assertTrue($response->isSuccessful());

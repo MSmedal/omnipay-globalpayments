@@ -2,11 +2,13 @@
 
 namespace Omnipay\GlobalPayments\Message\TransitMessage;
 
+use GlobalPayments\Api\Entities\Enums\OperatingEnvironment;
 use GlobalPayments\Api\ServiceConfigs\AcceptorConfig;
 use GlobalPayments\Api\ServiceConfigs\Gateways\TransitConfig;
 use GlobalPayments\Api\ServicesContainer;
 use Omnipay\GlobalPayments\Message\AbstractRequest;
 use Omnipay\GlobalPayments\Message\Response;
+use Omnipay\GlobalPayments\CreditCard;
 
 abstract class AbstractTransitRequest extends AbstractRequest
 {
@@ -32,6 +34,7 @@ abstract class AbstractTransitRequest extends AbstractRequest
             $data['card']['expiryMonth']    = $card->getExpiryMonth();
             $data['card']['expiryYear']     = $card->getExpiryYear();
             $data['card']['cvv']            = $card->getCvv();
+            $data['card']['type']            = $card->getType();
     
             // add payor info to $data
             $data['firstName']          = $card->getFirstName();
@@ -65,7 +68,7 @@ abstract class AbstractTransitRequest extends AbstractRequest
         $config->developerId = $this->getDeveloperId();
         $config->versionNumber = $this->getVersionNumber();
         $config->acceptorConfig = new AcceptorConfig();
-
+        
         if ($this->getTransactionKey() != null && $this->getTransactionKey() != "") {
             $config->transactionKey = $this->getTransactionKey();
         } else {

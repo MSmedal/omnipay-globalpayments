@@ -1,7 +1,12 @@
 <?php
 namespace Tests\Certification\Transit;
 
+use GlobalPayments\Api\Entities\Enums\CardType;
+use GlobalPayments\Api\PaymentMethods\CreditCardData;
+use GlobalPayments\Api\ServiceConfigs\AcceptorConfig;
+use GlobalPayments\Api\ServiceConfigs\Gateways\TransitConfig;
 use GlobalPayments\Api\Services\BatchService;
+use GlobalPayments\Api\ServicesContainer;
 use Omnipay\Omnipay;
 use Omnipay\Tests\TestCase;
 
@@ -42,6 +47,66 @@ class EcommerceTab extends TestCase
         }
     }
 
+    public function testGetonustoken01()
+    {
+        $card = array(
+            'number' => '4012000098765439',
+            'expiryMonth' => 12,
+            'expiryYear' => 2025,
+            'cvv' => 999,
+            'type' => CardType::VISA
+        );
+
+        $response = $this->gateway->createCard(
+            array(
+                'card' => $card,
+            )
+        )->send();
+
+        $this->assertTrue($response->isSuccessful());
+    }
+
+    // public function testGetonustoken01Spoof()
+    // {
+    //     $config = new TransitConfig(); // replaces ServicesConfig()
+    //     $config->merchantId = '885000003226';
+    //     $config->deviceId = '88500000322601';
+    //     $config->transactionKey = 'DPJLWWAD1MOAX8XPCHZAXP15U0UME5U0';
+    //     $config->acceptorConfig = new AcceptorConfig();
+
+    //     ServicesContainer::configureService($config);
+
+    //     $card = new CreditCardData();
+    //     $card->number = '4012000098765439';
+    //     $card->expMonth = '12';
+    //     $card->expYear = 2025;
+    //     $card->cvn = 999;
+    //     $card->cardType = CardType::VISA;
+
+    //     $response = $card->tokenize()->execute();
+
+    //     $this->assertEquals($response->responseCode, '00');
+    // }
+
+    public function testGetonustoken02()
+    {
+        $card = array(
+            'number' => '5146315000000055',
+            'expiryMonth' => 12,
+            'expiryYear' => 2025,
+            'cvv' => 998,
+            'type' => CardType::MASTERCARD
+        );
+
+        $response = $this->gateway->createCard(
+            array(
+                'card' => $card,
+            )
+        )->send();
+
+        $this->assertTrue($response->isSuccessful());
+    }
+
     public function testInternetPurchase01()
     {
         $request = $this->gateway->purchase(array(
@@ -70,7 +135,7 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase03()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->authorize(array(
             'card' => $this->getDiners(),
             'token' => $this->tsepDiners,
             'currency' => 'USD',
@@ -227,7 +292,9 @@ class EcommerceTab extends TestCase
     public function testVoid01()
     {
         $request = $this->gateway->void(array(
-            'transactionReference' => static::$partialVoidTarget
+            'transactionReference' => static::$partialVoidTarget,
+            'amount' => '5.00',
+            'description' => 'PARTIAL_REVERSAL'
         ));
 
         $response = $request->send();
@@ -237,7 +304,8 @@ class EcommerceTab extends TestCase
     public function testVoid02()
     {
         $request = $this->gateway->void(array(
-            'transactionReference' => static::$fullVoidTarget
+            'transactionReference' => static::$fullVoidTarget,
+            'description' => 'POST_AUTH_USER_DECLINE'
         ));
 
         $response = $request->send();
@@ -272,6 +340,12 @@ class EcommerceTab extends TestCase
         $this->assertTrue($response->isSuccessful());
     }
 
+    public function testIntermissionBeforeRefund() {
+        BatchService::closeBatch();
+
+        sleep(3601);
+    }
+
     public function testReturn01()
     {
         $request = $this->gateway->refund(array(
@@ -297,6 +371,7 @@ class EcommerceTab extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 998,
+            'type' => CardType::MASTERCARD
         );
 
         return array_merge($card, $this->avsData);
@@ -308,6 +383,7 @@ class EcommerceTab extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 996,
+            'type' => CardType::DISCOVER
         );
 
         return array_merge($card, $this->avsData);
@@ -319,6 +395,7 @@ class EcommerceTab extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 998,
+            'type' => CardType::MASTERCARD
         );
 
         return array_merge($card, $this->avsData);
@@ -330,6 +407,7 @@ class EcommerceTab extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 996,
+            'type' => CardType::JCB
         );
 
         return array_merge($card, $this->avsData);
@@ -341,6 +419,7 @@ class EcommerceTab extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 9997,
+            'type' => CardType::AMEX
         );
 
         return array_merge($card, $this->avsData);
@@ -352,6 +431,7 @@ class EcommerceTab extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 999,
+            'type' => CardType::VISA
         );
 
         return array_merge($card, $this->avsData);
@@ -363,6 +443,7 @@ class EcommerceTab extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 996,
+            'type' => CardType::DISCOVER
         );
 
         return array_merge($card, $this->avsData);
@@ -374,6 +455,7 @@ class EcommerceTab extends TestCase
             'expiryMonth' => 12,
             'expiryYear' => 2025,
             'cvv' => 996,
+            'type' => CardType::DINERS
         );
 
         return array_merge($card, $this->avsData);
