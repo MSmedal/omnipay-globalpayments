@@ -343,7 +343,7 @@ class EcommerceTab extends TestCase
     public function testIntermissionBeforeRefund() {
         BatchService::closeBatch();
 
-        sleep(3601);
+        // sleep(3601); // only needed during certification
     }
 
     public function testReturn01()
