@@ -12,6 +12,8 @@ $gateway->setTransactionKey('ZKLZ5B7N2WC1BAX8PIL0P65EPU67M3F9');
 $gateway->setDeviceId('88600000322601');
 $gateway->setMerchantId('886000003226');
 
+
+
 // Example form data
 $formData = [
     'number'            => '5146315000000055', // required
@@ -30,22 +32,27 @@ $formData = [
 
 $card = new CreditCard($formData);
 
-$response = $gateway->authorize(
-    [
-        'card'          => $card,
-        'currency'      => 'USD', // required
-        'amount'        => 100.00, // required
-    ]
-)->send();
+    // Purchase
+    $request = $gateway->purchase(array(
+        'card' => $card,
+        'currency' => 'USD',
+        'amount' => 11.17
+    ));
 
-$refNo = $response->getTransactionReference();
+    $response = $request->send();
+    $purchaseTransactionReference = $response->getTransactionReference();
 
-$response2 = $gateway->capture(
-    [
-        'transactionReference'  => $refNo,
-        'amount'                => 150.00, // required
-    ]
-)->send();
+    // Refund
+    $request = $gateway->refund(array(
+        'transactionReference' => $purchaseTransactionReference,
+    ));
+
+    $response = $request->send();
+
+
+
+
+
 
 print_r($response2);
 

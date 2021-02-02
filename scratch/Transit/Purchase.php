@@ -4,6 +4,7 @@ include_once 'C:\Users\tehpo\Desktop\omnipay-globalpayments\vendor\autoload.php'
 include_once 'vendor\autoload.php';
 
 use GlobalPayments\Api\Entities\Enums\CardType;
+use Omnipay\GlobalPayments\CreditCard;
 use Omnipay\Omnipay;
 
 $gateway = Omnipay::create('GlobalPayments\Transit');
@@ -13,23 +14,25 @@ $gateway->setMerchantId('885000003226');
 
 // Example form data
 $formData = [
-    'number'            => '5146315000000055', // required
-    'expiryMonth'       => '12', // required
-    'expiryYear'        => '2025', // required
-    'cvv'               => '998', // optional
-    'firstName'         => 'Tony', // optional
-    'lastName'          => 'Smedal', // optional
-    'billingAddress1'   => '1 Heartland Way', // optional
-    'billingCity'       => 'Jeffersonville', // optional
-    'billingPostcode'   => '47130', // optional
-    'billingState'      => 'IN', // optional
-    'billingCountry'    => 'USA', // optional
-    'type'              => CardType::MASTERCARD,
+    'number'            => '5146315000000055',
+    'expiryMonth'       => '12',
+    'expiryYear'        => '2025',
+    'cvv'               => '998',
+    'firstName'         => 'Tony',
+    'lastName'          => 'Smedal',
+    'billingAddress1'   => '1 Heartland Way',
+    'billingCity'       => 'Jeffersonville',
+    'billingPostcode'   => '47130',
+    'billingState'      => 'IN',
+    'billingCountry'    => 'USA',
+    'type'              => CardType::MASTERCARD, // required for this gateway (Transit/TSYS)
 ];
+
+$card = new CreditCard($formData);
 
 $response = $gateway->purchase(
     [
-        'card'          => $formData,
+        'card'          => $card,
         'currency'      => 'USD', // required
         'amount'        => '1.23', // required
         'description'   => 'Test Purchase using Purchase.php in scratch folder.'

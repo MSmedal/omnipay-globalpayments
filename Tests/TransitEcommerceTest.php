@@ -50,7 +50,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 11.12
         ));
 
         $response = $request->send();
@@ -67,7 +67,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getMasterCard(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 15.00
         ));
 
         $response = $request->send();
@@ -84,7 +84,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getMasterCard2Bin(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 15.00
         ));
 
         $response = $request->send();
@@ -101,7 +101,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getDiscover(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 12.00
         ));
 
         $response = $request->send();
@@ -118,7 +118,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getDiscoverCup(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 10.00
         ));
 
         $response = $request->send();
@@ -135,7 +135,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getAmex(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 13.50
         ));
 
         $response = $request->send();
@@ -152,7 +152,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getJcb(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 13.00
         ));
 
         $response = $request->send();
@@ -169,7 +169,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getDiners(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 6.00
         ));
 
         $response = $request->send();
@@ -191,7 +191,7 @@ class TransitEcommerceTest extends TestCase
             'token' => $this->tsepVisa,
             'card' => $this->getVisaTsep(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 11.13
         ));
 
         $response = $request->send();
@@ -209,7 +209,7 @@ class TransitEcommerceTest extends TestCase
             'token' => $this->tsepMasterCard,
             'card' => $this->getMasterCardTsep(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 15.00
         ));
 
         $response = $request->send();
@@ -227,7 +227,7 @@ class TransitEcommerceTest extends TestCase
             'token' => $this->tsepMasterCard2Bin,
             'card' => $this->getMasterCard2BinTsep(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 15.00
         ));
 
         $response = $request->send();
@@ -245,7 +245,7 @@ class TransitEcommerceTest extends TestCase
             'token' => $this->tsepDiscover,
             'card' => $this->getDiscoverTsep(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 12.00
         ));
 
         $response = $request->send();
@@ -263,7 +263,7 @@ class TransitEcommerceTest extends TestCase
             'token' => $this->tsepDiscuverCup,
             'card' => $this->getDiscoverCupTsep(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 10.00
         ));
 
         $response = $request->send();
@@ -281,7 +281,7 @@ class TransitEcommerceTest extends TestCase
             'token' => $this->tsepAmex,
             'card' => $this->getAmexTsep(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 13.50
         ));
 
         $response = $request->send();
@@ -299,7 +299,7 @@ class TransitEcommerceTest extends TestCase
             'token' => $this->tsepJcb,
             'card' => $this->getJcbTsep(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 13.00
         ));
 
         $response = $request->send();
@@ -317,7 +317,7 @@ class TransitEcommerceTest extends TestCase
             'token' => $this->tsepDiners,
             'card' => $this->getDinersTsep(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 6.00
         ));
 
         $response = $request->send();
@@ -339,7 +339,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->authorize(array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 11.14
         ));
 
         $response = $request->send();
@@ -370,7 +370,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->authorize(array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
-            'amount' => 100.00
+            'amount' => 11.15
         ));
 
         $response = $request->send();
@@ -384,7 +384,7 @@ class TransitEcommerceTest extends TestCase
         // Capture
         $request = $this->gateway->capture(array(
             'transactionReference' => $response->getTransactionReference(),
-            'amount' => 50.00
+            'amount' => 5.00
         ));
 
         $response = $request->send();
@@ -402,7 +402,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->authorize(array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 11.16
         ));
 
         $response = $request->send();
@@ -414,15 +414,17 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
     }
 
+    /**
+     * Test refunds
+     */
+
     public function test20RefundFull()
     {
-        $purchaseAmount = $this->randAmount();
-
         // Purchase
         $request = $this->gateway->purchase(array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
-            'amount' => $purchaseAmount,
+            'amount' => 11.17
         ));
 
         $response = $request->send();
@@ -437,6 +439,7 @@ class TransitEcommerceTest extends TestCase
         // Refund
         $request = $this->gateway->refund(array(
             'transactionReference' => $purchaseTransactionReference,
+            'currency' => 'USD' // currently required by php-sdk, even if no amount is supplied
         ));
 
         $response = $request->send();
@@ -454,7 +457,7 @@ class TransitEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
-            'amount' => 99.99,
+            'amount' => 11.18
         ));
 
         $response = $request->send();
@@ -469,7 +472,8 @@ class TransitEcommerceTest extends TestCase
         // Refund
         $request = $this->gateway->refund(array(
             'transactionReference' => $purchaseTransactionReference,
-            'amount' => 50.00
+            'amount' => 5.00,
+            'currency' => 'USD'
         ));
 
         $response = $request->send();
@@ -481,106 +485,31 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
     }
 
-    public function test10AuthAndCaputreMastercardManualEntry()
-    {
-        // Authorize
-        $request = $this->gateway->authorize(array(
-            'card' => $this->getMasterCard(),
-            'currency' => 'USD',
-            'amount' => $this->randAmount()
-        ));
-        $response = $request->send();
+    // Test voids
 
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
-        $this->assertNotNull($response->getTransactionReference());
-        $this->assertNotNull($response->getMessage());
-        $this->assertNotNull($response->getCode());
-
-        // Capture
-        $request = $this->gateway->capture(array(
-            'transactionReference' => $response->getTransactionReference()
-        ));
-        $response = $request->send();
-
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
-        $this->assertNotNull($response->getTransactionReference());
-        $this->assertNotNull($response->getMessage());
-        $this->assertNotNull($response->getCode());
-    }
-    public function test11AuthAndCaputreDiscoverManualEntry()
-    {
-        // Authorize
-        $request = $this->gateway->authorize(array(
-            'card' => $this->getDiscover(),
-            'currency' => 'USD',
-            'amount' => $this->randAmount()
-        ));
-        $response = $request->send();
-
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
-        $this->assertNotNull($response->getTransactionReference());
-        $this->assertNotNull($response->getMessage());
-        $this->assertNotNull($response->getCode());
-
-        // Capture
-        $request = $this->gateway->capture(array(
-            'transactionReference' => $response->getTransactionReference()
-        ));
-        $response = $request->send();
-
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
-        $this->assertNotNull($response->getTransactionReference());
-        $this->assertNotNull($response->getMessage());
-        $this->assertNotNull($response->getCode());
-    }
-    public function test12AuthAndCaputreAmexManualEntry()
-    {
-        // Authorize
-        $request = $this->gateway->authorize(array(
-            'card' => $this->getAmex(),
-            'currency' => 'USD',
-            'amount' => $this->randAmount()
-        ));
-        $response = $request->send();
-
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
-        $this->assertNotNull($response->getTransactionReference());
-        $this->assertNotNull($response->getMessage());
-        $this->assertNotNull($response->getCode());
-
-        // Capture
-        $request = $this->gateway->capture(array(
-            'transactionReference' => $response->getTransactionReference()
-        ));
-        $response = $request->send();
-
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
-        $this->assertNotNull($response->getTransactionReference());
-        $this->assertNotNull($response->getMessage());
-        $this->assertNotNull($response->getCode());
-    }
-    public function test13PartialRefund()
+    public function test22VoidFull()
     {
         // Purchase
         $request = $this->gateway->purchase(array(
-            'card' => $this->getAmex(),
+            'card' => $this->getVisa(),
             'currency' => 'USD',
-            'amount' => '2.00',
+            'amount' => 11.19
         ));
-        $response = $request->send();
 
-        // Refund
-        $request = $this->gateway->refund(array(
-            'transactionReference' => $response->getTransactionReference(),
-            'currency' => 'USD',
-            'amount' => '1.00'
+        $response = $request->send();
+        $purchaseTransactionReference = $response->getTransactionReference();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+
+        // Void
+        $request = $this->gateway->void(array(
+            'transactionReference' => $purchaseTransactionReference,
         ));
+
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
@@ -589,20 +518,31 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
     }
-    public function test14Void()
+
+    public function test23VoidPartial()
     {
         // Purchase
-        $request = $this->gateway->authorize(array(
-            'card' => $this->getAmex(),
+        $request = $this->gateway->purchase(array(
+            'card' => $this->getVisa(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 11.20
         ));
+
         $response = $request->send();
+        $purchaseTransactionReference = $response->getTransactionReference();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
 
         // Void
         $request = $this->gateway->void(array(
-            'transactionReference' => $response->getTransactionReference()
+            'transactionReference' => $purchaseTransactionReference,
+            'amount' => 5.00
         ));
+
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
@@ -613,8 +553,203 @@ class TransitEcommerceTest extends TestCase
     }
 
     /**
-     * 
+     * Test createCard and cardReference
      */
+
+    public function test24CreateCardVisa()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getVisa()
+        ));
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+
+    public function test25CreateCardMastercard()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getMasterCard()
+        ));
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+
+    public function test26CreateCardMastercardBin2()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getMasterCard2Bin()
+        ));
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+
+    public function test27CreateCardDiscover()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getDiscover()
+        ));
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+
+    public function test28CreateCardDiscoverCup()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getDiscoverCup()
+        ));
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+
+    public function test29CreateCardAmex()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getAmex()
+        ));
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+
+    public function test30CreateCardJcb()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getJcb()
+        ));
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+
+    public function test31CreateCardDiners()
+    {
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getDiners()
+        ));
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+    }
+
+    /**
+     * Test purchases using cardReference
+     */
+
+    public function test32PurchaseUsingVisaCardReference()
+    {
+        // createCard
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getVisa()
+        ));
+
+        $response = $request->send();
+        $cardReference = $response->getCardReference();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+
+        $request = $this->gateway->purchase(array(
+            'cardReference' => $cardReference,
+            'card' => $this->getVisaTsep(),
+            'currency' => 'USD',
+            'amount' => 11.21
+        ));
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+
+    public function test33PurchaseUsingAmexCardReference()
+    {
+        // createCard
+        $request = $this->gateway->createCard(array(
+            'card' => $this->getAmex()
+        ));
+
+        $response = $request->send();
+        $cardReference = $response->getCardReference();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+        $this->assertNotNull($response->getCardReference());
+
+        $request = $this->gateway->purchase(array(
+            'cardReference' => $cardReference,
+            'card' => $this->getAmexTsep(),
+            'currency' => 'USD',
+            'amount' => 4.00
+        ));
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isDecline());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+    
     protected function randAmount()
     {
         $numstring = '';
