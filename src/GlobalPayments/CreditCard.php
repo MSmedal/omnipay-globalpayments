@@ -7,7 +7,7 @@ use Omnipay\Common\CreditCard as CommonCreditCard;
 class CreditCard extends CommonCreditCard 
 {
     /**
-     * Get Card Type.
+     * Get card brand.
      *
      * @return string
      */
@@ -17,7 +17,7 @@ class CreditCard extends CommonCreditCard
     }
 
     /**
-     * Sets the last part of the card billing name.
+     * Sets set card brand.
      *
      * @param string $value
      * @return $this
