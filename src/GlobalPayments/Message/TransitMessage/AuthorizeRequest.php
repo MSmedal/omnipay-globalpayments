@@ -2,10 +2,12 @@
 
 namespace Omnipay\GlobalPayments\Message\TransitMessage;
 
+use Exception;
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
 use GlobalPayments\Api\Entities\Enums\StoredCredentialInitiator;
 use GlobalPayments\Api\Entities\StoredCredential;
+use GlobalPayments\Api\Entities\Transaction;
 
 class AuthorizeRequest extends AbstractTransitRequest
 {
@@ -49,10 +51,27 @@ class AuthorizeRequest extends AbstractTransitRequest
         if (isset($data['billingCountry'])) $address->country = $data['billingCountry'];
         if (isset($data['billingPostcode'])) $address->postalCode = $data['billingPostcode'];
 
-        return $chargeMe->authorize($data['amount'])
-            ->withAddress($address)
-            ->withCurrency($data['currency'])
-            ->withStoredCredential($storedCredentials)
-            ->execute();
+        try {
+            $response = $chargeMe->authorize($data['amount'])
+                ->withAddress($address)
+                ->withCurrency($data['currency'])
+                ->withStoredCredential($storedCredentials)
+                ->execute();
+
+            if ($response->responseMessage === "Partially Approved") {
+                $automaticVoid = Transaction::fromId($response->transactionId)
+                    ->void()
+                    ->execute();
+
+                $automaticVoid->responseCode = "05";
+                $automaticVoid->responseMessage = "Decline";
+
+                return $automaticVoid;
+            }
+
+            return $response;
+        } catch (Exception $e) {
+            return $e;
+        }
     }    
 }

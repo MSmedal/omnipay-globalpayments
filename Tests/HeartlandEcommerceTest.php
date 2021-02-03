@@ -33,7 +33,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -47,7 +46,6 @@ class HeartlandEcommerceTest extends TestCase
         ));
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -61,7 +59,6 @@ class HeartlandEcommerceTest extends TestCase
         ));
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -75,7 +72,6 @@ class HeartlandEcommerceTest extends TestCase
         ));
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -89,7 +85,6 @@ class HeartlandEcommerceTest extends TestCase
         ));
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -103,7 +98,6 @@ class HeartlandEcommerceTest extends TestCase
         ));
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -117,7 +111,6 @@ class HeartlandEcommerceTest extends TestCase
         ));
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -131,7 +124,6 @@ class HeartlandEcommerceTest extends TestCase
         ));
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -147,7 +139,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -159,7 +150,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -175,7 +165,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -187,7 +176,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -203,7 +191,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -215,7 +202,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -231,7 +217,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -243,7 +228,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -267,7 +251,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -289,7 +272,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -303,7 +285,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -320,7 +301,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -342,7 +322,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
     }
     public function test18UpdateDiscoverCardReference() {
         // Requires Heartland Multi-Use Tokens be enabled
@@ -363,7 +342,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
     }
     public function test19ACHPurchase()
     {
@@ -376,7 +354,6 @@ class HeartlandEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());

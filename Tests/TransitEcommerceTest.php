@@ -56,7 +56,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -73,7 +72,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -90,7 +88,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -107,7 +104,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -124,7 +120,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -141,7 +136,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -158,7 +152,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -175,7 +168,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -197,7 +189,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -215,7 +206,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
         
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -233,7 +223,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
         
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -251,7 +240,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
         
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -269,7 +257,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
         
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -287,7 +274,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
         
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -305,7 +291,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
         
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -323,7 +308,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
         
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -345,7 +329,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -358,7 +341,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -376,7 +358,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -390,7 +371,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -408,7 +388,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -431,7 +410,6 @@ class TransitEcommerceTest extends TestCase
         $purchaseTransactionReference = $response->getTransactionReference();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -445,7 +423,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -464,7 +441,6 @@ class TransitEcommerceTest extends TestCase
         $purchaseTransactionReference = $response->getTransactionReference();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -479,7 +455,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -500,7 +475,6 @@ class TransitEcommerceTest extends TestCase
         $purchaseTransactionReference = $response->getTransactionReference();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -513,7 +487,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -532,7 +505,6 @@ class TransitEcommerceTest extends TestCase
         $purchaseTransactionReference = $response->getTransactionReference();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -546,7 +518,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -565,7 +536,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -581,7 +551,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -597,7 +566,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -613,7 +581,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -629,7 +596,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -645,7 +611,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -661,7 +626,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -677,7 +641,6 @@ class TransitEcommerceTest extends TestCase
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -699,7 +662,6 @@ class TransitEcommerceTest extends TestCase
         $cardReference = $response->getCardReference();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -713,7 +675,6 @@ class TransitEcommerceTest extends TestCase
         ));
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -730,7 +691,6 @@ class TransitEcommerceTest extends TestCase
         $cardReference = $response->getCardReference();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -744,7 +704,6 @@ class TransitEcommerceTest extends TestCase
         ));
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isDecline());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
@@ -754,7 +713,40 @@ class TransitEcommerceTest extends TestCase
      * Test unsuccessful transaction handling
      */
 
-    
+    public function test34PurchaseDecline()
+    {
+        $card = $this->getVisa();
+        $card->setCvv('123'); // 123 causes a DNH 05 decline in sandbox
+
+        $request = $this->gateway->purchase(array(
+            'card' => $card,
+            'currency' => 'USD',
+            'amount' => 11.12
+        ));
+
+        $response = $request->send();
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+
+    public function test35PartialAuthDecline()
+    {
+        // this should trigger a partial auth
+        // partial auth should be automatically voided and decline response returned
+        $request = $this->gateway->purchase(array(
+            'card' => $this->getMasterCard2Bin(),
+            'currency' => 'USD',
+            'amount' => 11.10
+        ));
+
+        $response = $request->send();
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
     
     protected function randAmount()
     {

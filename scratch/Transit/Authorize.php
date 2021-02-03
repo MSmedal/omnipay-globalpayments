@@ -14,8 +14,9 @@ $gateway->setMerchantId('885000003226');
 
 // Example form data
 $formData = [
-    'number'            => '2223000048400011',
-    // 'number' => '4012000098765439',
+    // 'number'            => '5146315000000055',
+    // 'number' => '3055155515160018',
+    'number' => '2223000048400011',
     'expiryMonth'       => '12',
     'expiryYear'        => '2025',
     // 'cvv'               => '998', // will approve
@@ -28,16 +29,16 @@ $formData = [
     'billingState'      => 'IN',
     'billingCountry'    => 'USA',
     // 'type'              => CardType::MASTERCARD, // required for this gateway (Transit/TSYS)
-    'type' => CardType::MASTERCARD,
+    'type' => CardType::DINERS,
 ];
 
 $card = new CreditCard($formData);
 
-$response = $gateway->purchase(
+$response = $gateway->authorize(
     [
         'card'          => $card,
         'currency'      => 'USD', // required
-        'amount'        => '11.10', // required
+        'amount'        => '6.00', // required
         'description'   => 'Test Purchase using Purchase.php in scratch folder.'
     ]
 )->send();

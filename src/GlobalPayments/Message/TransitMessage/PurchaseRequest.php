@@ -7,6 +7,7 @@ use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
 use GlobalPayments\Api\Entities\Enums\StoredCredentialInitiator;
 use GlobalPayments\Api\Entities\StoredCredential;
+use GlobalPayments\Api\Entities\Transaction;
 
 class PurchaseRequest extends AbstractTransitRequest
 {
@@ -51,15 +52,26 @@ class PurchaseRequest extends AbstractTransitRequest
         if (isset($data['billingPostcode'])) $address->postalCode = $data['billingPostcode'];
 
         try {
-            return $chargeMe->charge($data['amount'])
-            ->withAddress($address)
-            ->withCurrency($data['currency'])
-            ->withStoredCredential($storedCredentials)
-            ->execute();
+            $response = $chargeMe->charge($data['amount'])
+                ->withAddress($address)
+                ->withCurrency($data['currency'])
+                ->withStoredCredential($storedCredentials)
+                ->execute();
+
+            if ($response->responseMessage === "Partially Approved") {
+                $automaticVoid = Transaction::fromId($response->transactionId)
+                    ->void()
+                    ->execute();
+
+                $automaticVoid->responseCode = "05";
+                $automaticVoid->responseMessage = "Decline";
+
+                return $automaticVoid;
+            }
+
+            return $response;
         } catch (Exception $e) {
             return $e;
         }
-
-    }
-    
+    }    
 }
