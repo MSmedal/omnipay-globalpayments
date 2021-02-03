@@ -17,7 +17,8 @@ $formData = [
     'number'            => '5146315000000055',
     'expiryMonth'       => '12',
     'expiryYear'        => '2025',
-    'cvv'               => '998',
+    // 'cvv'               => '998', // will approve
+    'cvv'               => '123', // will decline
     'firstName'         => 'Tony',
     'lastName'          => 'Smedal',
     'billingAddress1'   => '1 Heartland Way',
@@ -43,8 +44,6 @@ $response = $gateway->purchase(
 // Response.php holds all of these supported methods
 if ($response->isSuccessful()) {
     echo $response->getTransactionReference();
-} elseif ($response->isDecline()) {
-    echo $response->getMessage();
 } else {
-    echo 'something went wrong';
+    echo $response->getMessage();
 }

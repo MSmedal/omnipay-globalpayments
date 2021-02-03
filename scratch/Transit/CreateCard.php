@@ -40,23 +40,6 @@ $response = $gateway->createCard(
 // Response.php holds all of these supported methods
 if ($response->isSuccessful()) {
     echo $response->getTransactionReference();
-} elseif ($response->isDecline()) {
-    echo $response->getMessage();
 } else {
-    echo 'something went wrong';
+    echo $response->getMessage();
 }
-
-
-        $card = array(
-            'number' => '4012000098765439',
-            'expiryMonth' => 12,
-            'expiryYear' => 2025,
-            'cvv' => 999,
-            'type' => CardType::VISA
-        );
-
-        $response = $this->gateway->createCard(
-            $card
-        );
-
-        $this->assertTrue($response->isSuccessful());

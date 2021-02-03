@@ -749,6 +749,12 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getMessage());
         $this->assertNotNull($response->getCode());
     }
+
+    /**
+     * Test unsuccessful transaction handling
+     */
+
+    
     
     protected function randAmount()
     {

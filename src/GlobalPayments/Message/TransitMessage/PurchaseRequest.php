@@ -2,6 +2,7 @@
 
 namespace Omnipay\GlobalPayments\Message\TransitMessage;
 
+use Exception;
 use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\Entities\Address;
 use GlobalPayments\Api\Entities\Enums\StoredCredentialInitiator;
@@ -49,11 +50,16 @@ class PurchaseRequest extends AbstractTransitRequest
         if (isset($data['billingCountry'])) $address->country = $data['billingCountry'];
         if (isset($data['billingPostcode'])) $address->postalCode = $data['billingPostcode'];
 
-        return $chargeMe->charge($data['amount'])
+        try {
+            return $chargeMe->charge($data['amount'])
             ->withAddress($address)
             ->withCurrency($data['currency'])
             ->withStoredCredential($storedCredentials)
             ->execute();
+        } catch (Exception $e) {
+            return $e;
+        }
+
     }
     
 }

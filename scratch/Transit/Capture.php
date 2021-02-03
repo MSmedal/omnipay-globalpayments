@@ -43,7 +43,6 @@ $refNo = $response->getTransactionReference();
 $response2 = $gateway->capture(
     [
         'transactionReference'  => $refNo,
-        'amount'                => 150.00, // required
     ]
 )->send();
 
@@ -53,8 +52,6 @@ print_r($response2);
 // Response.php holds all of these supported methods
 if ($response->isSuccessful()) {
     echo $response->getTransactionReference();
-} elseif ($response->isDecline()) {
-    echo $response->getMessage();
 } else {
-    echo 'something went wrong';
-}
+    echo $response->getMessage();
+} 
