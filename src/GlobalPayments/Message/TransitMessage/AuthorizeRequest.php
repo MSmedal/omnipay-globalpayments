@@ -15,9 +15,7 @@ class AuthorizeRequest extends AbstractTransitRequest
     {
         $this->setGoodResponseCodes(array('00', '10'));
         
-        // new GlobalPayments credit card object
         $chargeMe = new CreditCardData();
-
         $storedCredentials = new StoredCredential();
 
         if (!empty($this->getToken())) {
@@ -25,31 +23,31 @@ class AuthorizeRequest extends AbstractTransitRequest
         } elseif (!empty($this->getCardReference())) {
             $chargeMe->token = $this->getCardReference();
             $storedCredentials->initiator = StoredCredentialInitiator::MERCHANT;
+        } else {
+            $chargeMe->number = $data['card']['number'];
         }
         
-        // token and card info can be submitted simultaneously; discrete card info values (below vars) will take precedence over token-contained card info
-        if (isset($data['card']['number'])) $chargeMe->number = $data['card']['number'];
-        if (isset($data['card']['expiryMonth'])) $chargeMe->expMonth = $data['card']['expiryMonth'];
-        if (isset($data['card']['expiryYear'])) $chargeMe->expYear = $data['card']['expiryYear'];
-        if (isset($data['card']['cvv'])) $chargeMe->cvn  = $data['card']['cvv'];
-        if (isset($data['card']['type'])) $chargeMe->cardType  = $data['card']['type'];
+        // tokens and cardRefs do not contain/represent the below data fields
+        if (!empty($data['card']['expiryMonth'])) $chargeMe->expMonth = $data['card']['expiryMonth'];
+        if (!empty($data['card']['expiryYear'])) $chargeMe->expYear = $data['card']['expiryYear'];
+        if (!empty($data['card']['cvv'])) $chargeMe->cvn  = $data['card']['cvv'];
+        if (!empty($data['card']['type'])) $chargeMe->cardType  = $data['card']['type'];
 
-        if (isset($data['firstName']) && isset($data['lastName'])) {
+        if (!empty($data['firstName']) && !empty($data['lastName'])) {
             $chargeMe->cardHolderName = $data['firstName'] . " " . $data['lastName'];
-        } elseif (isset($data['firstName'])) {
+        } elseif (!empty($data['firstName'])) {
             $chargeMe->cardHolderName = $data['firstName'];
-        } elseif (isset($data['lastName'])) {
+        } elseif (!empty($data['lastName'])) {
             $chargeMe->cardHolderName = $data['lastName'];
         }        
 
-        // new GlobalPayments address object
         $address = new Address();
-        if (isset($data['billingAddress1'])) $address->streetAddress1 = $data['billingAddress1'];
-        if (isset($data['billingAddress2'])) $address->streetAddress2 = $data['billingAddress2'];
-        if (isset($data['billingCity'])) $address->city = $data['billingCity'];
-        if (isset($data['billingState'])) $address->state = $data['billingState'];
-        if (isset($data['billingCountry'])) $address->country = $data['billingCountry'];
-        if (isset($data['billingPostcode'])) $address->postalCode = $data['billingPostcode'];
+        if (!empty($data['billingAddress1'])) $address->streetAddress1 = $data['billingAddress1'];
+        if (!empty($data['billingAddress2'])) $address->streetAddress2 = $data['billingAddress2'];
+        if (!empty($data['billingCity'])) $address->city = $data['billingCity'];
+        if (!empty($data['billingState'])) $address->state = $data['billingState'];
+        if (!empty($data['billingCountry'])) $address->country = $data['billingCountry'];
+        if (!empty($data['billingPostcode'])) $address->postalCode = $data['billingPostcode'];
 
         try {
             $response = $chargeMe->authorize($data['amount'])

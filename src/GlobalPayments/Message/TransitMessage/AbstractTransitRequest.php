@@ -34,7 +34,7 @@ abstract class AbstractTransitRequest extends AbstractRequest
             $data['card']['expiryMonth']    = $card->getExpiryMonth();
             $data['card']['expiryYear']     = $card->getExpiryYear();
             $data['card']['cvv']            = $card->getCvv();
-            $data['card']['type']            = $card->getType();
+            $data['card']['type']           = $card->getType();
     
             // add payor info to $data
             $data['firstName']          = $card->getFirstName();
@@ -69,16 +69,15 @@ abstract class AbstractTransitRequest extends AbstractRequest
         $config->versionNumber = $this->getVersionNumber();
         $config->acceptorConfig = new AcceptorConfig();
         
-        if ($this->getTransactionKey() != null && $this->getTransactionKey() != "") {
+        if (!empty($this->getTransactionKey())) {
             $config->transactionKey = $this->getTransactionKey();
         } else {
             ServicesContainer::configureService($config);
-            $provider = ServicesContainer::instance()->getClient();
+            $provider = ServicesContainer::instance()->getClient('default');
             $response = $provider->getTransactionKey();
             $config->transactionKey = $response->transactionKey;
         }
         
         ServicesContainer::configureService($config);
     }
-
 }

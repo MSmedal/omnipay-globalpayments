@@ -12,12 +12,14 @@ class HeartlandEcommerceTest extends TestCase
     /** @var Gateway */
     protected $gateway;
     /** @var string */
-    protected $publicKey = 'pkapi_cert_EuYk7ncMQaZLDLC0Gg';
+    // protected $publicKey = 'pkapi_cert_EuYk7ncMQaZLDLC0Gg';
+    protected $publicKey = 'pkapi_cert_3ZjQJbCO9rygPdXFkd';
 
     public function setUp()
     {
         parent::setUp();
-        $secretAPIKey = 'skapi_cert_MXvdAQB61V4AkyM-x3EJuY6hkEaCzaMimTWav7mVfQ';
+        // $secretAPIKey = 'skapi_cert_MXvdAQB61V4AkyM-x3EJuY6hkEaCzaMimTWav7mVfQ';
+        $secretAPIKey = 'skapi_cert_McU0AgBkx2EAldEfhhtolMw0RnvahBQAnXFdLYga-Q';
         if ($secretAPIKey) {
             $this->gateway = Omnipay::create('GlobalPayments\Heartland');
             $this->gateway->setSecretApiKey($secretAPIKey);

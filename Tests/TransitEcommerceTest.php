@@ -2,6 +2,7 @@
 namespace Omnipay\GlobalPayments;
 
 use GlobalPayments\Api\Entities\Enums\CardType;
+use GlobalPayments\Api\Services\BatchService;
 use Omnipay\Omnipay;
 use Omnipay\Tests\TestCase;
 
@@ -39,6 +40,13 @@ class TransitEcommerceTest extends TestCase
         $this->gateway->setMerchantId($merchantId);
         $this->gateway->setUserName($userName);
         $this->gateway->setTransactionKey($transactionKey);
+    }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        
+        BatchService::closeBatch();
     }
 
     /**

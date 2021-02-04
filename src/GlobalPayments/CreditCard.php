@@ -17,7 +17,7 @@ class CreditCard extends CommonCreditCard
     }
 
     /**
-     * Sets set card brand.
+     * Set card brand.
      *
      * @param string $value
      * @return $this
