@@ -46,27 +46,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     /**
-     * Set the gateway Secret API Key.
-     *
-     * Authentication is by means of a single secret API key set as
-     * the secretApiKey parameter when creating the gateway object.
-     *
-     * Heartland accounts have test-mode API keys as well as live-mode
-     * API keys. These keys can be active at the same time. Data
-     * created with test-mode credentials will never hit the credit
-     * card networks and will never cost anyone money.
-     *
-     * Unlike some gateways, there is no test mode endpoint separate
-     * to the live mode endpoint, the Heartland API endpoint is the same
-     * for test and for live.
-     *
-     * Setting the testMode flag on this gateway has no effect.  To
-     * use test mode just use your test mode API key.
-     *
-     * You can get your secret API key in heartland payments developer site
-     *
-     * @link https://developer.heartlandpaymentsystems.com/Account/KeysandCredentials
-     *
      * @param string $value
      *
      * @return \Omnipay\Common\Message\AbstractRequest
@@ -77,14 +56,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     /**
-     * Get the gateway Site Id.
-     *
-     * Authentication is by means of a single secret API key set as
-     * the secretApiKey parameter when creating the gateway object.
-     *
-     * When you don't have a Secret API Key you can use your Site Id, Device Id, License Id
-     * User name and Password details
-     *
      * @return string
      */
     public function getSiteId()
@@ -93,14 +64,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     /**
-     * Set the gateway Site Id.
-     *
-     * Authentication is by means of a single secret API key set as
-     * the secretApiKey parameter when creating the gateway object.
-     *
-     * When you don't have a Secret API Key you can use your Site Id, Device Id, License Id
-     * User name and Password details
-     *
      * @param string $value
      *
      * @return \Omnipay\Common\Message\AbstractRequest

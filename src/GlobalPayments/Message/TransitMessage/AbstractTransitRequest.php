@@ -2,13 +2,11 @@
 
 namespace Omnipay\GlobalPayments\Message\TransitMessage;
 
-use GlobalPayments\Api\Entities\Enums\OperatingEnvironment;
 use GlobalPayments\Api\ServiceConfigs\AcceptorConfig;
 use GlobalPayments\Api\ServiceConfigs\Gateways\TransitConfig;
 use GlobalPayments\Api\ServicesContainer;
 use Omnipay\GlobalPayments\Message\AbstractRequest;
 use Omnipay\GlobalPayments\Message\Response;
-use Omnipay\GlobalPayments\CreditCard;
 
 abstract class AbstractTransitRequest extends AbstractRequest
 {
@@ -50,10 +48,10 @@ abstract class AbstractTransitRequest extends AbstractRequest
         }
 
         // add transaction information to $data
-        $data['description']    = $this->getDescription();
-        $data['amount']     = $this->getAmount();
-        $data['currency']   = $this->getCurrency();
-        $data['transactionReference'] = $this->getTransactionReference();
+        $data['description']            = $this->getDescription();
+        $data['amount']                 = $this->getAmount();
+        $data['currency']               = $this->getCurrency();
+        $data['transactionReference']   = $this->getTransactionReference();
 
         return $data;
     }

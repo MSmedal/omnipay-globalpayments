@@ -6,7 +6,6 @@ use GlobalPayments\Api\Entities\Transaction;
 
 class RefundRequest extends AbstractTransitRequest
 {
-
     public function runTransitTrans($data)
     {
         $this->setGoodResponseCodes(array('00'));
@@ -16,5 +15,4 @@ class RefundRequest extends AbstractTransitRequest
             ->withCurrency($data['currency'])
             ->execute();
     }
-
 }

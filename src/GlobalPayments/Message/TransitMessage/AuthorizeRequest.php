@@ -16,18 +16,18 @@ class AuthorizeRequest extends AbstractTransitRequest
         $this->setGoodResponseCodes(array('00', '10'));
         
         $chargeMe = new CreditCardData();
-        $storedCredentials = new StoredCredential();
+        $storedCreds = new StoredCredential();
 
         if (!empty($this->getToken())) {
             $chargeMe->token = $this->getToken();
         } elseif (!empty($this->getCardReference())) {
             $chargeMe->token = $this->getCardReference();
-            $storedCredentials->initiator = StoredCredentialInitiator::MERCHANT;
+            $storedCreds->initiator = StoredCredentialInitiator::MERCHANT;
         } else {
             $chargeMe->number = $data['card']['number'];
         }
         
-        // tokens and cardRefs do not contain/represent the below data fields
+        // tokens and cardRefs do not contain/represent the below elements
         if (!empty($data['card']['expiryMonth'])) $chargeMe->expMonth = $data['card']['expiryMonth'];
         if (!empty($data['card']['expiryYear'])) $chargeMe->expYear = $data['card']['expiryYear'];
         if (!empty($data['card']['cvv'])) $chargeMe->cvn  = $data['card']['cvv'];
@@ -49,9 +49,19 @@ class AuthorizeRequest extends AbstractTransitRequest
         if (!empty($data['billingCountry'])) $address->country = $data['billingCountry'];
         if (!empty($data['billingPostcode'])) $address->postalCode = $data['billingPostcode'];
 
+        return $this->processTransaction($chargeMe, $data, $address, $storedCreds);
+    }
+
+    protected function processTransaction(
+        CreditCardData $card,
+        array $data,
+        Address $billingAddress,
+        StoredCredential $storedCredentials
+    )
+    {
         try {
-            $response = $chargeMe->authorize($data['amount'])
-                ->withAddress($address)
+            $response = $card->authorize($data['amount'])
+                ->withAddress($billingAddress)
                 ->withCurrency($data['currency'])
                 ->withStoredCredential($storedCredentials)
                 ->execute();
@@ -71,5 +81,5 @@ class AuthorizeRequest extends AbstractTransitRequest
         } catch (Exception $e) {
             return $e;
         }
-    }    
+    }
 }

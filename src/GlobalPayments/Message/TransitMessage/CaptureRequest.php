@@ -14,5 +14,4 @@ class CaptureRequest extends AbstractTransitRequest
             ->capture($data['amount'])
             ->execute();
     }
-
 }

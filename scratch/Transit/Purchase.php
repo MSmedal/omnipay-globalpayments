@@ -37,7 +37,7 @@ $response = $gateway->purchase(
     [
         'card'          => $card,
         'currency'      => 'USD', // required
-        'amount'        => '11.10', // required
+        'amount'        => '15.00', // required
         'description'   => 'Test Purchase using Purchase.php in scratch folder.'
     ]
 )->send();
