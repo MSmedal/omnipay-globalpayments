@@ -7,7 +7,7 @@ use GlobalPayments\Api\ServicesContainer;
 use Omnipay\GlobalPayments\Message\AbstractRequest;
 use Omnipay\GlobalPayments\Message\Response;
 
-abstract class AbstractPorticoRequest extends AbstractRequest
+abstract class AbstractHeartlandRequest extends AbstractRequest
 {
     protected $responseType = '\Omnipay\GlobalPayments\Response';
 
@@ -49,24 +49,36 @@ abstract class AbstractPorticoRequest extends AbstractRequest
         if ($this->getCheck()) {
             $check = $this->getCheck();
 
-            // add check info to $data; all of these are required pre transaction type
+            // add check info to $data; all of these are required for Heartland ACH
             $data['check'] = array();
-            $data['check']['accountNumber']     = $check['accountNumber'];
-            $data['check']['routingNumber']     = $check['routingNumber'];
-            $data['check']['accountType']       = $check['accountType'];
-            $data['check']['secCode']           = $check['secCode'];
-            $data['check']['checkType']         = $check['checkType'];
-            $data['check']['checkHolderName']   = $check['checkHolderName'];
+            $data['check']['accountNumber']     = $check->getAccountNumber();
+            $data['check']['routingNumber']     = $check->getRoutingNumber();
+            $data['check']['accountType']       = $check->getAccountType();
+            $data['check']['secCode']           = $check->getSecCode();
+            $data['check']['checkType']         = $check->getCheckType();
+
+            if (!empty($check->getFirstName()) && !empty($check->getLastName())) {
+                $data['check']['checkHolderName'] = $check->getFirstName() . ' ' . $check->getLastName();
+            } elseif(!empty($check->getFirstName()) || !empty($check->getLastName())) {
+                $data['check']['checkHolderName'] = !empty($check->getFirstName()) ? $check->getFirstName() : $check->getLastName();
+            } else {
+                $data['check']['checkHolderName'] = $check->getBillingCompany();
+            }
+
+            $check->setCheckHolderName($data['check']['checkHolderName']);
 
             // add payor info to $data
-            if (isset($check['billingAddress1'])) $data['billingAddress1']  = $check['billingAddress1'];
-            if (isset($check['billingAddress2'])) $data['billingAddress2']  = $check['billingAddress2'];
-            if (isset($check['billingCity'])) $data['billingCity']          = $check['billingCity'];
-            if (isset($check['billingPostcode'])) $data['billingPostcode']  = $check['billingPostcode'];
-            if (isset($check['billingState'])) $data['billingState']        = $check['billingState'];
-            if (isset($check['billingCountry'])) $data['billingCountry']    = $check['billingCountry'];
-            if (isset($check['billingPhone'])) $data['billingPhone']        = $check['billingPhone'];
-            if (isset($check['email'])) $data['email']                      = $check['email'];
+            $data['firstName']          = $check->getFirstName();
+            $data['lastName']           = $check->getLastName();
+            $data['billingAddress1']    = $check->getBillingAddress1();
+            $data['billingAddress2']    = $check->getBillingAddress2();
+            $data['billingCity']        = $check->getBillingCity();
+            $data['billingPostcode']    = $check->getBillingPostcode();
+            $data['billingState']       = $check->getBillingState();
+            $data['billingCountry']     = $check->getBillingCountry();
+            $data['billingPhone']       = $check->getBillingPhone();
+            $data['email']              = $check->getEmail();
+            $data['company']            = $check->getBillingCompany();
         }
 
         if ($this->getCustomer()) {

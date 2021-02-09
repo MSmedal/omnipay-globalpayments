@@ -34,7 +34,7 @@ use GlobalPayments\Api\Entities\Transaction;
  * </code>
  */
 
-class RefundRequest extends AbstractPorticoRequest
+class RefundRequest extends AbstractHeartlandRequest
 {
     public function runHPSTrans($data)
     {

@@ -46,7 +46,7 @@ use GlobalPayments\Api\Entities\Customer;
  * </code>
  */
 
-class CreateCustomerRequest extends AbstractPorticoRequest
+class CreateCustomerRequest extends AbstractHeartlandRequest
 {
     public function runHPSTrans($data)
     {

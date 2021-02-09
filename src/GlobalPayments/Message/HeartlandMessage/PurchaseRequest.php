@@ -51,7 +51,7 @@ use GlobalPayments\Api\Entities\StoredCredential;
  * </code>
  */
 
- class PurchaseRequest extends AbstractPorticoRequest
+ class PurchaseRequest extends AbstractHeartlandRequest
 {
     public function runHPSTrans($data)
     {

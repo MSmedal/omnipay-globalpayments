@@ -53,7 +53,7 @@ use GlobalPayments\Api\Entities\StoredCredential;
  * </code>
  */
 
-class AuthorizeRequest extends AbstractPorticoRequest
+class AuthorizeRequest extends AbstractHeartlandRequest
 {
     public function runHPSTrans($data)
     {

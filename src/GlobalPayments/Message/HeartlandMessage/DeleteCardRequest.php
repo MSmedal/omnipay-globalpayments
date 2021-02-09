@@ -34,7 +34,7 @@ use GlobalPayments\Api\PaymentMethods\CreditCardData;
  * </code>
  */
 
-class DeleteCardRequest extends AbstractPorticoRequest
+class DeleteCardRequest extends AbstractHeartlandRequest
 {
     public function runHPSTrans($data)
     {

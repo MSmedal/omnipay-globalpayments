@@ -32,7 +32,7 @@ use GlobalPayments\Api\Entities\Transaction;
  * </code>
  */
 
-class VoidRequest extends AbstractPorticoRequest
+class VoidRequest extends AbstractHeartlandRequest
 {
     public function runHPSTrans($data)
     {

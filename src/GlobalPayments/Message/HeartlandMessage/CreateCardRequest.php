@@ -50,7 +50,7 @@ use GlobalPayments\Api\Entities\Address;
  * </code>
  */
 
-class CreateCardRequest extends AbstractPorticoRequest
+class CreateCardRequest extends AbstractHeartlandRequest
 {
     public function runHPSTrans($data)
     {

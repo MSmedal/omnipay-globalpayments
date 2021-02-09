@@ -34,7 +34,7 @@ use GlobalPayments\Api\Entities\Transaction;
  * </code>
  */
 
-class CaptureRequest extends AbstractPorticoRequest
+class CaptureRequest extends AbstractHeartlandRequest
 {
     public function runHPSTrans($data)
     {

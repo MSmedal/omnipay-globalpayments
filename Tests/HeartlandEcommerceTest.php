@@ -1,7 +1,11 @@
 <?php
 namespace Omnipay\GlobalPayments;
 
+use GlobalPayments\Api\Entities\Enums\AccountType;
 use GlobalPayments\Api\Entities\Enums\CardType;
+use GlobalPayments\Api\Entities\Enums\CheckType;
+use GlobalPayments\Api\Entities\Enums\SecCode;
+use Omnipay\GlobalPayments\ECheck;
 use Omnipay\Omnipay;
 use Omnipay\Tests\TestCase;
 
@@ -47,7 +51,7 @@ class HeartlandEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'card' => $this->getMasterCard(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => 20.02
         ));
 
         $response = $request->send();
@@ -179,7 +183,7 @@ class HeartlandEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'token' => $this->getSingleUseToken($this->getDiscover()),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => '20.10'
         ));
 
         $response = $request->send();
@@ -650,21 +654,42 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertTrue($response->isSuccessful());
     }
 
-    // public function test19ACHPurchase()
-    // {
-    //     // Requires Heartland ACH be enabled
-    //     $request = $this->gateway->purchase(array(
-    //         'check' => $this->getPersonalCheck(),
-    //         'currency' => 'USD',
-    //         'amount' => $this->randAmount()
-    //     ));
-    //     $response = $request->send();
+    public function test30AchPurchase()
+    {
+        // Requires Heartland ACH be enabled
+        $request = $this->gateway->purchase(array(
+            'check' => $this->getPersonalCheck(),
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
 
-    //     $this->assertTrue($response->isSuccessful());
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotNull($response->getMessage());
-    //     $this->assertNotNull($response->getCode());
-    // }
+        $this->assertTrue($response->isSuccessful());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
+
+    public function test31AchPurchaseSingleUseToken()
+    {
+        // simulate these values being sent only via Single Use Token
+        $check = $this->getPersonalCheck();
+        $check->setAccountNumber(null);
+        $check->setRoutingNumber(null);
+
+        $request = $this->gateway->purchase(array(
+            'token' => $this->getAchSingleUseToken($this->getPersonalCheck()),
+            'check' => $check,
+            'currency' => 'USD',
+            'amount' => $this->randAmount()
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertNotNull($response->getTransactionReference());
+        $this->assertNotNull($response->getMessage());
+        $this->assertNotNull($response->getCode());
+    }
 
     // public function test20CreateCustomer()
     // {
@@ -746,7 +771,8 @@ class HeartlandEcommerceTest extends TestCase
         return floatval($numstring . (string) number_format('.' . rand(0, 99), 2));
     }
 
-    private function getMasterCard2Bin() {
+    private function getMasterCard2Bin()
+    {
         $card = array(
             'number' => '2223000010005780',
             'expiryMonth' => 12,
@@ -760,7 +786,8 @@ class HeartlandEcommerceTest extends TestCase
         return new CreditCard($card);
     }
 
-    private function getDiscover() {
+    private function getDiscover()
+    {
         $card = array(
             'number' => '6011000990156527',
             'expiryMonth' => 12,
@@ -774,7 +801,8 @@ class HeartlandEcommerceTest extends TestCase
         return new CreditCard($card);
     }
 
-    private function getMasterCard() {
+    private function getMasterCard()
+    {
         $card = array(
             'number' => '5473500000000014',
             'expiryMonth' => 12,
@@ -788,7 +816,8 @@ class HeartlandEcommerceTest extends TestCase
         return new CreditCard($card);
     }
 
-    private function getJcb() {
+    private function getJcb()
+    {
         $card = array(
             'number' => '3566007770007321',
             'expiryMonth' => 12,
@@ -802,7 +831,8 @@ class HeartlandEcommerceTest extends TestCase
         return new CreditCard($card);
     }
 
-    private function getAmex() {
+    private function getAmex()
+    {
         $card = array(
             'number' => '372700699251018',
             'expiryMonth' => 12,
@@ -816,7 +846,8 @@ class HeartlandEcommerceTest extends TestCase
         return new CreditCard($card);
     }
 
-    private function getVisa() {
+    private function getVisa()
+    {
         $card = array(
             'number' => '4012002000060016',
             'expiryMonth' => 12,
@@ -828,6 +859,26 @@ class HeartlandEcommerceTest extends TestCase
         );
 
         return new CreditCard($card);
+    }
+
+    private function getPersonalCheck()
+    {
+        $check = array(
+            'accountNumber' => '1357902468',
+            'routingNumber' => '122000030',
+        );
+
+        
+        $eCheck = new ECheck($check);
+        $eCheck->setSecCode(SecCode::WEB);
+        $eCheck->setAccountType(AccountType::CHECKING);
+        $eCheck->setCheckType(CheckType::PERSONAL);
+        $eCheck->setBillingAddress1('6860 Dallas Pkwy');
+        $eCheck->setBillingPostcode('750241234');
+        $eCheck->setFirstName('Tony');
+        $eCheck->setLastName('Smedal');
+
+        return $eCheck;
     }
 
     protected function getSingleUseToken(CreditCard $card)
@@ -849,6 +900,35 @@ class HeartlandEcommerceTest extends TestCase
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS =>'{"object":"token","token_type":"supt","card":{"number": ' . $cardNo . ', "cvc": ' . $cvv . ', "exp_month": ' . $expMonth . ', "exp_year": ' . $expYear . '}}',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $responseAsObj = json_decode(curl_exec($curl));
+
+        curl_close($curl);
+
+        return $responseAsObj->token_value;
+    }
+
+    protected function getAchSingleUseToken(ECheck $check)
+    {
+        $accountNumber = $check->getAccountNumber();
+        $routingNumber = $check->getRoutingNumber();
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway.Hpf.v1/api/token?api_key=' . $this->publicKey,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>'{"object": "token", "token_type": "supt", "ach": {"account_number": "'. $accountNumber . '", "routing_number": "' . $routingNumber . '"}}',
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json'
             ),
