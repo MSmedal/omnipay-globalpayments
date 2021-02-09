@@ -4,6 +4,8 @@ namespace Omnipay\GlobalPayments\Message;
 
 use GlobalPayments\Api\Entities\Transaction;
 use Omnipay\Common\Message\AbstractResponse;
+use Omnipay\GlobalPayments\Message\HeartlandMessage\UpdateCardRequest;
+use Omnipay\GlobalPayments\Message\HeartlandMessage\DeleteCardRequest;
 
 class Response extends AbstractResponse
 {
@@ -18,6 +20,8 @@ class Response extends AbstractResponse
         if ($this->response instanceof Transaction)
         {
             return in_array($this->response->responseCode, $this->request->getGoodReponseCodes());
+        } elseif ($this->request instanceof DeleteCardRequest || $this->request instanceof UpdateCardRequest) {
+            return $this->response;
         }
 
         return false;

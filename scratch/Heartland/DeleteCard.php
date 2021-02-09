@@ -1,24 +1,35 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once '../../vendor/autoload.php';
 
+use GlobalPayments\Api\Entities\Enums\CardType;
 use Omnipay\Omnipay;
 
 $gateway = Omnipay::create('GlobalPayments\Heartland');
 $gateway->setSecretApiKey('skapi_cert_MXvdAQB61V4AkyM-x3EJuY6hkEaCzaMimTWav7mVfQ');
 
-$response = $gateway->deleteCard(
-    [
-        'cardReference'  => '9flQwI08LbV63T5V044j5454', // cardReference from a previus createCardRequest goes here
-    ]
-)->send();
+// Requires Heartland Multi-Use Tokens be enabled
+$request = $gateway->createCard(array(
+    'card' => array(
+        'number' => '5473500000000014',
+        'expiryMonth' => 12,
+        'expiryYear' => 2025,
+        'cvv' => 123,
+        'type' => CardType::MASTERCARD,
+        'billingAddress1' => '6860 Dallas Pkwy',
+        'billingPostcode' => '75024'
+    )
+));
 
-// Heartland doesn't use a redirect, so isSuccessful() and isDecline() are used to evaluate result and isRedirect() is not used.
-// Response.php holds all of these supported methods
-if ($response->isSuccessful()) {
-    echo "cardReference Deleted";
-} elseif ($response->isDecline()) {
-    echo "cardReference didn't delete correctly";
-} else {
-    echo 'something went wrong';
-}
+$response = $request->send();        
+$cardReference = $response->getCardReference();
+
+$request = $gateway->deleteCard(array(
+    'cardReference' => $cardReference
+));
+
+$response = $request->send();
+
+$result = $response->isSuccessful();
+
+echo 'done';

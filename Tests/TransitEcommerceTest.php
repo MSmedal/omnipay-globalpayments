@@ -682,6 +682,8 @@ class TransitEcommerceTest extends TestCase
             'amount' => 11.21
         ));
 
+        $response = $request->send();
+
         $this->assertTrue($response->isSuccessful());
         $this->assertNotNull($response->getTransactionReference());
         $this->assertNotNull($response->getMessage());
@@ -710,6 +712,8 @@ class TransitEcommerceTest extends TestCase
             'currency' => 'USD',
             'amount' => 4.00
         ));
+
+        $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
         $this->assertNotNull($response->getTransactionReference());
@@ -986,5 +990,4 @@ class TransitEcommerceTest extends TestCase
         'company'           => 'Global Payments',
         'email'             => "mark.smedal@heartland.us",
     );
-
 }
