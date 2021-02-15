@@ -809,8 +809,7 @@ class HeartlandEcommerceTest extends TestCase
         $eCheck->setCheckType(CheckType::PERSONAL);
         $eCheck->setBillingAddress1('6860 Dallas Pkwy');
         $eCheck->setBillingPostcode('750241234');
-        $eCheck->setFirstName('Tony');
-        $eCheck->setLastName('Smedal');
+        $eCheck->setCheckHolderName('Tony Smedal');
 
         return $eCheck;
     }
