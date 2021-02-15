@@ -7,51 +7,7 @@ use GlobalPayments\Api\Entities\Address;
 use GlobalPayments\Api\Entities\Enums\StoredCredentialInitiator;
 use GlobalPayments\Api\Entities\StoredCredential;
 
-/**
- * Heartland Purchase Request
- * 
- * Example transaction that utilizes all supported fields:
- *  
- * <code>
- * 
- * $gateway = Omnipay::create('GlobalPayments\Heartland');
- * $gateway->setSecretApiKey('skapi_cert_MXvdAQB61V4AkyM-x3EJuY6hkEaCzaMimTWav7mVfQ');
- * 
- * // Example form data
- * $formData = [
- *     'number'            => '5454545454545454', // required
- *     'expiryMonth'       => '12', // required
- *     'expiryYear'        => '2025', // required
- *     'cvv'               => '123', // optional
- *     'firstName'         => 'Tony', // optional
- *     'lastName'          => 'Smedal', // optional
- *     'billingAddress1'   => '1 Heartland Way', // optional
- *     'billingCity'       => 'Jeffersonville', // optional
- *     'billingPostcode'   => '47130', // optional
- *     'billingState'      => 'IN', // optional
- *     'billingCountry'    => 'USA' // optional
- * ];
- * 
- * $response = $gateway->purchase(
- *     [
- *         'card'          => $formData, // replace 'card' with 'token' and pass it the single-use token if using single-use tokens
- *         'currency'      => 'USD', // required
- *         'amount'        => '1.23',
- *         'description'   => 'Test Purchase using Purchase.php in scratch folder.'
- *     ]
- * )->send();
- * 
- * // Heartland doesn't use a redirect, so isSuccessful() and isDecline() are used to evaluate result and isRedirect() is not used. Response.php holds all of these supported methods
- * if ($response->isSuccessful()) {
- *     echo $response->getTransactionReference();
- * } elseif ($response->isDecline()) {
- *     echo $response>getMessage();
- * }
- * 
- * </code>
- */
-
- class PurchaseRequest extends AbstractHeartlandRequest
+class PurchaseRequest extends AbstractHeartlandRequest
 {
     public function runHPSTrans($data)
     {

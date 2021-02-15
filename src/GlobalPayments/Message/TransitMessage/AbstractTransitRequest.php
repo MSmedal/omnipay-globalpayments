@@ -64,7 +64,6 @@ abstract class AbstractTransitRequest extends AbstractRequest
         $config->password = $this->getPassword();
         $config->deviceId = $this->getDeviceId();
         $config->developerId = $this->getDeveloperId();
-        $config->versionNumber = $this->getVersionNumber();
         $config->acceptorConfig = new AcceptorConfig();
         
         if (!empty($this->getTransactionKey())) {
@@ -77,5 +76,25 @@ abstract class AbstractTransitRequest extends AbstractRequest
         }
         
         ServicesContainer::configureService($config);
+    }
+    
+    public function getMerchantId()
+    {
+        return $this->getParameter('merchantId');
+    }
+
+    public function setMerchantId($value)
+    {
+        return $this->setParameter('merchantId', $value);
+    }
+
+    public function getTransactionKey()
+    {
+        return $this->getParameter('transactionKey');
+    }
+
+    public function setTransactionKey($value)
+    {
+        return $this->setParameter('transactionKey', $value);
     }
 }

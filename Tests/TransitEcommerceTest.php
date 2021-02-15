@@ -1,8 +1,9 @@
 <?php
-namespace Omnipay\GlobalPayments;
+namespace Omnipay\GlobalPayments\Tests;
 
 use GlobalPayments\Api\Entities\Enums\CardType;
 use GlobalPayments\Api\Services\BatchService;
+use Omnipay\GlobalPayments\CreditCard;
 use Omnipay\Omnipay;
 use Omnipay\Tests\TestCase;
 
@@ -770,7 +771,7 @@ class TransitEcommerceTest extends TestCase
             $numstring = $numstring . (string) rand(0, 9);
         }
 
-        return floatval($numstring . (string) number_format('.' . rand(0, 99), 2));
+        return (string) $numstring . '.' . (string) number_format(rand(0, 99));
     }
 
     private function getMasterCard2Bin() {

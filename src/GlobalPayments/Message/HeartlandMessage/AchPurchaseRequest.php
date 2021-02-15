@@ -58,11 +58,10 @@ class ACHPurchaseRequest extends AbstractHeartlandRequest
     {
         $this->setGoodResponseCodes(array('00'));
 
-        // new Heartland check object
         $chargeMe = new HeartlandECheck();
         $checkInfo = $this->getCheck();
 
-        // set account and routing number
+        // Single-Use Token contains/represents account and routing numbers
         if (!empty($this->getToken())) {
             $chargeMe->token = $this->getToken();
         } else {

@@ -2,12 +2,14 @@
 
 namespace Omnipay\GlobalPayments\Message\HeartlandMessage;
 
+use GlobalPayments\Api\Entities\Address;
+use GlobalPayments\Api\Entities\Enums\AddressType;
+use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\ServiceConfigs\Gateways\PorticoConfig;
 use GlobalPayments\Api\ServicesContainer;
-use Omnipay\GlobalPayments\Message\AbstractRequest;
 use Omnipay\GlobalPayments\Message\Response;
 
-abstract class AbstractHeartlandRequest extends AbstractRequest
+abstract class AbstractHeartlandRequest extends \Omnipay\GlobalPayments\Message\AbstractRequest
 {
     protected $responseType = '\Omnipay\GlobalPayments\Response';
 
@@ -16,6 +18,52 @@ abstract class AbstractHeartlandRequest extends AbstractRequest
         $this->setServicesConfig();
 
         return new Response($this, $this->runHPSTrans($data));
+    }
+
+    protected function getGpCardObj()
+    {
+        $omnipayCardObj = $this->getCard();
+
+        $GpCardObj = new CreditCardData();
+        $GpCardObj->number = $omnipayCardObj->getNumber();
+        $GpCardObj->expMonth = $omnipayCardObj->getExpiryMonth();
+        $GpCardObj->expYear = $omnipayCardObj->getExpiryYear();
+        $GpCardObj->cvn = $omnipayCardObj->getCvv();
+        $GpCardObj->cardHolderName = $omnipayCardObj->getFirstName() . $omnipayCardObj->getLastName();
+
+        return $GpCardObj;
+    }
+
+    protected function getGpBillingAddyObj()
+    {
+        $omnipayCardObj = $this->getCard();
+
+        $gpAddyObj = new Address();
+        $gpAddyObj->type = AddressType::BILLING;
+        $gpAddyObj->streetAddress1 = $omnipayCardObj->getBillingAddress1();
+        $gpAddyObj->streetAddress2 = $omnipayCardObj->getBillingAddress2();
+        $gpAddyObj->city = $omnipayCardObj->getBillingCity();
+        $gpAddyObj->postalCode = $omnipayCardObj->getBillingPostcode();
+        $gpAddyObj->state = $omnipayCardObj->getBillingState();
+        $gpAddyObj->country = $omnipayCardObj->getBillingCountry();
+
+        return $gpAddyObj;
+    }
+
+    protected function getGpShippingAddyObj()
+    {
+        $omnipayCardObj = $this->getCard();
+
+        $gpAddyObj = new Address();
+        $gpAddyObj->type = AddressType::SHIPPING;
+        $gpAddyObj->streetAddress1 = $omnipayCardObj->getShippingAddress1();
+        $gpAddyObj->streetAddress2 = $omnipayCardObj->getShippingAddress2();
+        $gpAddyObj->city = $omnipayCardObj->getShippingCity();
+        $gpAddyObj->postalCode = $omnipayCardObj->getShippingPostcode();
+        $gpAddyObj->state = $omnipayCardObj->getShippingState();
+        $gpAddyObj->country = $omnipayCardObj->getShippingCountry();
+
+        return $gpAddyObj;
     }
 
     public function getData()
@@ -128,7 +176,7 @@ abstract class AbstractHeartlandRequest extends AbstractRequest
     {
         $config = new PorticoConfig();
 
-        if ($this->getSecretApiKey() != null && $this->getSecretApiKey() != "") {
+        if (!empty($this->getSecretApiKey())) {
             $config->secretApiKey = trim($this->getSecretApiKey());
         } else {
             $config->siteId     = $this->getSiteId();
@@ -142,5 +190,85 @@ abstract class AbstractHeartlandRequest extends AbstractRequest
         $config->versionNumber  = $this->getVersionNumber();
 
         ServicesContainer::configureService($config);
+    }
+
+    public function getSecretApiKey()
+    {
+        return $this->getParameter('secretApiKey');
+    }
+
+    public function setSecretApiKey($value)
+    {
+        return $this->setParameter('secretApiKey', $value);
+    }
+
+    public function getSiteId()
+    {
+        return $this->getParameter('siteId');
+    }
+
+    public function setSiteId($value)
+    {
+        return $this->setParameter('siteId', $value);
+    }
+
+    public function getLicenseId()
+    {
+        return $this->getParameter('licenseId');
+    }
+
+    public function setLicenseId($value)
+    {
+        return $this->setParameter('licenseId', $value);
+    }
+
+    public function getVersionNumber()
+    {
+        return $this->getParameter('versionNumber');
+    }
+
+    public function setVersionNumber($value)
+    {
+        return $this->setParameter('versionNumber', $value);
+    }
+
+    public function getCheck()
+    {
+        return $this->getParameter('check');
+    }
+
+    public function setCheck($value)
+    {
+        return $this->setParameter('check', $value);
+    }
+
+    public function getCustomerReference()
+    {
+        return $this->getParameter('customerReference');
+    }
+
+    public function setCustomerReference($value)
+    {
+        return $this->setParameter('customerReference', $value);
+    }
+
+    public function getCustomer()
+    {
+        return $this->getParameter('customer');
+    }
+
+    public function setCustomer($value)
+    {
+        return $this->setParameter('customer', $value);
+    }
+
+    public function getPaymentMethodReference()
+    {
+        return $this->getParameter('paymentMethodReference');
+    }
+
+    public function setPaymentMethodReference($value)
+    {
+        return $this->setParameter('paymentMethodReference', $value);
     }
 }

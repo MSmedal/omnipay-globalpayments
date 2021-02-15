@@ -1,22 +1,23 @@
 <?php
-namespace Omnipay\GlobalPayments;
+namespace Omnipay\GlobalPayments\Tests;
 
 use GlobalPayments\Api\Entities\Enums\AccountType;
 use GlobalPayments\Api\Entities\Enums\CardType;
 use GlobalPayments\Api\Entities\Enums\CheckType;
 use GlobalPayments\Api\Entities\Enums\SecCode;
+use Omnipay\GlobalPayments\CreditCard;
 use Omnipay\GlobalPayments\ECheck;
 use Omnipay\Omnipay;
 use Omnipay\Tests\TestCase;
 
 /**
- * Integration tests for the  Gateway. These tests make real requests to Heartland sandbox environment using Certification MID 777700959162
+ * Integration tests for the  Gateway. These tests make real requests to Heartland sandbox environment
  */
 class HeartlandEcommerceTest extends TestCase
 {
     protected $gateway;
     protected $publicKey = 'pkapi_cert_3ZjQJbCO9rygPdXFkd';
-    protected $secretAPIKey = 'skapi_cert_McU0AgBkx2EAldEfhhtolMw0RnvahBQAnXFdLYga-Q';
+    protected $secretAPIKey = 'skapi_cert_McU0AgBkx2EAldEfhhtolMw0RnvahBQAnXFdLYga-Q'; // 777701408656
 
     public function setUp()
     {
@@ -660,7 +661,7 @@ class HeartlandEcommerceTest extends TestCase
         $request = $this->gateway->purchase(array(
             'check' => $this->getPersonalCheck(),
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => $this->randAmount(2)
         ));
         $response = $request->send();
 
@@ -681,7 +682,7 @@ class HeartlandEcommerceTest extends TestCase
             'token' => $this->getAchSingleUseToken($this->getPersonalCheck()),
             'check' => $check,
             'currency' => 'USD',
-            'amount' => $this->randAmount()
+            'amount' => $this->randAmount(2)
         ));
         $response = $request->send();
 
@@ -691,84 +692,17 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
     }
 
-    // public function test20CreateCustomer()
-    // {
-    //     // Requires Payplan to be enabled
-    //     $request = $this->gateway->createCustomer(array(
-    //         'customer' => $this->getCustomer()
-    //     ));
-    //     $response = $request->send();
-
-    //     $this->assertNotFalse($response->isSuccessful());
-    //     $this->assertNotNull($response->getCustomerReference());
-    // }
-    // public function test21CreateCustomerWithReference()
-    // {
-    //     // Requires Payplan to be enabled
-    //     $customerReference = time();
-
-    //     $request = $this->gateway->createCustomer(array(
-    //         'customerReference' => $customerReference,
-    //         'customer' => $this->getCustomer()
-    //     ));
-    //     $response = $request->send();
-
-    //     $this->assertNotFalse($response->isSuccessful());
-    //     $this->assertTrue($response->getCustomerReference() == $customerReference);
-    // }
-    // public function test22CreatePaymentMethod()
-    // {
-    //     // Requires Payplan to be enabled
-    //     $customerReference = time();
-
-    //     $request = $this->gateway->createCustomer(array(
-    //         'customerReference' => $customerReference,
-    //         'customer' => $this->getCustomer()
-    //     ));
-    //     $response = $request->send();
-
-    //     $request = $this->gateway->createPaymentMethod(array(
-    //         'card' => $this->getVisaCard(),
-    //         'customerReference' => $customerReference
-    //     ));
-    //     $response = $request->send();
-
-    //     $this->assertNotFalse($response->isSuccessful());
-    //     $this->assertNotNull($response->getPaymentMethodReference());
-    // }
-    // public function test23CreatePaymentMethodWithReference()
-    // {
-    //     // Requires Payplan to be enabled
-    //     $customerReference = time();
-    //     $paymentMethodReference = $customerReference + 1;
-
-    //     $request = $this->gateway->createCustomer(array(
-    //         'customerReference' => $customerReference,
-    //         'customer' => $this->getCustomer()
-    //     ));
-    //     $response = $request->send();
-
-    //     $request = $this->gateway->createPaymentMethod(array(
-    //         'card' => $this->getVisaCard(),
-    //         'customerReference' => $customerReference,
-    //         'paymentMethodReference' => $paymentMethodReference
-    //     ));
-    //     $response = $request->send();
-
-    //     $this->assertNotFalse($response->isSuccessful());
-    //     $this->assertTrue($response->getPaymentMethodReference() == $paymentMethodReference);
-    // }
-    protected function randAmount()
+    protected function randAmount($minDigits = 0, $maxDigits = 4)
     {
         $numstring = '';
-        $digits = rand(0, 4);
+        $digits = rand($minDigits, $maxDigits);
         
         for ($x = 0; $x < $digits; $x++)
         {
-            $numstring = $numstring . (string) rand(0, 9);
+            $numstring = $numstring . (string) rand(1, 9);
         }
 
-        return floatval($numstring . (string) number_format('.' . rand(0, 99), 2));
+        return (string) $numstring . '.' . (string) number_format(rand(0, 99));
     }
 
     private function getMasterCard2Bin()

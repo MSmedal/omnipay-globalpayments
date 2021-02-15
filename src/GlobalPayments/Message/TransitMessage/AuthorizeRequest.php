@@ -13,7 +13,7 @@ class AuthorizeRequest extends AbstractTransitRequest
 {
     public function runTransitTrans($data)
     {
-        $this->setGoodResponseCodes(array('00', '10'));
+        $this->setGoodResponseCodes(array('00'));
         
         $chargeMe = new CreditCardData();
         $storedCreds = new StoredCredential();
