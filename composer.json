@@ -20,14 +20,11 @@
             "Omnipay\\GlobalPayments\\": "src/GlobalPayments/"
         }
     },
-    "scripts": {
-        "test": "phpunit"
-    },
     "require-dev": {
         "omnipay/tests": "^3.1"
     },
     "require": {
         "league/omnipay": "^3.0",
-        "globalpayments/php-sdk": "^2.2"
+        "globalpayments/php-sdk": "2.2.6"
     }
 }
