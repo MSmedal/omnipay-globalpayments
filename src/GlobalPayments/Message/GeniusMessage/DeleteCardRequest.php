@@ -6,7 +6,7 @@ use GlobalPayments\Api\PaymentMethods\CreditCardData;
 
 class DeleteCardRequest extends AbstractGeniusRequest
 {
-    public function runGeniusTrans($data)
+    public function runTrans($data)
     {
         // new GlobalPayments credit card object
         $chargeMe = new CreditCardData();

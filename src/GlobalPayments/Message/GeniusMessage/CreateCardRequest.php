@@ -7,7 +7,7 @@ use GlobalPayments\Api\Entities\Address;
 
 class CreateCardRequest extends AbstractGeniusRequest
 {
-    public function runGeniusTrans($data)
+    public function runTrans($data)
     {
         $this->setGoodResponseCodes(array('00', '85'));
         

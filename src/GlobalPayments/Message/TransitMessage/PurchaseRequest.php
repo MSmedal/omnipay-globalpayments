@@ -3,25 +3,22 @@
 namespace Omnipay\GlobalPayments\Message\TransitMessage;
 
 use Exception;
-use GlobalPayments\Api\PaymentMethods\CreditCardData;
-use GlobalPayments\Api\Entities\Address;
-use GlobalPayments\Api\Entities\StoredCredential;
 use GlobalPayments\Api\Entities\Transaction;
 
 class PurchaseRequest extends AuthorizeRequest
 {
-    protected function processTransaction(
-        CreditCardData $card,
-        array $data,
-        Address $billingAddress,
-        StoredCredential $storedCredentials
-    )
+    public function runTrans()
     {
+        $this->setGoodResponseCodes(array('00'));
+        
+        $chargeMe = $this->gpCardObj;
+
         try {
-            $response = $card->charge($data['amount']) // only change from AuthorizeRequest
-                ->withAddress($billingAddress)
-                ->withCurrency($data['currency'])
-                ->withStoredCredential($storedCredentials)
+            $response = $chargeMe->charge($this->getAmount())
+                ->withAddress($this->gpBillingAddyObj)
+                ->withCurrency($this->getCurrency())
+                ->withDescription($this->getDescription())
+                ->withClientTransactionId($this->getTransactionId())
                 ->execute();
 
             if ($response->responseMessage === "Partially Approved") {
@@ -39,5 +36,5 @@ class PurchaseRequest extends AuthorizeRequest
         } catch (Exception $e) {
             return $e;
         }
-    }    
+    }
 }

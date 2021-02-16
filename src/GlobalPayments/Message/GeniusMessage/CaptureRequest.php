@@ -6,7 +6,7 @@ use GlobalPayments\Api\Entities\Transaction;
 
 class CaptureRequest extends AbstractGeniusRequest
 {
-    public function runGeniusTrans($data)
+    public function runTrans($data)
     {
         $this->setGoodResponseCodes(array('00'));
 

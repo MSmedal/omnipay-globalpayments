@@ -6,14 +6,13 @@ use GlobalPayments\Api\Entities\Transaction;
 
 class VoidRequest extends AbstractTransitRequest
 {
-    public function runTransitTrans($data)
+    public function runTrans()
     {
         $this->setGoodResponseCodes(array('00'));
 
-        return Transaction::fromId($data['transactionReference'])
-            ->void($data['amount'])
-            ->withDescription($data['description'])
+        return Transaction::fromId($this->getTransactionReference())
+            ->void($this->getAmount())
+            ->withDescription($this->getDescription())
             ->execute();
     }
-
 }

@@ -6,12 +6,12 @@ use GlobalPayments\Api\Entities\Transaction;
 
 class CaptureRequest extends AbstractTransitRequest
 {
-    public function runTransitTrans($data)
+    public function runTrans()
     {
         $this->setGoodResponseCodes(array('00'));
 
-        return Transaction::fromId($data['transactionReference'])
-            ->capture($data['amount'])
+        return Transaction::fromId($this->getTransactionReference())
+            ->capture($this->getAmount())
             ->execute();
     }
 }

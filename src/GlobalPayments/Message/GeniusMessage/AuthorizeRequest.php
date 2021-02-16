@@ -9,7 +9,7 @@ use GlobalPayments\Api\Entities\StoredCredential;
 
 class AuthorizeRequest extends AbstractGeniusRequest
 {
-    public function runGeniusTrans($data)
+    public function runTrans($data)
     {
         $this->setGoodResponseCodes(array('00', '10'));
         

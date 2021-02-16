@@ -6,7 +6,7 @@ use GlobalPayments\Api\Entities\Transaction;
 
 class VoidRequest extends AbstractHeartlandRequest
 {
-    public function runHPSTrans()
+    public function runTrans()
     {
         $this->setGoodResponseCodes(array('00'));
 

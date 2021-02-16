@@ -48,7 +48,7 @@ use GlobalPayments\Api\Entities\Customer;
 
 class CreateCustomerRequest extends AbstractHeartlandRequest
 {
-    public function runHPSTrans($data)
+    public function runTrans($data)
     {
         // new GlobalPayments credit card object
         $newCustomer = new Customer();

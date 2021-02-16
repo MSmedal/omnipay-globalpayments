@@ -6,19 +6,9 @@ use GlobalPayments\Api\Entities\Enums\GatewayProvider;
 use GlobalPayments\Api\ServiceConfigs\Gateways\GeniusConfig;
 use GlobalPayments\Api\ServicesContainer;
 use Omnipay\GlobalPayments\Message\AbstractRequest;
-use Omnipay\GlobalPayments\Message\Response;
 
 abstract class AbstractGeniusRequest extends AbstractRequest
 {
-    protected $responseType = '\Omnipay\GlobalPayments\Response';
-
-    public function sendData($data)
-    {
-        $this->setServicesConfig();
-
-        return new Response($this, $this->runGeniusTrans($data));
-    }
-
     public function getData()
     {
         $data = array();

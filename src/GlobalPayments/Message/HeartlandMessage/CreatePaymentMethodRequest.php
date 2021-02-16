@@ -45,7 +45,7 @@ use GlobalPayments\Api\Entities\Customer;
 
 class CreatePaymentMethodRequest extends AbstractHeartlandRequest
 {
-    public function runHPSTrans($data)
+    public function runTrans($data)
     {
         // obtain customer object from Heartland
         $customer = Customer::find((int) $this->getCustomerReference());

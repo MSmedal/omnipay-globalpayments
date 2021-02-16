@@ -14,19 +14,9 @@ use Omnipay\GlobalPayments\Message\Response;
 
 abstract class AbstractHeartlandRequest extends \Omnipay\GlobalPayments\Message\AbstractRequest
 {
-    protected $responseType = '\Omnipay\GlobalPayments\Response';
     protected $gpBillingAddyObj;
     protected $gpCardObj;
     protected $gpCheckObj;
-
-    protected abstract function runHPSTrans();
-
-    public function sendData($data)
-    {
-        $this->setServicesConfig();
-
-        return new Response($this, $this->runHPSTrans());
-    }
 
     protected function getGpCheckObj()
     {
@@ -80,7 +70,6 @@ abstract class AbstractHeartlandRequest extends \Omnipay\GlobalPayments\Message\
     protected function getGpBillingAddyObj()
     {
         $gpAddyObj = new Address();
-        $gpAddyObj->type = AddressType::BILLING;
 
         if ($this->getCard()) {
             $omnipayCardObj = $this->getCard();

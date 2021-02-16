@@ -2,58 +2,67 @@
 
 namespace Omnipay\GlobalPayments\Message\TransitMessage;
 
+use GlobalPayments\Api\Entities\Address;
+use GlobalPayments\Api\Entities\Enums\StoredCredentialInitiator;
+use GlobalPayments\Api\Entities\StoredCredential;
+use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\ServiceConfigs\AcceptorConfig;
 use GlobalPayments\Api\ServiceConfigs\Gateways\TransitConfig;
 use GlobalPayments\Api\ServicesContainer;
 use Omnipay\GlobalPayments\Message\AbstractRequest;
-use Omnipay\GlobalPayments\Message\Response;
 
 abstract class AbstractTransitRequest extends AbstractRequest
 {
-    protected $responseType = '\Omnipay\GlobalPayments\Response';
+    protected $gpBillingAddyObj;
+    protected $gpCardObj;
 
-    public function sendData($data)
+    protected function getGpCardObj()
     {
-        $this->setServicesConfig();
+        $gpCardObj = new CreditCardData();
 
-        return new Response($this, $this->runTransitTrans($data));
+        if ($this->getCard()) {
+            $omnipayCardObj = $this->getCard();
+            
+            $gpCardObj->number = $omnipayCardObj->getNumber();
+            $gpCardObj->expMonth = $omnipayCardObj->getExpiryMonth();
+            $gpCardObj->expYear = $omnipayCardObj->getExpiryYear();
+            $gpCardObj->cvn = $omnipayCardObj->getCvv();
+            $gpCardObj->cardHolderName = $omnipayCardObj->getFirstName() . $omnipayCardObj->getLastName();
+        }
+
+        if (!empty($this->getToken())) {
+            $gpCardObj->token = $this->getToken();
+        } elseif (!empty($this->getCardReference())) {
+            $gpCardObj->token = $this->getCardReference();
+            $storedCredentials = new StoredCredential();
+            $storedCredentials->initiator = StoredCredentialInitiator::MERCHANT;
+        }
+
+        return $gpCardObj;
+    }
+
+    protected function getGpBillingAddyObj()
+    {
+        $gpAddyObj = new Address();
+
+        if ($this->getCard()) {
+            $omnipayCardObj = $this->getCard();
+
+            $gpAddyObj->streetAddress1 = $omnipayCardObj->getBillingAddress1();
+            $gpAddyObj->streetAddress2 = $omnipayCardObj->getBillingAddress2();
+            $gpAddyObj->city = $omnipayCardObj->getBillingCity();
+            $gpAddyObj->postalCode = $omnipayCardObj->getBillingPostcode();
+            $gpAddyObj->state = $omnipayCardObj->getBillingState();
+            $gpAddyObj->country = $omnipayCardObj->getBillingCountry();
+        }
+
+        return $gpAddyObj;
     }
 
     public function getData()
     {
-        $data = array();
-
-        if ($this->getCard()) {
-            $card = $this->getCard();
-        
-            // add card info to $data
-            $data['card'] = array();
-            $data['card']['number']         = $card->getNumber();
-            $data['card']['expiryMonth']    = $card->getExpiryMonth();
-            $data['card']['expiryYear']     = $card->getExpiryYear();
-            $data['card']['cvv']            = $card->getCvv();
-            $data['card']['type']           = $card->getType();
-    
-            // add payor info to $data
-            $data['firstName']          = $card->getFirstName();
-            $data['lastName']           = $card->getLastName();
-            $data['billingAddress1']    = $card->getBillingAddress1();
-            $data['billingAddress2']    = $card->getBillingAddress2();
-            $data['billingCity']        = $card->getBillingCity();
-            $data['billingPostcode']    = $card->getBillingPostcode();
-            $data['billingState']       = $card->getBillingState();
-            $data['billingCountry']     = $card->getBillingCountry();
-            $data['billingPhone']       = $card->getBillingPhone();
-            $data['email']              = $card->getEmail();
-        }
-
-        // add transaction information to $data
-        $data['description']            = $this->getDescription();
-        $data['amount']                 = $this->getAmount();
-        $data['currency']               = $this->getCurrency();
-        $data['transactionReference']   = $this->getTransactionReference();
-
-        return $data;
+        $this->gpBillingAddyObj = $this->getGpBillingAddyObj();
+        $this->gpCardObj = $this->getGpCardObj();
     }
 
     protected function setServicesConfig()

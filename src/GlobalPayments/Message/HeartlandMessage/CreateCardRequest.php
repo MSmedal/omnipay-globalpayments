@@ -4,7 +4,7 @@ namespace Omnipay\GlobalPayments\Message\HeartlandMessage;
 
 class CreateCardRequest extends AbstractHeartlandRequest
 {
-    public function runHPSTrans()
+    public function runTrans()
     {
         $this->setGoodResponseCodes(array('00', '85'));
 

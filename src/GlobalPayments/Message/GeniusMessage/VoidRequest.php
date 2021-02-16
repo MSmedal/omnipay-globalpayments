@@ -7,7 +7,7 @@ use GlobalPayments\Api\Entities\Transaction;
 class VoidRequest extends AbstractGeniusRequest
 {
 
-    public function runGeniusTrans($data)
+    public function runTrans($data)
     {
         $this->setGoodResponseCodes(array('00'));
 

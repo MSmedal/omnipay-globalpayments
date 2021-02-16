@@ -4,6 +4,18 @@ namespace Omnipay\GlobalPayments\Message;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
+    protected $responseType = '\Omnipay\GlobalPayments\Response';
+
+    protected abstract function runTrans();
+    protected abstract function setServicesConfig();
+
+    public function sendData($data)
+    {
+        $this->setServicesConfig();
+
+        return new Response($this, $this->runTrans());
+    }
+
     public function getDeviceId()
     {
         return $this->getParameter('deviceId');

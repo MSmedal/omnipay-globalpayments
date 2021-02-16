@@ -4,7 +4,7 @@ namespace Omnipay\GlobalPayments\Message\HeartlandMessage;
 
 class UpdateCardRequest extends AbstractHeartlandRequest
 {
-    public function runHPSTrans()
+    public function runTrans()
     {
         $chargeMe = $this->gpCardObj;
 
