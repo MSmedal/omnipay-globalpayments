@@ -33,11 +33,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test01PurchaseVisaManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -49,11 +51,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test02PurchaseMastercardManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard(),
             'currency' => 'USD',
             'amount' => 20.02
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -65,11 +69,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test03PurchaseMastercardBin2ManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard2Bin(),
             'currency' => 'USD',
             'amount' => '20.03'
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -81,11 +87,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test04PurchaseDiscoverManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getDiscover(),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -97,11 +105,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test05PurchaseAmexManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getAmex(),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -113,11 +123,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test06PurchaseJcbManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getJcb(),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -133,11 +145,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test07PurchaseVisaSingleUseToken()
     {        
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->getSingleUseToken($this->getVisa()),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -149,11 +163,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test08PurchaseMastercardSingleUseToken()
     {        
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->getSingleUseToken($this->getMasterCard()),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -165,11 +181,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test09PurchaseMastercardBin2SingleUseToken()
     {        
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->getSingleUseToken($this->getMasterCard2Bin()),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -181,11 +199,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test10PurchaseDiscoverSingleUseToken()
     {        
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->getSingleUseToken($this->getDiscover()),
             'currency' => 'USD',
             'amount' => '20.10'
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -197,11 +217,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test11PurchaseAmexSingleUseToken()
     {        
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->getSingleUseToken($this->getAmex()),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -213,11 +235,13 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test12PurchaseJcbSingleUseToken()
     {        
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->getSingleUseToken($this->getJcb()),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -235,11 +259,13 @@ class HeartlandEcommerceTest extends TestCase
     public function test13AuthAndCapture()
     {
         // Authorize
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.14
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -249,9 +275,11 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Capture
-        $request = $this->gateway->capture(array(
+        $request = $this->gateway->capture(
+            array(
             'transactionReference' => $response->getTransactionReference()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -264,11 +292,13 @@ class HeartlandEcommerceTest extends TestCase
     public function test14AuthAndPartialCapture()
     {
         // Authorize
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.15
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -278,10 +308,12 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Capture
-        $request = $this->gateway->capture(array(
+        $request = $this->gateway->capture(
+            array(
             'transactionReference' => $response->getTransactionReference(),
             'amount' => 5.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -294,11 +326,13 @@ class HeartlandEcommerceTest extends TestCase
     public function test15AuthAndNoCapture()
     {
         // Authorize
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.16
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -315,11 +349,13 @@ class HeartlandEcommerceTest extends TestCase
     public function test16RefundFull()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.17
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -330,11 +366,13 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Refund
-        $request = $this->gateway->refund(array(
+        $request = $this->gateway->refund(
+            array(
             'transactionReference' => $purchaseTransactionReference,
             'currency' => 'USD',
             'amount' => 11.17
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -347,11 +385,13 @@ class HeartlandEcommerceTest extends TestCase
     public function test17RefundPartial()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.18
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -362,11 +402,13 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Refund
-        $request = $this->gateway->refund(array(
+        $request = $this->gateway->refund(
+            array(
             'transactionReference' => $purchaseTransactionReference,
             'amount' => 5.00,
             'currency' => 'USD'
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -383,11 +425,13 @@ class HeartlandEcommerceTest extends TestCase
     public function test18VoidFull()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.19
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -398,9 +442,11 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Void
-        $request = $this->gateway->void(array(
+        $request = $this->gateway->void(
+            array(
             'transactionReference' => $purchaseTransactionReference,
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -413,11 +459,13 @@ class HeartlandEcommerceTest extends TestCase
     public function test19VoidPartial()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.20
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -428,10 +476,12 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Void
-        $request = $this->gateway->void(array(
+        $request = $this->gateway->void(
+            array(
             'transactionReference' => $purchaseTransactionReference,
             'amount' => 5.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -447,9 +497,11 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test20CreateCardVisa()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getVisa()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -462,9 +514,11 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test21CreateCardMastercard()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getMasterCard()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -477,9 +531,11 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test22CreateCardMastercardBin2()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getMasterCard2Bin()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -492,9 +548,11 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test23CreateCardDiscover()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getDiscover()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -507,9 +565,11 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test24CreateCardAmex()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getAmex()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -522,9 +582,11 @@ class HeartlandEcommerceTest extends TestCase
 
     public function test25CreateCardJcb()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getJcb()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -542,9 +604,11 @@ class HeartlandEcommerceTest extends TestCase
     public function test26PurchaseUsingVisaCardReference()
     {
         // createCard
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getVisa()
-        ));
+            )
+        );
 
         $response = $request->send();
         $cardReference = $response->getCardReference();
@@ -556,11 +620,13 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCardReference());
 
         // purchase w/cardReference
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'cardReference' => $cardReference,
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -573,9 +639,11 @@ class HeartlandEcommerceTest extends TestCase
     public function test27PurchaseUsingAmexCardReference()
     {
         // createCard
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getAmex()
-        ));
+            )
+        );
 
         $response = $request->send();
         $cardReference = $response->getCardReference();
@@ -587,11 +655,13 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCardReference());
 
         // purchase w/cardReference
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'cardReference' => $cardReference,
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -604,9 +674,11 @@ class HeartlandEcommerceTest extends TestCase
     public function test28DeleteMastercardCardReference()
     {
         // Requires Heartland Multi-Use Tokens be enabled
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getMasterCard()
-        ));
+            )
+        );
 
         $response = $request->send();        
         $cardReference = $response->getCardReference();
@@ -617,9 +689,11 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
         $this->assertNotNull($response->getCardReference());
 
-        $request = $this->gateway->deleteCard(array(
+        $request = $this->gateway->deleteCard(
+            array(
             'cardReference' => $cardReference
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -629,9 +703,11 @@ class HeartlandEcommerceTest extends TestCase
     public function test29UpdateDiscoverCardReference()
     {
         // Requires Heartland Multi-Use Tokens be enabled
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getDiscover()
-        ));
+            )
+        );
 
         $response = $request->send();        
         $cardReference = $response->getCardReference();
@@ -642,7 +718,8 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
         $this->assertNotNull($response->getCardReference());
 
-        $request = $this->gateway->updateCard(array(
+        $request = $this->gateway->updateCard(
+            array(
             'card' => new CreditCard(
                 array(
                     'expiryYear' => '2026',
@@ -650,7 +727,8 @@ class HeartlandEcommerceTest extends TestCase
                 )
             ),
             'cardReference' => $cardReference
-        ));
+            )
+        );
         
         $response = $request->send();
 
@@ -660,11 +738,13 @@ class HeartlandEcommerceTest extends TestCase
     public function test30AchPurchase()
     {
         // Requires Heartland ACH be enabled
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'check' => $this->getPersonalCheck(),
             'currency' => 'USD',
             'amount' => $this->randAmount(2)
-        ));
+            )
+        );
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
@@ -680,12 +760,14 @@ class HeartlandEcommerceTest extends TestCase
         $check->setAccountNumber(null);
         $check->setRoutingNumber(null);
 
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->getAchSingleUseToken($this->getPersonalCheck()),
             'check' => $check,
             'currency' => 'USD',
             'amount' => $this->randAmount(2)
-        ));
+            )
+        );
         $response = $request->send();
 
         $this->assertTrue($response->isSuccessful());
@@ -825,7 +907,8 @@ class HeartlandEcommerceTest extends TestCase
 
         $curl = curl_init();
 
-        curl_setopt_array($curl, array(
+        curl_setopt_array(
+            $curl, array(
             CURLOPT_URL => 'https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway.Hpf.v1/api/token?api_key=' . $this->publicKey,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
@@ -838,7 +921,8 @@ class HeartlandEcommerceTest extends TestCase
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json'
             ),
-        ));
+            )
+        );
 
         $responseAsObj = json_decode(curl_exec($curl));
 
@@ -854,7 +938,8 @@ class HeartlandEcommerceTest extends TestCase
 
         $curl = curl_init();
 
-        curl_setopt_array($curl, array(
+        curl_setopt_array(
+            $curl, array(
             CURLOPT_URL => 'https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway.Hpf.v1/api/token?api_key=' . $this->publicKey,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
@@ -867,7 +952,8 @@ class HeartlandEcommerceTest extends TestCase
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json'
             ),
-        ));
+            )
+        );
 
         $responseAsObj = json_decode(curl_exec($curl));
 

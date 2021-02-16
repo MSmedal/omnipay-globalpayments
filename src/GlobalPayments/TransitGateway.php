@@ -4,7 +4,7 @@ namespace Omnipay\GlobalPayments;
 
 use Omnipay\Common\AbstractGateway;
 
-class TransitGateway extends AbstractGateway 
+class TransitGateway extends AbstractGateway
 {
     public function getName()
     {

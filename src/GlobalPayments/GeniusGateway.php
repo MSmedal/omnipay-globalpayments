@@ -4,7 +4,7 @@ namespace Omnipay\GlobalPayments;
 
 use Omnipay\Common\AbstractGateway;
 
-class GeniusGateway extends AbstractGateway 
+class GeniusGateway extends AbstractGateway
 {
     public function getName()
     {

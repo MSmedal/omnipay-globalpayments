@@ -4,7 +4,7 @@ namespace Omnipay\GlobalPayments;
 
 use Omnipay\Common\CreditCard as CommonCreditCard;
 
-class CreditCard extends CommonCreditCard 
+class CreditCard extends CommonCreditCard
 {
     /**
      * Get card brand.
@@ -17,9 +17,9 @@ class CreditCard extends CommonCreditCard
     }
 
     /**
-     * Set card brand.
-     *
-     * @param string $value
+     * 
+     * @param string $value card brand.
+     * 
      * @return $this
      */
     public function setType($value)
@@ -38,9 +38,9 @@ class CreditCard extends CommonCreditCard
     }
 
     /**
-     * Set mobile type (ApplePay / GooglePay)
-     *
-     * @param string $value
+     * 
+     * @param string $value mobile type (ApplePay / GooglePay)
+     * 
      * @return $this
      */
     public function setMobileType($value)

@@ -109,12 +109,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase01()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard2Bin(),
             'token' => $this->tsepMasterCard2Bin,
             'currency' => 'USD',
             'amount' => 11.10
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -122,12 +124,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase02()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getDiscover(),
             'token' => $this->tsepDiscover,
             'currency' => 'USD',
             'amount' => '12.00'
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -135,12 +139,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase03()
     {
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getDiners(),
             'token' => $this->tsepDiners,
             'currency' => 'USD',
             'amount' => '6.00'
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -148,12 +154,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase04()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard(),
             'token' => $this->tsepMasterCard,
             'currency' => 'USD',
             'amount' => '15.00'
-        ));
+            )
+        );
 
         $response = $request->send();
         static::$partialVoidTarget = $response->getTransactionReference();
@@ -162,12 +170,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase05()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard(),
             'token' => $this->tsepDiners,
             'currency' => 'USD',
             'amount' => 34.13
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -175,12 +185,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase06()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getJcb(),
             'token' => $this->tsepJcb,
             'currency' => 'USD',
             'amount' => '13.00'
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -191,12 +203,14 @@ class EcommerceTab extends TestCase
         $card = $this->getAmex();
         unset($card['cvv']); // test specifies not to send
 
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $card,
             'token' => $this->tsepAmex,
             'currency' => 'USD',
             'amount' => 13.50
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -204,12 +218,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase08()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'token' => $this->tsepVisa,
             'currency' => 'USD',
             'amount' => 32.49
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -217,12 +233,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase09()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getDiscoverCup(),
             'token' => $this->tsepDiscuverCup,
             'currency' => 'USD',
             'amount' => '10.00'
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -230,12 +248,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase10()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'token' => $this->tsepVisa,
             'currency' => 'USD',
             'amount' => 11.12
-        ));
+            )
+        );
 
         $response = $request->send();
         static::$refundTarget = $response->getTransactionReference();
@@ -244,12 +264,14 @@ class EcommerceTab extends TestCase
 
     public function testInternetPurchase11()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getAmex(),
             'token' => $this->tsepAmex,
             'currency' => 'USD',
             'amount' => '4.00'
-        ));
+            )
+        );
 
         $response = $request->send();
         static::$fullVoidTarget = $response->getTransactionReference();
@@ -291,11 +313,13 @@ class EcommerceTab extends TestCase
 
     public function testVoid01()
     {
-        $request = $this->gateway->void(array(
+        $request = $this->gateway->void(
+            array(
             'transactionReference' => static::$partialVoidTarget,
             'amount' => '5.00',
             'description' => 'PARTIAL_REVERSAL'
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -303,10 +327,12 @@ class EcommerceTab extends TestCase
 
     public function testVoid02()
     {
-        $request = $this->gateway->void(array(
+        $request = $this->gateway->void(
+            array(
             'transactionReference' => static::$fullVoidTarget,
             'description' => 'POST_AUTH_USER_DECLINE'
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -314,13 +340,15 @@ class EcommerceTab extends TestCase
 
     public function testConsumerInitiated01()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             // 'cardReference' => static::$visaReference,
             'cardReference' => $this->tsepVisa,
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => '14.00'
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -328,19 +356,22 @@ class EcommerceTab extends TestCase
 
     public function testConsumerInitiated02()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             // 'cardReference' => static::$mastercardReference,
             'cardReference' => $this->tsepMasterCard,
             'card' => $this->getMasterCard(),
             'currency' => 'USD',
             'amount' => '15.00'
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
     }
 
-    public function testIntermissionBeforeRefund() {
+    public function testIntermissionBeforeRefund()
+    {
         BatchService::closeBatch();
 
         // sleep(3601); // only needed during certification
@@ -348,10 +379,12 @@ class EcommerceTab extends TestCase
 
     public function testReturn01()
     {
-        $request = $this->gateway->refund(array(
+        $request = $this->gateway->refund(
+            array(
             'transactionReference' => static::$refundTarget,
             'currency' => 'USD',
-        ));
+            )
+        );
 
         $response = $request->send();
         $this->assertTrue($response->isSuccessful());
@@ -365,7 +398,8 @@ class EcommerceTab extends TestCase
         $this->assertEquals('00', $response->responseCode);
     }
 
-    private function getMasterCard2Bin() {
+    private function getMasterCard2Bin()
+    {
         $card = array(
             // 'number' => '2223000048400011',
             'expiryMonth' => 12,
@@ -377,7 +411,8 @@ class EcommerceTab extends TestCase
         return array_merge($card, $this->avsData);
     }
 
-    private function getDiscover() {
+    private function getDiscover()
+    {
         $card = array(
             // 'number' => '6011000993026909',
             'expiryMonth' => 12,
@@ -389,7 +424,8 @@ class EcommerceTab extends TestCase
         return array_merge($card, $this->avsData);
     }
 
-    private function getMasterCard() {
+    private function getMasterCard()
+    {
         $card = array(
             // 'number' => '5146315000000055',
             'expiryMonth' => 12,
@@ -401,7 +437,8 @@ class EcommerceTab extends TestCase
         return array_merge($card, $this->avsData);
     }
 
-    private function getJcb() {
+    private function getJcb()
+    {
         $card = array(
             // 'number' => '3530142019945859',
             'expiryMonth' => 12,
@@ -413,7 +450,8 @@ class EcommerceTab extends TestCase
         return array_merge($card, $this->avsData);
     }
 
-    private function getAmex() {
+    private function getAmex()
+    {
         $card = array(
             // 'number' => '371449635392376',
             'expiryMonth' => 12,
@@ -425,7 +463,8 @@ class EcommerceTab extends TestCase
         return array_merge($card, $this->avsData);
     }
 
-    private function getVisa() {
+    private function getVisa()
+    {
         $card = array(
             // 'number' => '4012000098765439',
             'expiryMonth' => 12,
@@ -437,7 +476,8 @@ class EcommerceTab extends TestCase
         return array_merge($card, $this->avsData);
     }
 
-    private function getDiscoverCup() {
+    private function getDiscoverCup()
+    {
         $card = array(
             // 'number' => '6282000123842342',
             'expiryMonth' => 12,
@@ -449,7 +489,8 @@ class EcommerceTab extends TestCase
         return array_merge($card, $this->avsData);
     }
 
-    private function getDiners() {
+    private function getDiners()
+    {
         $card = array(
             // 'number' => '3055155515160018',
             'expiryMonth' => 12,

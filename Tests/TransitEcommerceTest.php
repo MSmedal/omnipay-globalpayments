@@ -56,11 +56,13 @@ class TransitEcommerceTest extends TestCase
 
     public function test01PurchaseVisaManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.12
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -72,11 +74,13 @@ class TransitEcommerceTest extends TestCase
 
     public function test02PurchaseMastercardManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard(),
             'currency' => 'USD',
             'amount' => 15.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -88,11 +92,13 @@ class TransitEcommerceTest extends TestCase
 
     public function test03PurchaseMastercardBin2ManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard2Bin(),
             'currency' => 'USD',
             'amount' => 15.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -104,11 +110,13 @@ class TransitEcommerceTest extends TestCase
 
     public function test04PurchaseDiscoverManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getDiscover(),
             'currency' => 'USD',
             'amount' => 12.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -120,11 +128,13 @@ class TransitEcommerceTest extends TestCase
 
     public function test05PurchaseDiscoverCupManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getDiscoverCup(),
             'currency' => 'USD',
             'amount' => 10.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -136,11 +146,13 @@ class TransitEcommerceTest extends TestCase
 
     public function test06PurchaseAmexManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getAmex(),
             'currency' => 'USD',
             'amount' => 13.50
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -152,11 +164,13 @@ class TransitEcommerceTest extends TestCase
 
     public function test07PurchaseJcbManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getJcb(),
             'currency' => 'USD',
             'amount' => 13.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -168,11 +182,13 @@ class TransitEcommerceTest extends TestCase
 
     public function test08PurchaseDinersManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getDiners(),
             'currency' => 'USD',
             'amount' => 6.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -188,12 +204,14 @@ class TransitEcommerceTest extends TestCase
 
     public function test09PurchaseVisaToken()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->tsepVisa,
             'card' => $this->getVisaTsep(),
             'currency' => 'USD',
             'amount' => 11.13
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -205,12 +223,14 @@ class TransitEcommerceTest extends TestCase
 
     public function test10PurchaseMastercardToken()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->tsepMasterCard,
             'card' => $this->getMasterCardTsep(),
             'currency' => 'USD',
             'amount' => 15.00
-        ));
+            )
+        );
 
         $response = $request->send();
         
@@ -222,12 +242,14 @@ class TransitEcommerceTest extends TestCase
 
     public function test11PurchaseMastercardBin2Token()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->tsepMasterCard2Bin,
             'card' => $this->getMasterCard2BinTsep(),
             'currency' => 'USD',
             'amount' => 15.00
-        ));
+            )
+        );
 
         $response = $request->send();
         
@@ -239,12 +261,14 @@ class TransitEcommerceTest extends TestCase
 
     public function test12PurchaseDiscoverToken()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->tsepDiscover,
             'card' => $this->getDiscoverTsep(),
             'currency' => 'USD',
             'amount' => 12.00
-        ));
+            )
+        );
 
         $response = $request->send();
         
@@ -256,12 +280,14 @@ class TransitEcommerceTest extends TestCase
 
     public function test13PurchaseDiscoverCupToken()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->tsepDiscuverCup,
             'card' => $this->getDiscoverCupTsep(),
             'currency' => 'USD',
             'amount' => 10.00
-        ));
+            )
+        );
 
         $response = $request->send();
         
@@ -273,12 +299,14 @@ class TransitEcommerceTest extends TestCase
 
     public function test14PurchaseAmexToken()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->tsepAmex,
             'card' => $this->getAmexTsep(),
             'currency' => 'USD',
             'amount' => 13.50
-        ));
+            )
+        );
 
         $response = $request->send();
         
@@ -290,12 +318,14 @@ class TransitEcommerceTest extends TestCase
 
     public function test15PurchaseJcbToken()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->tsepJcb,
             'card' => $this->getJcbTsep(),
             'currency' => 'USD',
             'amount' => 13.00
-        ));
+            )
+        );
 
         $response = $request->send();
         
@@ -307,12 +337,14 @@ class TransitEcommerceTest extends TestCase
 
     public function test16PurchaseDinersToken()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'token' => $this->tsepDiners,
             'card' => $this->getDinersTsep(),
             'currency' => 'USD',
             'amount' => 6.00
-        ));
+            )
+        );
 
         $response = $request->send();
         
@@ -329,11 +361,13 @@ class TransitEcommerceTest extends TestCase
     public function test17AuthAndCapture()
     {
         // Authorize
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.14
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -343,9 +377,11 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Capture
-        $request = $this->gateway->capture(array(
+        $request = $this->gateway->capture(
+            array(
             'transactionReference' => $response->getTransactionReference()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -358,11 +394,13 @@ class TransitEcommerceTest extends TestCase
     public function test18AuthAndPartialCapture()
     {
         // Authorize
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.15
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -372,10 +410,12 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Capture
-        $request = $this->gateway->capture(array(
+        $request = $this->gateway->capture(
+            array(
             'transactionReference' => $response->getTransactionReference(),
             'amount' => 5.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -388,11 +428,13 @@ class TransitEcommerceTest extends TestCase
     public function test19AuthAndNoCapture()
     {
         // Authorize
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.16
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -409,11 +451,13 @@ class TransitEcommerceTest extends TestCase
     public function test20RefundFull()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.17
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -424,10 +468,12 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Refund
-        $request = $this->gateway->refund(array(
+        $request = $this->gateway->refund(
+            array(
             'transactionReference' => $purchaseTransactionReference,
             'currency' => 'USD' // currently required by php-sdk, even if no amount is supplied
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -440,11 +486,13 @@ class TransitEcommerceTest extends TestCase
     public function test21RefundPartial()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.18
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -455,11 +503,13 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Refund
-        $request = $this->gateway->refund(array(
+        $request = $this->gateway->refund(
+            array(
             'transactionReference' => $purchaseTransactionReference,
             'amount' => 5.00,
             'currency' => 'USD'
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -474,11 +524,13 @@ class TransitEcommerceTest extends TestCase
     public function test22VoidFull()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.19
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -489,9 +541,11 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Void
-        $request = $this->gateway->void(array(
+        $request = $this->gateway->void(
+            array(
             'transactionReference' => $purchaseTransactionReference,
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -504,11 +558,13 @@ class TransitEcommerceTest extends TestCase
     public function test23VoidPartial()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.20
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -519,10 +575,12 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Void
-        $request = $this->gateway->void(array(
+        $request = $this->gateway->void(
+            array(
             'transactionReference' => $purchaseTransactionReference,
             'amount' => 5.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -538,9 +596,11 @@ class TransitEcommerceTest extends TestCase
 
     public function test24CreateCardVisa()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getVisa()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -553,9 +613,11 @@ class TransitEcommerceTest extends TestCase
 
     public function test25CreateCardMastercard()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getMasterCard()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -568,9 +630,11 @@ class TransitEcommerceTest extends TestCase
 
     public function test26CreateCardMastercardBin2()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getMasterCard2Bin()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -583,9 +647,11 @@ class TransitEcommerceTest extends TestCase
 
     public function test27CreateCardDiscover()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getDiscover()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -598,9 +664,11 @@ class TransitEcommerceTest extends TestCase
 
     public function test28CreateCardDiscoverCup()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getDiscoverCup()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -613,9 +681,11 @@ class TransitEcommerceTest extends TestCase
 
     public function test29CreateCardAmex()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getAmex()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -628,9 +698,11 @@ class TransitEcommerceTest extends TestCase
 
     public function test30CreateCardJcb()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getJcb()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -643,9 +715,11 @@ class TransitEcommerceTest extends TestCase
 
     public function test31CreateCardDiners()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getDiners()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -663,9 +737,11 @@ class TransitEcommerceTest extends TestCase
     public function test32PurchaseUsingVisaCardReference()
     {
         // createCard
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getVisa()
-        ));
+            )
+        );
 
         $response = $request->send();
         $cardReference = $response->getCardReference();
@@ -676,12 +752,14 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
         $this->assertNotNull($response->getCardReference());
 
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'cardReference' => $cardReference,
             'card' => $this->getVisaTsep(),
             'currency' => 'USD',
             'amount' => 11.21
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -694,9 +772,11 @@ class TransitEcommerceTest extends TestCase
     public function test33PurchaseUsingAmexCardReference()
     {
         // createCard
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getAmex()
-        ));
+            )
+        );
 
         $response = $request->send();
         $cardReference = $response->getCardReference();
@@ -707,12 +787,14 @@ class TransitEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
         $this->assertNotNull($response->getCardReference());
 
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'cardReference' => $cardReference,
             'card' => $this->getAmexTsep(),
             'currency' => 'USD',
             'amount' => 4.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -731,11 +813,13 @@ class TransitEcommerceTest extends TestCase
         $card = $this->getVisa();
         $card->setCvv('123'); // 123 causes a DNH 05 decline in sandbox
 
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $card,
             'currency' => 'USD',
             'amount' => 11.12
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -748,11 +832,13 @@ class TransitEcommerceTest extends TestCase
     {
         // this should trigger a partial auth
         // partial auth should be automatically voided and decline response returned
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard2Bin(),
             'currency' => 'USD',
             'amount' => 11.10
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -774,7 +860,8 @@ class TransitEcommerceTest extends TestCase
         return (string) $numstring . '.' . (string) number_format(rand(0, 99));
     }
 
-    private function getMasterCard2Bin() {
+    private function getMasterCard2Bin()
+    {
         $card = array(
             'number' => '2223000048400011',
             'expiryMonth' => 12,
@@ -786,7 +873,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->allData));
     }
 
-    private function getDiscover() {
+    private function getDiscover()
+    {
         $card = array(
             'number' => '6011000993026909',
             'expiryMonth' => 12,
@@ -798,7 +886,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getMasterCard() {
+    private function getMasterCard()
+    {
         $card = array(
             'number' => '5146315000000055',
             'expiryMonth' => 12,
@@ -810,7 +899,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getJcb() {
+    private function getJcb()
+    {
         $card = array(
             'number' => '3530142019945859',
             'expiryMonth' => 12,
@@ -822,7 +912,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getAmex() {
+    private function getAmex()
+    {
         $card = array(
             'number' => '371449635392376',
             'expiryMonth' => 12,
@@ -834,7 +925,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getVisa() {
+    private function getVisa()
+    {
         $card = array(
             'number' => '4012000098765439',
             'expiryMonth' => 12,
@@ -846,7 +938,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getDiscoverCup() {
+    private function getDiscoverCup()
+    {
         $card = array(
             'number' => '6282000123842342',
             'expiryMonth' => 12,
@@ -858,7 +951,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getDiners() {
+    private function getDiners()
+    {
         $card = array(
             'number' => '3055155515160018',
             'expiryMonth' => 12,
@@ -870,7 +964,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getMasterCard2BinTsep() {
+    private function getMasterCard2BinTsep()
+    {
         $card = array(
             // 'number' => '2223000048400011',
             'expiryMonth' => 12,
@@ -882,7 +977,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->allData));
     }
 
-    private function getDiscoverTsep() {
+    private function getDiscoverTsep()
+    {
         $card = array(
             // 'number' => '6011000993026909',
             'expiryMonth' => 12,
@@ -894,7 +990,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getMasterCardTsep() {
+    private function getMasterCardTsep()
+    {
         $card = array(
             // 'number' => '5146315000000055',
             'expiryMonth' => 12,
@@ -906,7 +1003,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getJcbTsep() {
+    private function getJcbTsep()
+    {
         $card = array(
             // 'number' => '3530142019945859',
             'expiryMonth' => 12,
@@ -918,7 +1016,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getAmexTsep() {
+    private function getAmexTsep()
+    {
         $card = array(
             // 'number' => '371449635392376',
             'expiryMonth' => 12,
@@ -930,7 +1029,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getVisaTsep() {
+    private function getVisaTsep()
+    {
         $card = array(
             // 'number' => '4012000098765439',
             'expiryMonth' => 12,
@@ -942,7 +1042,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getDiscoverCupTsep() {
+    private function getDiscoverCupTsep()
+    {
         $card = array(
             // 'number' => '6282000123842342',
             'expiryMonth' => 12,
@@ -954,7 +1055,8 @@ class TransitEcommerceTest extends TestCase
         return new CreditCard(array_merge($card, $this->avsData));
     }
 
-    private function getDinersTsep() {
+    private function getDinersTsep()
+    {
         $card = array(
             // 'number' => '3055155515160018',
             'expiryMonth' => 12,

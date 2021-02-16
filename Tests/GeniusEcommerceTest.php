@@ -32,11 +32,13 @@ class GeniusEcommerceTest extends TestCase
 
     public function test01PurchaseVisaManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -48,11 +50,13 @@ class GeniusEcommerceTest extends TestCase
 
     public function test02PurchaseMastercardManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard(),
             'currency' => 'USD',
             'amount' => 20.02
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -64,11 +68,13 @@ class GeniusEcommerceTest extends TestCase
 
     public function test03PurchaseMastercardBin2ManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getMasterCard2Bin(),
             'currency' => 'USD',
             'amount' => '20.03'
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -80,11 +86,13 @@ class GeniusEcommerceTest extends TestCase
 
     public function test04PurchaseDiscoverManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getDiscover(),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -96,11 +104,13 @@ class GeniusEcommerceTest extends TestCase
 
     public function test05PurchaseAmexManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getAmex(),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -112,11 +122,13 @@ class GeniusEcommerceTest extends TestCase
 
     public function test06PurchaseJcbManualEntry()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getJcb(),
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -132,12 +144,14 @@ class GeniusEcommerceTest extends TestCase
 
     public function test07ApplePay()
     {
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getApplePay(),
             'currency' => 'USD',
             'amount' => $this->randAmount(),
             'token' => 'ew0KCSJ2ZXJzaW9uIjogIkVDX3YxIiwNCgkiZ==',
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -154,11 +168,13 @@ class GeniusEcommerceTest extends TestCase
     public function test08AuthAndCapture()
     {
         // Authorize
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.14
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -168,9 +184,11 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Capture
-        $request = $this->gateway->capture(array(
+        $request = $this->gateway->capture(
+            array(
             'transactionReference' => $response->getTransactionReference()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -183,11 +201,13 @@ class GeniusEcommerceTest extends TestCase
     public function test09AuthAndPartialCapture()
     {
         // Authorize
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.15
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -197,10 +217,12 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Capture
-        $request = $this->gateway->capture(array(
+        $request = $this->gateway->capture(
+            array(
             'transactionReference' => $response->getTransactionReference(),
             'amount' => 5.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -213,11 +235,13 @@ class GeniusEcommerceTest extends TestCase
     public function test10AuthAndNoCapture()
     {
         // Authorize
-        $request = $this->gateway->authorize(array(
+        $request = $this->gateway->authorize(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.16
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -234,11 +258,13 @@ class GeniusEcommerceTest extends TestCase
     public function test11RefundFull()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.17
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -249,11 +275,13 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Refund
-        $request = $this->gateway->refund(array(
+        $request = $this->gateway->refund(
+            array(
             'transactionReference' => $purchaseTransactionReference,
             'currency' => 'USD',
             'amount' => 11.17
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -266,11 +294,13 @@ class GeniusEcommerceTest extends TestCase
     public function test12RefundPartial()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.18
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -281,11 +311,13 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Refund
-        $request = $this->gateway->refund(array(
+        $request = $this->gateway->refund(
+            array(
             'transactionReference' => $purchaseTransactionReference,
             'amount' => 5.00,
             'currency' => 'USD'
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -302,11 +334,13 @@ class GeniusEcommerceTest extends TestCase
     public function test13VoidFull()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.19
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -317,9 +351,11 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Void
-        $request = $this->gateway->void(array(
+        $request = $this->gateway->void(
+            array(
             'transactionReference' => $purchaseTransactionReference,
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -332,11 +368,13 @@ class GeniusEcommerceTest extends TestCase
     public function test14VoidPartial()
     {
         // Purchase
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'card' => $this->getVisa(),
             'currency' => 'USD',
             'amount' => 11.20
-        ));
+            )
+        );
 
         $response = $request->send();
         $purchaseTransactionReference = $response->getTransactionReference();
@@ -347,10 +385,12 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
 
         // Void
-        $request = $this->gateway->void(array(
+        $request = $this->gateway->void(
+            array(
             'transactionReference' => $purchaseTransactionReference,
             'amount' => 5.00
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -366,9 +406,11 @@ class GeniusEcommerceTest extends TestCase
 
     public function test15CreateCardVisa()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getVisa()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -381,9 +423,11 @@ class GeniusEcommerceTest extends TestCase
 
     public function test16CreateCardMastercard()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getMasterCard()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -396,9 +440,11 @@ class GeniusEcommerceTest extends TestCase
 
     public function test17CreateCardMastercardBin2()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getMasterCard2Bin()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -411,9 +457,11 @@ class GeniusEcommerceTest extends TestCase
 
     public function test18CreateCardDiscover()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getDiscover()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -426,9 +474,11 @@ class GeniusEcommerceTest extends TestCase
 
     public function test19CreateCardAmex()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getAmex()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -441,9 +491,11 @@ class GeniusEcommerceTest extends TestCase
 
     public function test20CreateCardJcb()
     {
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getJcb()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -461,9 +513,11 @@ class GeniusEcommerceTest extends TestCase
     public function test20PurchaseUsingVisaCardReference()
     {
         // createCard
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getVisa()
-        ));
+            )
+        );
 
         $response = $request->send();
         $cardReference = $response->getCardReference();
@@ -475,11 +529,13 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getCardReference());
 
         // purchase w/cardReference
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'cardReference' => $cardReference,
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 
@@ -492,9 +548,11 @@ class GeniusEcommerceTest extends TestCase
     public function test21PurchaseUsingAmexCardReference()
     {
         // createCard
-        $request = $this->gateway->createCard(array(
+        $request = $this->gateway->createCard(
+            array(
             'card' => $this->getAmex()
-        ));
+            )
+        );
 
         $response = $request->send();
         $cardReference = $response->getCardReference();
@@ -506,11 +564,13 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getCardReference());
 
         // purchase w/cardReference
-        $request = $this->gateway->purchase(array(
+        $request = $this->gateway->purchase(
+            array(
             'cardReference' => $cardReference,
             'currency' => 'USD',
             'amount' => $this->randAmount()
-        ));
+            )
+        );
 
         $response = $request->send();
 

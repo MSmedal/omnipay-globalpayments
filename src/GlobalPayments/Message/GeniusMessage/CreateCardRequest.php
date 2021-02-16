@@ -11,10 +11,10 @@ class CreateCardRequest extends AbstractGeniusRequest
         $chargeMe = $this->gpCardObj;
 
         return $chargeMe->verify()
-        ->withRequestMultiUseToken(true)
-        ->withAddress($this->gpBillingAddyObj)
-        ->withDescription($this->getDescription())
-        ->withClientTransactionId($this->getTransactionId())
-        ->execute();
+            ->withRequestMultiUseToken(true)
+            ->withAddress($this->gpBillingAddyObj)
+            ->withDescription($this->getDescription())
+            ->withClientTransactionId($this->getTransactionId())
+            ->execute();
     }    
 }

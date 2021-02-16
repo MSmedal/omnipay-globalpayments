@@ -57,10 +57,14 @@ class CreatePaymentMethodRequest extends AbstractHeartlandRequest
             $newPaymentMethod->token = $this->getToken();
         }
         // token and card info can be submitted simultaneously; discrete card info values (below vars) will take precedence over token-contained card info
-        if (isset($data['card']['number'])) $newPaymentMethod->number           = $data['card']['number'];
-        if (isset($data['card']['expiryMonth'])) $newPaymentMethod->expMonth    = $data['card']['expiryMonth'];
-        if (isset($data['card']['expiryYear'])) $newPaymentMethod->expYear      = $data['card']['expiryYear'];
-        if (isset($data['card']['cvv'])) $newPaymentMethod->cvn                 = $data['card']['cvv'];
+        if (isset($data['card']['number'])) { $newPaymentMethod->number           = $data['card']['number'];
+        }
+        if (isset($data['card']['expiryMonth'])) { $newPaymentMethod->expMonth    = $data['card']['expiryMonth'];
+        }
+        if (isset($data['card']['expiryYear'])) { $newPaymentMethod->expYear      = $data['card']['expiryYear'];
+        }
+        if (isset($data['card']['cvv'])) { $newPaymentMethod->cvn                 = $data['card']['cvv'];
+        }
 
         if ($this->getPaymentMethodReference()) {
             $paymentMethodId = $this->getPaymentMethodReference();

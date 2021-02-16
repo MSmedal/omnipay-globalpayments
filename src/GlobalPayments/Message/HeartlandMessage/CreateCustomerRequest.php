@@ -58,18 +58,27 @@ class CreateCustomerRequest extends AbstractHeartlandRequest
         } else {
             $newCustomer->id = time() . "__Omnipay__" . rand(100, 999); // generate this automatically not provided
         }
-        if (isset($data['firstName'])) $newCustomer->firstName          = $data['firstName'];
-        if (isset($data['lastName'])) $newCustomer->lastName            = $data['lastName'];
-        if (isset($data['company'])) $newCustomer->company              = $data['company'];
+        if (isset($data['firstName'])) { $newCustomer->firstName          = $data['firstName'];
+        }
+        if (isset($data['lastName'])) { $newCustomer->lastName            = $data['lastName'];
+        }
+        if (isset($data['company'])) { $newCustomer->company              = $data['company'];
+        }
 
         // new GlobalPayments address object
         $address = new Address();
-        if (isset($data['billingAddress1'])) $address->streetAddress1   = $data['billingAddress1'];
-        if (isset($data['billingAddress2'])) $address->streetAddress2   = $data['billingAddress2'];
-        if (isset($data['billingCity'])) $address->city                 = $data['billingCity'];
-        if (isset($data['billingState'])) $address->state               = $data['billingState'];
-        if (isset($data['billingCountry'])) $address->country           = $data['billingCountry'];
-        if (isset($data['billingPostcode'])) $address->postalCode       = $data['billingPostcode'];
+        if (isset($data['billingAddress1'])) { $address->streetAddress1   = $data['billingAddress1'];
+        }
+        if (isset($data['billingAddress2'])) { $address->streetAddress2   = $data['billingAddress2'];
+        }
+        if (isset($data['billingCity'])) { $address->city                 = $data['billingCity'];
+        }
+        if (isset($data['billingState'])) { $address->state               = $data['billingState'];
+        }
+        if (isset($data['billingCountry'])) { $address->country           = $data['billingCountry'];
+        }
+        if (isset($data['billingPostcode'])) { $address->postalCode       = $data['billingPostcode'];
+        }
 
         $newCustomer->address = $address;
 
