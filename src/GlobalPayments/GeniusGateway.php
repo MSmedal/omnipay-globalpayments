@@ -79,14 +79,13 @@ class GeniusGateway extends AbstractGateway
         return $this->createRequest($this->geniusMessagePath . '\CreateCardRequest', $options);
     }
 
-    public function updateCard($options = array())
-    {
-        return $this->createRequest($this->geniusMessagePath . '\UpdateCardRequest', $options);
-    }
+    // public function updateCard($options = array())
+    // {
+    //     return $this->createRequest($this->geniusMessagePath . '\UpdateCardRequest', $options);
+    // }
 
-    public function deleteCard($options = array())
-    {
-        return $this->createRequest($this->geniusMessagePath . '\DeleteCardRequest', $options);
-    }
-
+    // public function deleteCard($options = array())
+    // {
+    //     return $this->createRequest($this->geniusMessagePath . '\DeleteCardRequest', $options);
+    // }
 }

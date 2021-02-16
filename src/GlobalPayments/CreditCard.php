@@ -26,4 +26,25 @@ class CreditCard extends CommonCreditCard
     {
         return $this->setParameter('type', $value);
     }
+
+    /**
+     * Get mobile type (ApplePay / GooglePay)
+     *
+     * @return string
+     */
+    public function getMobileType()
+    {
+        return $this->getParameter('mobileType');
+    }
+
+    /**
+     * Set mobile type (ApplePay / GooglePay)
+     *
+     * @param string $value
+     * @return $this
+     */
+    public function setMobileType($value)
+    {
+        return $this->setParameter('mobileType', $value);
+    }
 }

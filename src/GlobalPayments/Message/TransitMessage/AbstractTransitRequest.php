@@ -2,10 +2,6 @@
 
 namespace Omnipay\GlobalPayments\Message\TransitMessage;
 
-use GlobalPayments\Api\Entities\Address;
-use GlobalPayments\Api\Entities\Enums\StoredCredentialInitiator;
-use GlobalPayments\Api\Entities\StoredCredential;
-use GlobalPayments\Api\PaymentMethods\CreditCardData;
 use GlobalPayments\Api\ServiceConfigs\AcceptorConfig;
 use GlobalPayments\Api\ServiceConfigs\Gateways\TransitConfig;
 use GlobalPayments\Api\ServicesContainer;
@@ -13,58 +9,6 @@ use Omnipay\GlobalPayments\Message\AbstractRequest;
 
 abstract class AbstractTransitRequest extends AbstractRequest
 {
-    protected $gpBillingAddyObj;
-    protected $gpCardObj;
-
-    protected function getGpCardObj()
-    {
-        $gpCardObj = new CreditCardData();
-
-        if ($this->getCard()) {
-            $omnipayCardObj = $this->getCard();
-            
-            $gpCardObj->number = $omnipayCardObj->getNumber();
-            $gpCardObj->expMonth = $omnipayCardObj->getExpiryMonth();
-            $gpCardObj->expYear = $omnipayCardObj->getExpiryYear();
-            $gpCardObj->cvn = $omnipayCardObj->getCvv();
-            $gpCardObj->cardHolderName = $omnipayCardObj->getFirstName() . $omnipayCardObj->getLastName();
-        }
-
-        if (!empty($this->getToken())) {
-            $gpCardObj->token = $this->getToken();
-        } elseif (!empty($this->getCardReference())) {
-            $gpCardObj->token = $this->getCardReference();
-            $storedCredentials = new StoredCredential();
-            $storedCredentials->initiator = StoredCredentialInitiator::MERCHANT;
-        }
-
-        return $gpCardObj;
-    }
-
-    protected function getGpBillingAddyObj()
-    {
-        $gpAddyObj = new Address();
-
-        if ($this->getCard()) {
-            $omnipayCardObj = $this->getCard();
-
-            $gpAddyObj->streetAddress1 = $omnipayCardObj->getBillingAddress1();
-            $gpAddyObj->streetAddress2 = $omnipayCardObj->getBillingAddress2();
-            $gpAddyObj->city = $omnipayCardObj->getBillingCity();
-            $gpAddyObj->postalCode = $omnipayCardObj->getBillingPostcode();
-            $gpAddyObj->state = $omnipayCardObj->getBillingState();
-            $gpAddyObj->country = $omnipayCardObj->getBillingCountry();
-        }
-
-        return $gpAddyObj;
-    }
-
-    public function getData()
-    {
-        $this->gpBillingAddyObj = $this->getGpBillingAddyObj();
-        $this->gpCardObj = $this->getGpCardObj();
-    }
-
     protected function setServicesConfig()
     {
         $config = new TransitConfig();

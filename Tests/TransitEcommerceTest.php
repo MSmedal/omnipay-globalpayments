@@ -783,7 +783,7 @@ class TransitEcommerceTest extends TestCase
             'type' => CardType::MASTERCARD
         );
 
-        return array_merge($card, $this->allData);
+        return new CreditCard(array_merge($card, $this->allData));
     }
 
     private function getDiscover() {
@@ -879,7 +879,7 @@ class TransitEcommerceTest extends TestCase
             'type' => CardType::MASTERCARD
         );
 
-        return array_merge($card, $this->allData);
+        return new CreditCard(array_merge($card, $this->allData));
     }
 
     private function getDiscoverTsep() {

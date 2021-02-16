@@ -643,9 +643,11 @@ class HeartlandEcommerceTest extends TestCase
         $this->assertNotNull($response->getCardReference());
 
         $request = $this->gateway->updateCard(array(
-            'card' => array(
-                'expiryYear' => '2026',
-                'expiryMonth' => '1'
+            'card' => new CreditCard(
+                array(
+                    'expiryYear' => '2026',
+                    'expiryMonth' => '1'
+                )
             ),
             'cardReference' => $cardReference
         ));

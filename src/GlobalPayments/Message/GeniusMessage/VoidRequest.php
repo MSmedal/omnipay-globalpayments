@@ -6,14 +6,12 @@ use GlobalPayments\Api\Entities\Transaction;
 
 class VoidRequest extends AbstractGeniusRequest
 {
-
-    public function runTrans($data)
+    public function runTrans()
     {
         $this->setGoodResponseCodes(array('00'));
 
-        return Transaction::fromId($data['transactionReference'])
+        return Transaction::fromId($this->getTransactionReference())
             ->void()
             ->execute();
     }
-
 }

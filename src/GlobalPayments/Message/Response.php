@@ -56,5 +56,4 @@ class Response extends AbstractResponse
     {
         return $this->response->id;
     }
-
 }

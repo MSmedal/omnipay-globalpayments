@@ -112,13 +112,13 @@ class HeartlandGateway extends AbstractGateway
         return $this->createRequest($this->heartlandMessagePath . '\DeleteCardRequest', $options);
     }
 
-    public function createCustomer($options = array())
-    {
-        return $this->createRequest($this->heartlandMessagePath . '\CreateCustomerRequest', $options);
-    }
+    // public function createCustomer($options = array())
+    // {
+    //     return $this->createRequest($this->heartlandMessagePath . '\CreateCustomerRequest', $options);
+    // }
 
-    public function createPaymentMethod($options = array())
-    {
-        return $this->createRequest($this->heartlandMessagePath . '\CreatePaymentMethodRequest', $options);
-    }
+    // public function createPaymentMethod($options = array())
+    // {
+    //     return $this->createRequest($this->heartlandMessagePath . '\CreatePaymentMethodRequest', $options);
+    // }
 }

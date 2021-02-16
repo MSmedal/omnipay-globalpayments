@@ -89,15 +89,4 @@ class TransitGateway extends AbstractGateway
     {
         return $this->createRequest($this->transitMessagePath . '\CreateCardRequest', $options);
     }
-
-    // public function updateCard($options = array())
-    // {
-    //     return $this->createRequest('\Omnipay\Heartland\Message\UpdateCardRequest', $options);
-    // }
-
-    // public function deleteCard($options = array())
-    // {
-    //     return $this->createRequest('\Omnipay\Heartland\Message\DeleteCardRequest', $options);
-    // }
-
 }
