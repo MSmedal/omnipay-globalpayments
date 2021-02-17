@@ -6,6 +6,8 @@ use Omnipay\Common\AbstractGateway;
 
 class TransitGateway extends AbstractGateway
 {
+    private $transitMessagePath = '\Omnipay\GlobalPayments\Message\TransitMessage';
+
     public function getName()
     {
         return 'Transit';
@@ -23,7 +25,7 @@ class TransitGateway extends AbstractGateway
         );
     }
 
-    private $transitMessagePath = '\Omnipay\GlobalPayments\Message\TransitMessage';
+    // Methods for setting Gateway Authentication properties
 
     public function setDeviceId($value)
     {
@@ -60,33 +62,47 @@ class TransitGateway extends AbstractGateway
         return $this->setParameter('transactionKey', $value);
     }
 
+    // Transactions
+
     public function purchase($options = array())
     {
-        return $this->createRequest($this->transitMessagePath . '\PurchaseRequest', $options);
+        return $this->createRequest(
+            $this->transitMessagePath . '\PurchaseRequest', $options
+        );
     }
 
     public function authorize($options = array())
     {
-        return $this->createRequest($this->transitMessagePath . '\AuthorizeRequest', $options);
+        return $this->createRequest(
+            $this->transitMessagePath . '\AuthorizeRequest', $options
+        );
     }
 
     public function capture($options = array())
     {
-        return $this->createRequest($this->transitMessagePath . '\CaptureRequest', $options);
+        return $this->createRequest(
+            $this->transitMessagePath . '\CaptureRequest', $options
+        );
     }
 
     public function void($options = array())
     {
-        return $this->createRequest($this->transitMessagePath . '\VoidRequest', $options);
+        return $this->createRequest(
+            $this->transitMessagePath . '\VoidRequest', $options
+        );
     }
     
     public function refund($options = array())
     {
-        return $this->createRequest($this->transitMessagePath . '\RefundRequest', $options);
+        return $this->createRequest(
+            $this->transitMessagePath . '\RefundRequest', $options
+        );
     }
 
     public function createCard($options = array())
     {
-        return $this->createRequest($this->transitMessagePath . '\CreateCardRequest', $options);
+        return $this->createRequest(
+            $this->transitMessagePath . '\CreateCardRequest', $options
+        );
     }
 }

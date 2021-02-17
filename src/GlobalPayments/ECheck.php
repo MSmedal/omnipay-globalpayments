@@ -7,6 +7,10 @@ use GlobalPayments\Api\Entities\Enums\CheckType;
 use GlobalPayments\Api\Entities\Enums\SecCode;
 use Omnipay\Common\CreditCard as CommonCreditCard;
 
+/**
+ * Extends Omnipay\Common\CreditCard to make use of most of that class's properties
+ * before adding the below parameters specific to check/ACH
+ */
 class ECheck extends CommonCreditCard
 {
     /**
@@ -18,7 +22,8 @@ class ECheck extends CommonCreditCard
     }
 
     /**
-     * @param  string $value
+     * @param string $value
+     * 
      * @return $this
      */
     public function setAccountNumber($value)
@@ -35,7 +40,8 @@ class ECheck extends CommonCreditCard
     }
 
     /**
-     * @param  string $value
+     * @param string $value
+     * 
      * @return $this
      */
     public function setRoutingNumber($value)
@@ -52,7 +58,8 @@ class ECheck extends CommonCreditCard
     }
 
     /**
-     * @param  AccountType $value
+     * @param AccountType $value
+     * 
      * @return $this
      */
     public function setAccountType($value)
@@ -69,7 +76,8 @@ class ECheck extends CommonCreditCard
     }
 
     /**
-     * @param  SecCode $value
+     * @param SecCode $value
+     * 
      * @return $this
      */
     public function setSecCode($value)
@@ -86,7 +94,8 @@ class ECheck extends CommonCreditCard
     }
 
     /**
-     * @param  CheckType $value
+     * @param CheckType $value
+     * 
      * @return $this
      */
     public function setCheckType($value)
@@ -103,7 +112,8 @@ class ECheck extends CommonCreditCard
     }
 
     /**
-     * @param  string $value
+     * @param string $value
+     * 
      * @return $this
      */
     public function setCheckHolderName($value)

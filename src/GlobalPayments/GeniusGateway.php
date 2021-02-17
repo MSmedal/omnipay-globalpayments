@@ -6,6 +6,8 @@ use Omnipay\Common\AbstractGateway;
 
 class GeniusGateway extends AbstractGateway
 {
+    private $geniusMessagePath = '\Omnipay\GlobalPayments\Message\GeniusMessage';
+
     public function getName()
     {
         return 'Genius';
@@ -20,9 +22,9 @@ class GeniusGateway extends AbstractGateway
             'developerId' => '',
             'versionNumber' => '',
         );
-    }
+    }    
 
-    private $geniusMessagePath = '\Omnipay\GlobalPayments\Message\GeniusMessage';
+    // Methods for setting Gateway Authentication properties
 
     public function setMerchantName($value)
     {
@@ -49,33 +51,47 @@ class GeniusGateway extends AbstractGateway
         return $this->setParameter('versionNumber', $value);
     }
 
+    // Transactions
+    
     public function purchase($options = array())
     {
-        return $this->createRequest($this->geniusMessagePath . '\PurchaseRequest', $options);
+        return $this->createRequest(
+            $this->geniusMessagePath . '\PurchaseRequest', $options
+        );
     }
 
     public function authorize($options = array())
     {
-        return $this->createRequest($this->geniusMessagePath . '\AuthorizeRequest', $options);
+        return $this->createRequest(
+            $this->geniusMessagePath . '\AuthorizeRequest', $options
+        );
     }
 
     public function capture($options = array())
     {
-        return $this->createRequest($this->geniusMessagePath . '\CaptureRequest', $options);
+        return $this->createRequest(
+            $this->geniusMessagePath . '\CaptureRequest', $options
+        );
     }
 
     public function void($options = array())
     {
-        return $this->createRequest($this->geniusMessagePath . '\VoidRequest', $options);
+        return $this->createRequest(
+            $this->geniusMessagePath . '\VoidRequest', $options
+        );
     }
     
     public function refund($options = array())
     {
-        return $this->createRequest($this->geniusMessagePath . '\RefundRequest', $options);
+        return $this->createRequest(
+            $this->geniusMessagePath . '\RefundRequest', $options
+        );
     }
 
     public function createCard($options = array())
     {
-        return $this->createRequest($this->geniusMessagePath . '\CreateCardRequest', $options);
+        return $this->createRequest(
+            $this->geniusMessagePath . '\CreateCardRequest', $options
+        );
     }
 }

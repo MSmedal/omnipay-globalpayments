@@ -6,6 +6,8 @@ use Omnipay\Common\AbstractGateway;
 
 class HeartlandGateway extends AbstractGateway
 {
+    private $heartlandMessagePath = '\Omnipay\GlobalPayments\Message\HeartlandMessage';
+
     public function getName()
     {
         return 'Heartland';
@@ -26,9 +28,8 @@ class HeartlandGateway extends AbstractGateway
         );
     }
 
-    private $heartlandMessagePath = '\Omnipay\GlobalPayments\Message\HeartlandMessage';
-
-
+    // Methods for setting Gateway Authentication properties
+    
     public function setSecretApiKey($value)
     {
         return $this->setParameter('secretApiKey', $value);
@@ -69,56 +70,67 @@ class HeartlandGateway extends AbstractGateway
         return $this->setParameter('siteTrace', $value);
     }
 
+    // Transactions
+
     public function purchase($options = array())
     {
         if (isset($options['check'])) {
-            return $this->createRequest($this->heartlandMessagePath . '\ACHPurchaseRequest', $options);
+            return $this->createRequest(
+                $this->heartlandMessagePath . '\ACHPurchaseRequest', $options
+            );
         }
-        return $this->createRequest($this->heartlandMessagePath . '\PurchaseRequest', $options);
+
+        return $this->createRequest(
+            $this->heartlandMessagePath . '\PurchaseRequest', $options
+        );
     }
 
     public function authorize($options = array())
     {
-        return $this->createRequest($this->heartlandMessagePath . '\AuthorizeRequest', $options);
+        return $this->createRequest(
+            $this->heartlandMessagePath . '\AuthorizeRequest', $options
+        );
     }
 
     public function capture($options = array())
     {
-        return $this->createRequest($this->heartlandMessagePath . '\CaptureRequest', $options);
+        return $this->createRequest(
+            $this->heartlandMessagePath . '\CaptureRequest', $options
+        );
     }
 
     public function void($options = array())
     {
-        return $this->createRequest($this->heartlandMessagePath . '\VoidRequest', $options);
+        return $this->createRequest(
+            $this->heartlandMessagePath . '\VoidRequest', $options
+        );
     }
 
     public function refund($options = array())
     {
-        return $this->createRequest($this->heartlandMessagePath . '\RefundRequest', $options);
+        return $this->createRequest(
+            $this->heartlandMessagePath . '\RefundRequest', $options
+        );
     }
 
     public function createCard($options = array())
     {
-        return $this->createRequest($this->heartlandMessagePath . '\CreateCardRequest', $options);
+        return $this->createRequest(
+            $this->heartlandMessagePath . '\CreateCardRequest', $options
+        );
     }
 
     public function updateCard($options = array())
     {
-        return $this->createRequest($this->heartlandMessagePath . '\UpdateCardRequest', $options);
+        return $this->createRequest(
+            $this->heartlandMessagePath . '\UpdateCardRequest', $options
+        );
     }
 
     public function deleteCard($options = array())
     {
-        return $this->createRequest($this->heartlandMessagePath . '\DeleteCardRequest', $options);
+        return $this->createRequest(
+            $this->heartlandMessagePath . '\DeleteCardRequest', $options
+        );
     }
-
-    // public function createCustomer($options = array())
-    // {
-    //     return $this->createRequest($this->heartlandMessagePath . '\CreateCustomerRequest', $options);
-    // }
-
-    // public function createPaymentMethod($options = array())
-    // {
-    //     return $this->createRequest($this->heartlandMessagePath . '\CreatePaymentMethodRequest', $options);
-    // }
 }

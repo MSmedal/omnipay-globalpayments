@@ -14,7 +14,9 @@ class AuthorizeRequest extends AbstractTransitRequest
         $chargeMe = $this->gpCardObj;
 
         if (empty($chargeMe->cardType)) {
-            trigger_error('cardType (card brand) required for TransIt gateway', E_USER_WARNING);
+            trigger_error(
+                'cardType (card brand) required for TransIt gateway', E_USER_WARNING
+            );
         }
 
         try {

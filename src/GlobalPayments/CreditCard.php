@@ -4,6 +4,9 @@ namespace Omnipay\GlobalPayments;
 
 use Omnipay\Common\CreditCard as CommonCreditCard;
 
+/**
+ * Extends Omnipay\Common\CreditCard to add support for the below params
+ */
 class CreditCard extends CommonCreditCard
 {
     /**
@@ -17,6 +20,7 @@ class CreditCard extends CommonCreditCard
     }
 
     /**
+     * Sets card brand; required for TransIt Gateway
      * 
      * @param string $value card brand.
      * 
@@ -38,6 +42,7 @@ class CreditCard extends CommonCreditCard
     }
 
     /**
+     * Sets mobile wallet type
      * 
      * @param string $value mobile type (ApplePay / GooglePay)
      * 

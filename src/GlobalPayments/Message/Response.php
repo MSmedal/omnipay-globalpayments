@@ -18,7 +18,9 @@ class Response extends AbstractResponse
     public function isSuccessful()
     {
         if ($this->response instanceof Transaction) {
-            return in_array($this->response->responseCode, $this->request->getGoodReponseCodes());
+            return in_array(
+                $this->response->responseCode, $this->request->getGoodReponseCodes()
+            );
         } elseif ($this->request instanceof HeartlandDeleteCardRequest || $this->request instanceof HeartlandUpdateCardRequest) {
             return $this->response;
         }
