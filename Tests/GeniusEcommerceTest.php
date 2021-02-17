@@ -580,62 +580,6 @@ class GeniusEcommerceTest extends TestCase
         $this->assertNotNull($response->getCode());
     }
 
-    // public function test22DeleteMastercardCardReference()
-    // {
-    //     // Requires Heartland Multi-Use Tokens be enabled
-    //     $request = $this->gateway->createCard(array(
-    //         'card' => $this->getMasterCard()
-    //     ));
-
-    //     $response = $request->send();        
-    //     $cardReference = $response->getCardReference();
-
-    //     $this->assertTrue($response->isSuccessful());
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotNull($response->getMessage());
-    //     $this->assertNotNull($response->getCode());
-    //     $this->assertNotNull($response->getCardReference());
-
-    //     $request = $this->gateway->deleteCard(array(
-    //         'cardReference' => $cardReference
-    //     ));
-
-    //     $response = $request->send();
-
-    //     $this->assertTrue($response->isSuccessful());
-    // }
-
-    // public function test23UpdateDiscoverCardReference()
-    // {
-    //     // Requires Heartland Multi-Use Tokens be enabled
-    //     $request = $this->gateway->createCard(array(
-    //         'card' => $this->getDiscover()
-    //     ));
-
-    //     $response = $request->send();        
-    //     $cardReference = $response->getCardReference();
-
-    //     $this->assertTrue($response->isSuccessful());
-    //     $this->assertNotNull($response->getTransactionReference());
-    //     $this->assertNotNull($response->getMessage());
-    //     $this->assertNotNull($response->getCode());
-    //     $this->assertNotNull($response->getCardReference());
-
-    //     $request = $this->gateway->updateCard(array(
-    //         'card' => new CreditCard(
-    //             array(
-    //                 'expiryYear' => '2026',
-    //                 'expiryMonth' => '1'
-    //             )
-    //         ),
-    //         'cardReference' => $cardReference
-    //     ));
-        
-    //     $response = $request->send();
-
-    //     $this->assertTrue($response->isSuccessful());
-    // }
-
     protected function randAmount($minDigits = 0, $maxDigits = 4)
     {
         $numstring = '';
